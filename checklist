@@ -1,1 +1,567 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Checklist • Replanejamento Escolar 2026 • SEDUC SP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #0a2f6c 0%, #041a3a 100%);
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    /* container principal com a identidade visual */
+    .checklist-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #0f1a24;
+      border-radius: 48px;
+      padding: 24px 20px;
+      box-shadow: 0 30px 35px rgba(0, 0, 0, 0.5), inset 0 1px 4px rgba(255, 255, 200, 0.1);
+      border: 1px solid #d32f2f;
+    }
+
+    /* cabeçalho estilo SEDUC */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 47, 108, 0.85);
+      backdrop-filter: blur(4px);
+      padding: 12px 20px;
+      border-radius: 60px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .logo-area img {
+      height: 48px;
+      width: auto;
+      border-radius: 12px;
+      background: white;
+      padding: 4px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffec9e;
+      line-height: 1.3;
+    }
+
+    .title-badge {
+      background: #d32f2f;
+      color: white;
+      padding: 6px 18px;
+      border-radius: 3rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+    }
+
+    /* título principal */
+    .main-title {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .main-title h1 {
+      font-size: 1.7rem;
+      color: #ffec9e;
+      letter-spacing: -0.3px;
+    }
+
+    .main-title p {
+      color: #bcd0e8;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    /* barra de progresso geral */
+    .global-progress {
+      background: #1e2f3a;
+      border-radius: 60px;
+      padding: 6px;
+      margin-bottom: 32px;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    .progress-bar-bg {
+      background: #2c4c6e;
+      border-radius: 60px;
+      height: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #f59e0b, #d32f2f);
+      border-radius: 60px;
+      transition: width 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+      color: white;
+      font-weight: bold;
+      font-size: 0.8rem;
+      line-height: 1;
+    }
+
+    .percent-text {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ffe6b3;
+      font-weight: 800;
+      font-size: 0.8rem;
+      background: #0a2f6c80;
+      padding: 2px 10px;
+      border-radius: 30px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* cartões de cada ação */
+    .task-card {
+      background: white;
+      border-radius: 28px;
+      margin-bottom: 20px;
+      padding: 18px 20px;
+      transition: all 0.2s;
+      border: 1px solid #e0e4e9;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .task-card.completed {
+      background: #f8fef5;
+      border-left: 6px solid #10b981;
+    }
+
+    .task-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .checkbox-custom {
+      margin-top: 4px;
+    }
+
+    .checkbox-custom input {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      accent-color: #d32f2f;
+      transform: scale(1.1);
+    }
+
+    .task-content {
+      flex: 1;
+    }
+
+    .task-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #0a2f6c;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .task-desc {
+      font-size: 0.85rem;
+      color: #334155;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    /* barra de progresso individual (por etapa) */
+    .task-progress {
+      margin: 12px 0 10px 0;
+    }
+
+    .progress-individual {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .indiv-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .indiv-fill {
+      width: 0%;
+      height: 100%;
+      background: #f59e0b;
+      border-radius: 20px;
+      transition: width 0.3s;
+    }
+
+    .indiv-percent {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #1e4663;
+      min-width: 45px;
+      text-align: right;
+    }
+
+    /* frase motivacional */
+    .motivational-phrase {
+      background: #fff7ed;
+      border-radius: 20px;
+      padding: 12px 16px;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: #9a3412;
+      border-left: 4px solid #f59e0b;
+      transition: 0.2s;
+      font-style: italic;
+    }
+
+    .motivational-phrase i {
+      font-style: normal;
+      font-weight: 600;
+      margin-right: 6px;
+      color: #d32f2f;
+    }
+
+    /* status quando concluída */
+    .task-card.completed .motivational-phrase {
+      background: #e6f9ed;
+      border-left-color: #10b981;
+      color: #065f46;
+    }
+
+    .reset-button {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .reset-btn {
+      background: #d32f2f;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 10px 28px;
+      border-radius: 60px;
+      color: white;
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.2s;
+      box-shadow: 0 4px 0 #771d1d;
+    }
+
+    .reset-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #771d1d;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      color: #b4c8e0;
+      font-size: 0.7rem;
+      border-top: 1px solid #2c4c6e;
+    }
+
+    @media (max-width: 550px) {
+      .checklist-container {
+        padding: 16px;
+      }
+      .task-title {
+        font-size: 0.95rem;
+      }
+      .motivational-phrase {
+        font-size: 0.75rem;
+      }
+      .header {
+        justify-content: center;
+        text-align: center;
+      }
+      .title-badge {
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="checklist-container">
+  <div class="header">
+    <div class="logo-area">
+      
+      <div class="logo-text">Secretaria da Educação<br>URE CENTRO SUL - Replanejamento 2026</div>
+    </div>
+    <div class="title-badge">📋 CHECKLIST ESTRATÉGICO</div>
+  </div>
+
+  <div class="main-title">
+    <h1>📌 Ações • Junho e Julho 2026</h1>
+    <p>Marque cada etapa concluída e acompanhe seu progresso rumo a um replanejamento escolar de excelência.</p>
+  </div>
+
+  <!-- Barra de progresso geral -->
+  <div class="global-progress">
+    <div class="progress-bar-bg">
+      <div class="progress-fill" id="globalFill" style="width: 0%;"></div>
+      <div class="percent-text" id="globalPercent">0%</div>
+    </div>
+  </div>
+
+  <!-- Lista de tarefas (checklist) -->
+  <div id="tasksList"></div>
+
+  <div class="reset-button">
+    <button class="reset-btn" id="resetAllBtn">⟳ MARCAR TODAS COMO NÃO CONCLUÍDAS</button>
+  </div>
+  <footer>
+    🧭 Cada ação concluída aproxima a escola de um replanejamento eficaz. Bons estudos, equipe!
+  </footer>
+</div>
+
+<script>
+  // Dados das 5 ações com suas frases motivacionais específicas
+  const tasksData = [
+    {
+      id: 0,
+      title: "🎥 Live SEDUC - Replanejamento 2026",
+      description: "Assistir à live oficial da SEDUC sobre o Replanejamento Escolar 2026, alinhando diretrizes e novidades para o segundo semestre.",
+      motivational: "🎯 “Assistir à live é o primeiro passo para alinhar olhares e construir um replanejamento coletivo e eficiente.”"
+    },
+    {
+      id: 1,
+      title: "📘 Estudo do Roteiro e Adaptações",
+      description: "Estudar o roteiro de replanejamento e realizar adaptações necessárias para a realidade da escola, garantindo pertencimento.",
+      motivational: "✍️ “Adaptar o roteiro à sua comunidade é transformar diretrizes em práticas que transformam vidas.”"
+    },
+    {
+      id: 2,
+      title: "📚 Guia do Currículo Priorizado e Materiais do 3º Bimestre",
+      description: "Analisar o Guia do Currículo Priorizado e todos os materiais do 3º bimestre para planejamento com foco nas aprendizagens essenciais.",
+      motivational: "📖 “Conhecer o currículo priorizado é garantir que cada aula faça a diferença para o aluno.”"
+    },
+    {
+      id: 3,
+      title: "📊 Síntese dos dados de aprendizagem",
+      description: "Consolidar síntese dos dados de aprendizagem da escola e das turmas para apoiar as discussões do replanejamento.",
+      motivational: "📈 “Dados bem organizados são bússola para decisões pedagógicas mais justas e efetivas.”"
+    },
+    {
+      id: 4,
+      title: "👥 Organização da equipe gestora durante os dias de replanejamento",
+      description: "Definir responsabilidades e estratégias de acompanhamento dos professores durante os dias de replanejamento.",
+      motivational: "🤝 “Uma equipe gestora alinhada potencializa o engajamento e garante a qualidade do processo formativo.”"
+    }
+  ];
+
+  // Estado de conclusão (salvo no localStorage)
+  let completedStatus = new Array(tasksData.length).fill(false);
+
+  // Carregar do localStorage se existir
+  function loadFromStorage() {
+    const saved = localStorage.getItem("checklist_replanejamento2026");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length === tasksData.length) {
+          completedStatus = parsed;
+        }
+      } catch(e) {}
+    }
+    // garantir que seja um array de booleanos
+    completedStatus = completedStatus.map(item => item === true);
+  }
+
+  function saveToStorage() {
+    localStorage.setItem("checklist_replanejamento2026", JSON.stringify(completedStatus));
+  }
+
+  // Calcular progresso geral
+  function updateGlobalProgress() {
+    const total = tasksData.length;
+    const completedCount = completedStatus.filter(v => v === true).length;
+    const percent = Math.round((completedCount / total) * 100);
+    const globalFill = document.getElementById('globalFill');
+    const globalPercentSpan = document.getElementById('globalPercent');
+    if (globalFill) {
+      globalFill.style.width = `${percent}%`;
+    }
+    if (globalPercentSpan) {
+      globalPercentSpan.innerText = `${percent}%`;
+    }
+    return percent;
+  }
+
+  // Atualizar barra de progresso individual e frase de acordo com o checkbox
+  function updateIndividualProgress(taskId, isChecked) {
+    const indivFill = document.getElementById(`indiv-fill-${taskId}`);
+    const indivPercentSpan = document.getElementById(`indiv-percent-${taskId}`);
+    if (indivFill) {
+      // Se marcada, 100% senao 0%
+      const percent = isChecked ? 100 : 0;
+      indivFill.style.width = `${percent}%`;
+      if (indivPercentSpan) indivPercentSpan.innerText = `${percent}%`;
+    }
+    // A frase motivacional pode destacar uma mensagem extra quando concluída, mas a frase já existe.
+    // Além disso, adicionamos uma pequena animação no cartão.
+    const taskCard = document.getElementById(`task-card-${taskId}`);
+    if (taskCard) {
+      if (isChecked) {
+        taskCard.classList.add('completed');
+      } else {
+        taskCard.classList.remove('completed');
+      }
+    }
+    // Atualizar texto da frase com pequeno ícone de confirmação (opcional)
+    const phraseDiv = document.getElementById(`phrase-${taskId}`);
+    if (phraseDiv) {
+      if (isChecked) {
+        if (!phraseDiv.innerHTML.includes('✅')) {
+          phraseDiv.innerHTML = `<i>✨ CONCLUÍDA!</i> ${tasksData[taskId].motivational}`;
+        }
+      } else {
+        phraseDiv.innerHTML = `<i>💡 INSPIRAÇÃO:</i> ${tasksData[taskId].motivational}`;
+      }
+    }
+  }
+
+  // Marca/desmarca tarefa e atualiza tudo
+  function setTaskCompletion(taskId, isChecked) {
+    completedStatus[taskId] = isChecked;
+    updateIndividualProgress(taskId, isChecked);
+    updateGlobalProgress();
+    saveToStorage();
+    // Disparar um efeito de confete simbólico se concluiu (opcional: pequeno alerta)
+    if (isChecked) {
+      // Feedback sutil: não intrusivo
+      const card = document.getElementById(`task-card-${taskId}`);
+      if (card) {
+        card.style.transform = "scale(1.01)";
+        setTimeout(() => { if(card) card.style.transform = ""; }, 200);
+      }
+    }
+  }
+
+  // Renderizar toda a lista de tarefas com base nos dados
+  function renderTasks() {
+    const container = document.getElementById('tasksList');
+    if (!container) return;
+    container.innerHTML = '';
+
+    tasksData.forEach((task, idx) => {
+      const isCompleted = completedStatus[idx];
+      // Construir elemento
+      const taskDiv = document.createElement('div');
+      taskDiv.className = `task-card ${isCompleted ? 'completed' : ''}`;
+      taskDiv.id = `task-card-${idx}`;
+
+      // Estrutura interna
+      taskDiv.innerHTML = `
+        <div class="task-header">
+          <div class="checkbox-custom">
+            <input type="checkbox" id="check-${idx}" ${isCompleted ? 'checked' : ''}>
+          </div>
+          <div class="task-content">
+            <div class="task-title">${task.title}</div>
+            <div class="task-desc">${task.description}</div>
+            <div class="task-progress">
+              <div class="progress-individual">
+                <div class="indiv-bar-bg">
+                  <div class="indiv-fill" id="indiv-fill-${idx}" style="width: ${isCompleted ? '100%' : '0%'};"></div>
+                </div>
+                <div class="indiv-percent" id="indiv-percent-${idx}">${isCompleted ? '100%' : '0%'}</div>
+              </div>
+            </div>
+            <div class="motivational-phrase" id="phrase-${idx}">
+              ${isCompleted ? `<i>✨ CONCLUÍDA!</i> ${task.motivational}` : `<i>💡 INSPIRAÇÃO:</i> ${task.motivational}`}
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(taskDiv);
+
+      // Adicionar evento ao checkbox
+      const checkbox = document.getElementById(`check-${idx}`);
+      if (checkbox) {
+        checkbox.addEventListener('change', (e) => {
+          setTaskCompletion(idx, e.target.checked);
+        });
+      }
+    });
+  }
+
+  // Resetar todos os checkboxes
+  function resetAllTasks() {
+    for (let i = 0; i < tasksData.length; i++) {
+      completedStatus[i] = false;
+      const checkbox = document.getElementById(`check-${i}`);
+      if (checkbox) checkbox.checked = false;
+      updateIndividualProgress(i, false);
+    }
+    updateGlobalProgress();
+    saveToStorage();
+    // Força re-render para garantir consistência nas frases (já atualizadas pelo updateIndividualProgress)
+    // Mas precisamos atualizar o texto das frases para o estado padrão (não concluído)
+    for (let i = 0; i < tasksData.length; i++) {
+      const phraseDiv = document.getElementById(`phrase-${i}`);
+      if (phraseDiv) {
+        phraseDiv.innerHTML = `<i>💡 INSPIRAÇÃO:</i> ${tasksData[i].motivational}`;
+      }
+      const card = document.getElementById(`task-card-${i}`);
+      if (card) card.classList.remove('completed');
+    }
+    // Pequeno efeito visual
+    const globalFill = document.getElementById('globalFill');
+    if (globalFill) globalFill.style.width = '0%';
+    document.getElementById('globalPercent').innerText = '0%';
+  }
+
+  // Inicialização: carrega dados, renderiza, calcula progresso.
+  function init() {
+    loadFromStorage();
+    renderTasks();
+    // Atualizar barras individuais e global após render
+    for (let i = 0; i < tasksData.length; i++) {
+      updateIndividualProgress(i, completedStatus[i]);
+    }
+    updateGlobalProgress();
+
+    // Evento do botão reset
+    const resetBtn = document.getElementById('resetAllBtn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', resetAllTasks);
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
