@@ -483,6 +483,7 @@
     <!-- CABEÇALHO INSTITUCIONAL (sem botões de ação) -->
     <div class="header">
        <div class="logo-area">
+    <img src="logo-centro-sul.png" alt="Centro Sul">
     <div class="logo-text">
         <strong>CENTRO SUL</strong>
         <small>Unidade Regional de Ensino</small>
@@ -499,7 +500,7 @@
             <div class="hero" id="heroBar" style="margin-bottom:20px;">
                 <div class="hero-row">
                     <div>
-                        <h2 id="heroMonth">Julho 2026</h2>
+                        <h2 id="heroMonth">Janeiro 2026</h2>
                         <div class="hero-sub" id="heroSub">Navegue pelo calendário para ver as ações</div>
                     </div>
                     <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -512,23 +513,24 @@
             <div class="card">
                 <div class="calendar-nav">
                     <button class="nav-btn" id="prevMonth" aria-label="Mês anterior">◀</button>
-                    <span class="month-title" id="monthTitle">Julho 2026</span>
+                    <span class="month-title" id="monthTitle">Janeiro 2026</span>
                     <button class="nav-btn" id="nextMonth" aria-label="Próximo mês">▶</button>
                 </div>
 
                 <!-- FILTRO POR MUNICÍPIO -->
-<div class="city-filter-bar">
-    <label for="cityFilter">Município:</label>
-    <select id="cityFilter">
-        <option value="Todos">Todos</option>
-        <option value="Centro Sul">Centro Sul</option>
-        <option value="São Paulo">São Paulo</option>
-        <option value="Cajamar">Cajamar</option>
-        <option value="Francisco Morato">Francisco Morato</option>
-        <option value="Franco da Rocha">Franco da Rocha</option>
-        <option value="Mairiporã">Mairiporã</option>
-    </select>
-</div>
+                <div class="city-filter-bar">
+                    <label for="cityFilter">Município:</label>
+                    <select id="cityFilter">
+                        <option value="Todos">Todos</option>
+                        <option value="Caieiras">Caieiras</option>
+                        <option value="São Paulo">São Paulo</option>
+                        <option value="Cajamar">Cajamar</option>
+                        <option value="Francisco Morato">Francisco Morato</option>
+                        <option value="Franco da Rocha">Franco da Rocha</option>
+                        <option value="Mairiporã">Mairiporã</option>
+                    </select>
+                </div>
+
                 <div class="weekdays-row" id="weekdaysRow"></div>
                 <div class="filter-bar" id="filterBar"></div>
                 <div class="days-grid" id="daysGrid"></div>
@@ -614,7 +616,7 @@
     const MONTH_NAMES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
     const WEEKDAY_LABELS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
 
-    let currentMonth = 6;
+    let currentMonth = 0;
     let currentYear = 2026;
     let selectedDateKey = null;
     let events = {};
@@ -770,7 +772,7 @@
 
         // --- Eventos municipais ---
         const cityEvents = [
-            { city: 'Caieiras', anniversary: '2026-12-14', patron: '2026-06-13', patronDesc: 'Santo Antônio' },
+            { city: 'CENTRO SUL', anniversary: '2026-12-14', patron: '2026-06-13', patronDesc: 'Santo Antônio' },
             { city: 'Cajamar', anniversary: '2026-02-18', patron: '2026-01-20', patronDesc: 'São Sebastião' },
             { city: 'Francisco Morato', anniversary: '2026-03-21', patron: null, patronDesc: null },
             { city: 'Franco da Rocha', anniversary: '2026-11-30', patron: '2026-12-08', patronDesc: 'Nossa Sra. da Conceição' },
@@ -823,6 +825,218 @@
                     activeFilters.clear();
                     $filterBar.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
                     chip.classList.add('active');
+                } else {
+                    $filterBar.querySelector('[data-filter="all"]').classList.remove('active');
+                    chip.classList.toggle('active');
+                    if(chip.classList.contains('active')) activeFilters.add(f);
+                    else activeFilters.delete(f);
+                    if(activeFilters.size===0) $filterBar.querySelector('[data-filter="all"]').classList.add('active');
+                }
+                renderCalendar();
+            });
+        });
+    }
+
+    // Filtra eventos por município e categoria
+    function getVisibleEvents(dateK){
+        const dayEv = events[dateK];
+        if (!dayEv) return [];
+        let filtered = dayEv;
+        // Filtro por categoria
+        if (activeFilters.size > 0) {
+            filtered = filtered.filter(e => activeFilters.has(e.type));
+        }
+        // Filtro por município: mostra eventos da cidade selecionada + eventos gerais (city vazio)
+        if (selectedCity !== 'Todos') {
+            filtered = filtered.filter(e => e.city === selectedCity || e.city === '');
+        }
+        return filtered;
+    }
+
+    function updateHero(){
+        $heroMonth.textContent=`${MONTH_NAMES[currentMonth]} ${currentYear}`;
+        let total=0, feriados=0;
+        for(const [dateK,arr] of Object.entries(events)){
+            const {year,month}=parseKey(dateK);
+            if(year===currentYear&&month===currentMonth){
+                const filtered = getVisibleEvents(dateK);
+                total += filtered.length;
+                feriados += filtered.filter(e=>e.type==='Feriado / Emenda').length;
+            }
+        }
+        $heroTotal.textContent=total;
+        $heroFeriados.textContent=feriados;
+        $heroSub.textContent=total>0?`${total} ${total>1?'':''} programada${total>1?'s':''} neste mês`:'Nenhuma ação programada neste mês';
+    }
+
+    function renderCalendar(){
+        if (isLoading) return;
+        $monthTitle.textContent=`${MONTH_NAMES[currentMonth]} ${currentYear}`;
+        const firstDay=new Date(currentYear,currentMonth,1).getDay();
+        const daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
+        const tk=todayKey();
+
+        let html='';
+        for(let i=0;i<firstDay;i++) html+='<div class="day-cell empty"></div>';
+
+        for(let d=1;d<=daysInMonth;d++){
+            const dateK=dk(currentYear,currentMonth,d);
+            const visible=getVisibleEvents(dateK);
+            const isSelected=dateK===selectedDateKey;
+            const isToday=dateK===tk;
+
+            let cls='day-cell has-day';
+            if(isSelected) cls+=' selected';
+            if(isToday) cls+=' today';
+
+            let dots='';
+            if(visible.length>0){
+                dots='<div class="event-dots">'+
+                    visible.slice(0,6).map(e=>`<div class="event-dot" style="background:${getColor(e.type)}"></div>`).join('')+
+                    (visible.length>6?'<div class="event-dot" style="background:#555"></div>':'')+
+                    '</div>';
+            }
+
+            html+=`<div class="${cls}" data-date="${dateK}"><div class="day-number">${d}</div>${dots}</div>`;
+        }
+        $daysGrid.innerHTML=html;
+        $daysGrid.querySelectorAll('.day-cell.has-day').forEach(cell=>{
+            cell.addEventListener('click',()=>selectDay(cell.dataset.date));
+        });
+        renderStats();
+        updateHero();
+    }
+
+    function renderStats(){
+        const monthEv={};
+        let total=0;
+        for(const [dateK,arr] of Object.entries(events)){
+            const {year,month}=parseKey(dateK);
+            if(year===currentYear&&month===currentMonth){
+                const filtered = getVisibleEvents(dateK);
+                filtered.forEach(e=>{ monthEv[e.type]=(monthEv[e.type]||0)+1; total++; });
+            }
+        }
+        if(total===0){ $statsRow.innerHTML=''; return; }
+        let html=`<div class="stat-chip"><strong>${total}</strong> ${total>1?'':''} este mês</div>`;
+        for(const [type,cnt] of Object.entries(monthEv)){
+            const short=type.length>24?type.slice(0,24)+'…':type;
+            html+=`<div class="stat-chip"><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:${getColor(type)};margin-right:4px;vertical-align:middle;"></span>${cnt}× ${short}</div>`;
+        }
+        $statsRow.innerHTML=html;
+    }
+
+    function selectDay(dateK){
+        selectedDateKey=dateK;
+        renderCalendar();
+        renderPanel();
+    }
+
+    function renderPanel(){
+        if(!selectedDateKey){
+            $panelDate.textContent='Selecione um dia';
+            $eventList.innerHTML='<div class="empty-state">Clique em um dia no calendário<small>para ver as ações programadas</small></div>';
+            return;
+        }
+        const {year,month,day}=parseKey(selectedDateKey);
+        const dateObj=new Date(year,month,day);
+        $panelDate.textContent=dateObj.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+        const dayEv = events[selectedDateKey];
+        if(!dayEv || dayEv.length===0){
+            $eventList.innerHTML='<div class="empty-state">Nenhuma ação neste dia</div>';
+            return;
+        }
+
+        // Exibe apenas os eventos, com indicação do município (se houver)
+        $eventList.innerHTML=dayEv.map(ev=>{
+            const c=getColor(ev.type);
+            return `<div class="event-card fade-in" style="border-left-color:${c}">
+                <div class="event-card-content">
+                    <div class="event-card-type">${ev.type}</div>
+                    ${ev.description ? `<div class="event-card-desc">${ev.description}</div>` : ''}
+                    ${ev.city ? `<div class="event-card-desc" style="font-weight:500;color:#0a2f6c;">📍 ${ev.city}</div>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // ========== INICIALIZAÇÃO ==========
+
+    async function init(){
+        isLoading = true;
+
+        await loadEventsFromFirebase();
+
+        if (Object.keys(events).length === 0) {
+            console.log('📭 Nenhum evento encontrado. Gerando dados padrão...');
+            seedDefaultEvents();
+            await saveEventsToFirebase();
+        } else {
+            console.log(`📊 ${Object.keys(events).length} dias com eventos carregados.`);
+        }
+
+        renderWeekdays();
+        renderLegend();
+        renderFilters();
+
+        const t=new Date();
+        const tk=todayKey();
+        const pk=parseKey(tk);
+        if(pk.year===2026){
+            currentMonth=pk.month;
+        } else {
+            currentMonth=0;
+        }
+        currentYear=2026;
+
+        isLoading = false;
+        renderCalendar();
+
+        if (pk.year===2026 && events[tk]) {
+            selectDay(tk);
+        } else {
+            let firstEventDay = null;
+            for (const dateKey of Object.keys(events).sort()) {
+                const {year, month} = parseKey(dateKey);
+                if (year === currentYear && month === currentMonth) {
+                    firstEventDay = dateKey;
+                    break;
+                }
+            }
+            if (firstEventDay) selectDay(firstEventDay);
+            else selectDay(dk(2026,0,2));
+        }
+
+        // Navegação
+        $('prevMonth').addEventListener('click',()=>{
+            currentMonth--;
+            if(currentMonth<0){currentMonth=11;currentYear--;}
+            selectedDateKey=null;
+            renderCalendar(); renderPanel();
+        });
+        $('nextMonth').addEventListener('click',()=>{
+            currentMonth++;
+            if(currentMonth>11){currentMonth=0;currentYear++;}
+            selectedDateKey=null;
+            renderCalendar(); renderPanel();
+        });
+
+        // Filtro por município
+        $cityFilter.addEventListener('change', () => {
+            selectedCity = $cityFilter.value;
+            renderCalendar();
+            renderPanel();
+        });
+
+        console.log('✅ Calendário carregado com sucesso!');
+    }
+
+    init();
+})();
+</script>
+</body>
+</html>
                 } else {
                     $filterBar.querySelector('[data-filter="all"]').classList.remove('active');
                     chip.classList.toggle('active');
