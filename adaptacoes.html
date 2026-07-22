@@ -1,1 +1,1062 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Missão 2 · Traçando a Rota | Jornada da Aprendizagem · URE CENTRO SUL</title>
+<!-- FONTES E ÍCONES (IDENTIDADE VISUAL) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  /* ========== IDENTIDADE VISUAL (baseada no checklist) ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(145deg, #0a2f6c 0%, #041a3a 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #1e293b;
+  }
+
+  .main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #0f1a24;
+    border-radius: 48px;
+    padding: 20px;
+    box-shadow: 0 30px 35px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255,255,200,0.1);
+    border: 1px solid #d32f2f;
+  }
+
+  /* cabeçalho institucional */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 47, 108, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 12px 24px;
+    border-radius: 60px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .logo-area img {
+    height: 55px;
+    width: auto;
+    border-radius: 12px;
+    background: white;
+    padding: 4px;
+    object-fit: contain;
+  }
+  .logo-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffec9e;
+    line-height: 1.3;
+  }
+  .title-badge {
+    background: #d32f2f;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+  }
+
+  /* cartões e elementos internos (estilo checklist) */
+  .card {
+    background: white;
+    border-radius: 32px;
+    padding: 1.5rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border: 1px solid #e0e4e9;
+    transition: all 0.2s;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0a2f6c, #1a4a7a);
+    border-radius: 32px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+  }
+  .hero p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+  .xp-bar-wrap {
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    height: 10px;
+    margin-top: 1rem;
+    overflow: hidden;
+  }
+  .xp-bar {
+    background: #fbbf24;
+    height: 100%;
+    width: 0%;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  .xp-label {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+  }
+  .progress-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.5);
+    background: transparent;
+    transition: 0.2s;
+  }
+  .dot.done {
+    background: #fbbf24;
+    border-color: #fbbf24;
+  }
+  .dot.current {
+    background: white;
+    border-color: white;
+  }
+
+  /* badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 60px;
+    margin-bottom: 0.75rem;
+  }
+  .badge-teal { background: #e0f2e9; color: #0b5e42; }
+  .badge-amber { background: #ffedd5; color: #9a3412; }
+  .badge-blue { background: #eef2ff; color: #1e40af; }
+  .badge-red { background: #fee2e2; color: #b91c1c; }
+  .badge-green { background: #dcfce7; color: #166534; }
+
+  /* navegação */
+  .progress-nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .nav-step {
+    padding: 5px 12px;
+    border-radius: 60px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    cursor: default;
+  }
+  .nav-step.done-nav {
+    background: #0a2f6c;
+    color: white;
+    border-color: #0a2f6c;
+  }
+  .nav-step.current-nav {
+    background: #d32f2f;
+    color: white;
+    border-color: #d32f2f;
+  }
+
+  /* formulários */
+  label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1e4663;
+    display: block;
+    margin-bottom: 6px;
+  }
+  input, select, textarea {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    border-radius: 60px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    transition: 0.2s;
+  }
+  input[type="number"] {
+    width: auto;
+    max-width: 100px;
+  }
+  textarea {
+    border-radius: 24px;
+    resize: vertical;
+    min-height: 90px;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #d32f2f;
+    box-shadow: 0 0 0 3px rgba(211,47,47,0.2);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 60px;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    transition: 0.2s;
+  }
+  .btn-primary {
+    background: #0a2f6c;
+    color: white;
+    border-color: #0a2f6c;
+  }
+  .btn-primary:hover {
+    background: #d32f2f;
+    border-color: #d32f2f;
+  }
+  .btn-danger {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fecaca;
+  }
+  .btn-danger:hover {
+    background: #fecaca;
+  }
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 1.2rem;
+  }
+  .question-label {
+    font-weight: 700;
+    color: #0a2f6c;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+  }
+  .checkbox-group, .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .checkbox-item, .radio-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    border-radius: 60px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+  }
+  .checkbox-item:hover, .radio-item:hover {
+    background: #eef2ff;
+  }
+  .checkbox-item input, .radio-item input {
+    width: 18px;
+    accent-color: #d32f2f;
+    margin-top: 2px;
+  }
+  .mission-tip {
+    background: #eef2ff;
+    border-left: 4px solid #d32f2f;
+    border-radius: 20px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: #1e293b;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .section-title {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    color: #0a2f6c;
+  }
+  .example-box {
+    background: #fff8e1;
+    border-radius: 20px;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    color: #5d4a00;
+    margin-bottom: 1rem;
+    border-left: 4px solid #f9a825;
+  }
+  /* sequências cards */
+  .seq-card {
+    background: #f8fafc;
+    border-radius: 28px;
+    border: 1px solid #e2e8f0;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .seq-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+  .seq-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 30px;
+    background: #0a2f6c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .seq-title-input {
+    flex: 1;
+    font-size: 0.85rem;
+  }
+  .seq-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .remove-btn {
+    background: #fee2e2;
+    border: none;
+    border-radius: 30px;
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    cursor: pointer;
+  }
+  .add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    padding: 6px 14px;
+    border-radius: 60px;
+    background: transparent;
+    border: 1px dashed #cbd5e1;
+    cursor: pointer;
+  }
+  .unlocked-badge {
+    text-align: center;
+    padding: 1.5rem;
+    background: #eef2ff;
+    border-radius: 28px;
+    margin-bottom: 1rem;
+  }
+  .item-rota {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 60px;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+  }
+  .report-section {
+    border-left: 3px solid #d32f2f;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .report-section h3 {
+    font-size: 0.9rem;
+    color: #0a2f6c;
+    margin-bottom: 0.5rem;
+  }
+  .report-item {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+  .report-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #d32f2f;
+  }
+  .screen {
+    display: none;
+  }
+  .screen.active {
+    display: block;
+  }
+  /* botão fixo */
+  .print-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: linear-gradient(135deg, #0a2f6c, #052050);
+    color: white;
+    border: none;
+    border-radius: 60px;
+    padding: 12px 24px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    font-family: 'Inter', sans-serif;
+  }
+  .print-btn:hover {
+    background: #d32f2f;
+  }
+  @media (max-width: 640px) {
+    .two-col { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.2rem; }
+  }
+  /* estilos específicos para impressão do relatório (usado no iframe) */
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #print-report-area, #print-report-area * {
+      visibility: visible;
+    }
+    #print-report-area {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin: 0;
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="main-container">
+  <!-- CABEÇALHO IDENTIDADE -->
+  <div class="header">
+    <div class="logo-area">
+    
+      <div class="logo-text">URE CENTRO SUL - Seduc SP</div>
+    </div>
+    <div class="title-badge"><i class="fas fa-map"></i> Jornada da Aprendizagem · Missão 2</div>
+  </div>
+
+  <div id="app">
+    <!-- HERO -->
+    <div class="hero">
+      <h1><i class="fas fa-map-marked-alt"></i> Jornada da Aprendizagem</h1>
+      <p>Segunda missão: Traçando a rota</p>
+      <div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar"></div></div>
+      <div class="xp-label" id="xp-label">0 / 5 marcos da rota concluídos</div>
+      <div class="progress-dots" id="progress-dots"></div>
+    </div>
+
+    <!-- CADASTRO -->
+    <div id="screen-cadastro" class="screen active">
+      <div class="card">
+        <div class="badge badge-teal"><i class="fas fa-user"></i> identificação</div>
+        <p class="section-title">Antes de traçar a rota, quem é você nessa jornada?</p>
+        <div style="margin-bottom:1rem"><label>Nome completo</label><input type="text" id="inp-nome" placeholder="Seu nome"></div>
+        <div class="two-col" style="margin-bottom:1rem">
+          <div><label>Escola</label><input type="text" id="inp-escola" placeholder="Nome da escola"></div>
+          <div><label>Turma / coordenação</label><input type="text" id="inp-turma" placeholder="Ex: 9º A, 3ª série EM"></div>
+        </div>
+        <div class="two-col" style="margin-bottom:1rem">
+          <div><label>Componente curricular</label><select id="inp-componente"><option value="">Selecione...</option><option>Língua Portuguesa</option>
+<option>Matemática</option>
+<option>Ciências</option>
+<option>História</option>
+<option>Geografia</option>
+<option>Arte</option>
+<option>Inglês</option>
+<option>Educação Física</option>
+<option>Física</option>
+<option>Química</option>
+<option>Biologia</option>
+<option>Filosofia</option>
+<option>Sociologia</option>
+<option>Ensino Religioso</option>
+<option>Projeto de Vida</option>
+<option>Tecnologia e Inovação</option>
+<option>Eletivas</option>
+<option>Redação e Leitura</option>
+<option>Educação Financeira</option>
+<option>Pensamento Computacional</option>
+<option>Práticas Experimentais</option>
+<option>Educação Especial / AEE</option>
+<option>Coordenação Pedagógica</option>
+<option>Orientação Educacional</option>
+<option>Direção Escolar</option></select></div>
+          <div><label>Ciclo</label><select id="inp-ciclo"><option value="">Selecione...</option><option>Anos Iniciais (1º ao 5º ano)</option><option>Anos Finais (6º ao 9º ano)</option><option>Ensino Médio</option></select></div>
+        </div>
+        <div class="btn-group"><button class="btn btn-primary" onclick="iniciarMissao()"><i class="fas fa-map"></i> Traçar minha rota ↗</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 1 - Ponto de partida -->
+    <div id="screen-s1" class="screen">
+      <div class="progress-nav" id="nav-s1"></div>
+      <div class="card">
+        <div class="badge badge-teal"><i class="fas fa-map-pin"></i> marco 1 de 5 — ponto de partida</div>
+        <div class="mission-tip"><strong>🎯 Orientação</strong> Antes de traçar a rota, relembre as anotações que você fez na Missão 1 (Arrumando a mochila).</div>
+        <div><p class="question-label">Quais foram as principais lacunas de aprendizagem que você identificou na sua turma na Missão 1?</p><textarea id="s1q1" placeholder="Ex.: dificuldade com interpretação de texto, operações com frações..."></textarea></div>
+        <div><p class="question-label">Com que material ou recurso você vai partir para o 3º bimestre? (marque os que tiver à disposição)</p><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="s1q2" value="Escopo-Sequência do 3º bimestre"> Escopo-Sequência</label><label class="checkbox-item"><input type="checkbox" name="s1q2" value="Material digital"> Material digital</label><label class="checkbox-item"><input type="checkbox" name="s1q2" value="Livro do estudante (impresso)"> Livro do estudante</label><label class="checkbox-item"><input type="checkbox" name="s1q2" value="Guia do Currículo Priorizado"> Guia do Currículo</label><label class="checkbox-item"><input type="checkbox" name="s1q2" value="Anotações da Missão 1"> Anotações da Missão 1</label></div></div>
+        <div class="btn-group"><button class="btn btn-primary" onclick="avancar('s1','s2',0)"><i class="fas fa-arrow-right"></i> Marcar ponto de partida ↗</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 2 - Sequências -->
+    <div id="screen-s2" class="screen">
+      <div class="progress-nav" id="nav-s2"></div>
+      <div class="card">
+        <div class="badge badge-amber"><i class="fas fa-route"></i> marco 2 de 5 — mapeando o percurso</div>
+        <div class="example-box"><strong>📌 Exemplo (Matemática — 6º ano): Porcentagem</strong><br>Tema pressupõe domínio de frações. Retomar com Aula 2 do 2º bimestre. Estimativa: 1 aula de retomada.</div>
+        <div id="sequencias-container"></div>
+        <button class="add-btn" onclick="adicionarSequencia()"><i class="fas fa-plus"></i> Adicionar sequência de aulas</button>
+        <div class="btn-group"><button class="btn" onclick="mostrarScreen('s1')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s2','s3',1)"><i class="fas fa-save"></i> Salvar sequências ↗</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 3 - Retomadas -->
+    <div id="screen-s3" class="screen">
+      <div class="progress-nav" id="nav-s3"></div>
+      <div class="card">
+        <div class="badge badge-blue"><i class="fas fa-refresh"></i> marco 3 de 5 — pontos de retomada</div>
+        <div><p class="question-label">Quantas sequências demandarão retomada de conteúdos anteriores?</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s3q1" value="Nenhuma — a turma está com boa base"> Nenhuma</label><label class="radio-item"><input type="radio" name="s3q1" value="1 a 2 sequências precisarão de retomada"> 1 a 2 sequências</label><label class="radio-item"><input type="radio" name="s3q1" value="3 a 4 sequências precisarão de retomada"> 3 a 4 sequências</label><label class="radio-item"><input type="radio" name="s3q1" value="A maioria das sequências precisará de retomada"> A maioria</label></div></div>
+        <div><p class="question-label">Qual conteúdo prévio é o mais crítico para o sucesso do 3º bimestre da sua turma?</p><textarea id="s3q2" placeholder="Descreva o conteúdo ou habilidade pré-requisito..."></textarea></div>
+        <div><p class="question-label">Como você pretende organizar as retomadas?</p><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="s3q3" value="Aula(s) dedicada(s) exclusivamente à retomada"> Aula dedicada</label><label class="checkbox-item"><input type="checkbox" name="s3q3" value="Atividade de retomada nos primeiros minutos (rotina inicial)"> Rotina inicial</label><label class="checkbox-item"><input type="checkbox" name="s3q3" value="Grupos de apoio com estudantes com maior dificuldade"> Grupos de apoio</label><label class="checkbox-item"><input type="checkbox" name="s3q3" value="Plataformas digitais (Khan Academy, Matific)"> Plataformas digitais</label></div></div>
+        <div class="btn-group"><button class="btn" onclick="mostrarScreen('s2')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s3','s4',2)"><i class="fas fa-save"></i> Salvar retomadas ↗</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 4 - Adaptações -->
+    <div id="screen-s4" class="screen">
+      <div class="progress-nav" id="nav-s4"></div>
+      <div class="card">
+        <div class="badge badge-red"><i class="fas fa-adjust"></i> marco 4 de 5 — adaptações e apoios</div>
+        <div><p class="question-label">Há estudantes que precisarão de atividades adaptadas ao longo do bimestre?</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s4q1" value="Sim, vou precisar adaptar para a maioria dos estudantes"> Maioria</label><label class="radio-item"><input type="radio" name="s4q1" value="Sim, para um grupo específico (dificuldades concentradas)"> Grupo específico</label><label class="radio-item"><input type="radio" name="s4q1" value="Sim, para estudantes elegíveis da Educação Especial"> Educação Especial</label><label class="radio-item"><input type="radio" name="s4q1" value="Não serão necessárias adaptações neste bimestre"> Não</label></div></div>
+        <div><p class="question-label">Que tipo de adaptação você já planeja fazer?</p><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="s4q2" value="Simplificação de enunciados"> Simplificação</label><label class="checkbox-item"><input type="checkbox" name="s4q2" value="Uso de material concreto"> Material concreto</label><label class="checkbox-item"><input type="checkbox" name="s4q2" value="Suporte visual (pictogramas, esquemas)"> Suporte visual</label><label class="checkbox-item"><input type="checkbox" name="s4q2" value="Uso do material acessibilizado (Educação Especial)"> Material acessibilizado</label></div></div>
+        <div><p class="question-label">Há algum apoio da equipe gestora ou da URE que você precisará?</p><textarea id="s4q3" placeholder="Formações, materiais, parcerias..."></textarea></div>
+        <div class="btn-group"><button class="btn" onclick="mostrarScreen('s3')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s4','s5',3)"><i class="fas fa-save"></i> Salvar adaptações ↗</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 5 - Visão geral -->
+    <div id="screen-s5" class="screen">
+      <div class="progress-nav" id="nav-s5"></div>
+      <div class="card">
+        <div class="badge badge-green"><i class="fas fa-compass"></i> marco 5 de 5 — visão geral da rota</div>
+        <div><p class="question-label">Como você avalia sua clareza sobre o percurso do 3º bimestre após essa missão?</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s5q1" value="Tenho uma visão clara e me sinto preparado(a)"> Visão clara</label><label class="radio-item"><input type="radio" name="s5q1" value="Tenho uma visão geral, mas ainda preciso refinar alguns pontos"> Visão geral, preciso refinar</label><label class="radio-item"><input type="radio" name="s5q1" value="Ainda tenho dúvidas sobre como organizar as retomadas"> Dúvidas</label></div></div>
+        <div><p class="question-label">Qual é o maior desafio que você antecipa para conduzir as aprendizagens do 3º bimestre?</p><textarea id="s5q2" placeholder="Seja específico(a): tempo, lacunas profundas..."></textarea></div>
+        <div><p class="question-label">Em uma frase, como você descreveria a sua rota para o 3º bimestre?</p><input type="text" id="s5q3" placeholder="Ex.: Retomar frações nas primeiras aulas e avançar com plataformas..."></div>
+        <div class="btn-group"><button class="btn" onclick="mostrarScreen('s4')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s5','fim',4)"><i class="fas fa-flag-checkered"></i> Finalizar rota ↗</button></div>
+      </div>
+    </div>
+
+    <!-- TELA FIM -->
+    <div id="screen-fim" class="screen">
+      <div class="progress-nav" id="nav-fim"></div>
+      <div class="card">
+        <div class="badge badge-green"><i class="fas fa-trophy"></i> missão 2 concluída!</div>
+        <div class="unlocked-badge"><div class="medal">🗺️✅</div><h2>Rota traçada com sucesso!</h2><p>Você já tem um percurso definido para conduzir as aprendizagens do 3º bimestre.</p></div>
+        <div class="item-rota"><i class="fas fa-map-pin"></i> Ponto de partida claro — lacunas conectadas ao 3º bimestre</div>
+        <div class="item-rota"><i class="fas fa-route"></i> Sequências de aulas mapeadas com análise de pré-requisitos</div>
+        <div class="item-rota"><i class="fas fa-refresh"></i> Momentos de retomada definidos e materiais identificados</div>
+        <div class="item-rota"><i class="fas fa-adjust"></i> Adaptações e apoios planejados</div>
+        <div class="btn-group"><button class="btn btn-primary" onclick="gerarRelatorio()"><i class="fas fa-file-alt"></i> Gerar relatório da rota ↗</button></div>
+      </div>
+    </div>
+
+    <!-- RELATÓRIO (tela de visualização) -->
+    <div id="screen-relatorio" class="screen">
+      <div class="card" style="border-top:4px solid #d32f2f">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem">
+          <div><p style="font-size:0.7rem;color:#d32f2f;font-weight:800">Jornada da Aprendizagem — URE CENTRO SUL</p><h2 style="color:#0a2f6c;">Relatório · Missão 2: Traçando a rota</h2></div>
+          <button class="btn" onclick="imprimirSomenteRelatorio()"><i class="fas fa-print"></i> Imprimir / PDF</button>
+        </div>
+        <div id="relatorio-conteudo"></div>
+        <div class="btn-group"><button class="btn" onclick="mostrarScreen('fim')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="imprimirSomenteRelatorio()"><i class="fas fa-print"></i> Imprimir / salvar PDF</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Botões CRUD (inferior esquerdo) -->
+<div style="position: fixed; bottom: 24px; left: 24px; z-index: 10; display: flex; gap: 12px;">
+  <button class="btn btn-danger" onclick="limparDados()" style="background: #fee2e2; color: #b91c1c;"><i class="fas fa-trash-alt"></i> Limpar todos os dados</button>
+  <button class="btn btn-primary" onclick="salvarProgressoManual()" style="background: #0a2f6c;"><i class="fas fa-save"></i> Salvar progresso agora</button>
+</div>
+<!-- Botão fixo para imprimir relatório -->
+<button class="print-btn" onclick="imprimirSomenteRelatorio()"><i class="fas fa-print"></i> Imprimir / Salvar PDF</button>
+
+<script>
+  let estado = { nome: '', escola: '', turma: '', componente: '', ciclo: '', passos: 0 };
+  const TOTAL = 5;
+  const ETAPAS = ['Ponto de partida','Sequências','Retomadas','Adaptações','Visão geral'];
+  let seqCount = 0;
+  const STORAGE_KEY = 'missao2_jornada';
+
+  // ========== CRUD LOCALSTORAGE ==========
+  function salvarParaLocalStorage() {
+    // Coleta todas as sequências atuais
+    let seqs = [];
+    document.querySelectorAll('.seq-card').forEach(card => {
+      let id = card.id.replace('seq-', '');
+      let tema = document.getElementById('seq-tema-' + id);
+      let aulas = document.getElementById('seq-aulas-' + id);
+      let ret = document.getElementById('seq-retomada-' + id);
+      let prereq = document.getElementById('seq-prereq-' + id);
+      let material = document.getElementById('seq-material-' + id);
+      let adapt = document.getElementById('seq-adaptacao-' + id);
+      if (tema) {
+        seqs.push({
+          id: id,
+          tema: tema.value,
+          aulas: aulas ? aulas.value : '1',
+          retomada: ret ? ret.value : 'Sim',
+          prereq: prereq ? prereq.value : '',
+          material: material ? material.value : '',
+          adaptacao: adapt ? adapt.value : ''
+        });
+      }
+    });
+
+    const dados = {
+      identificacao: {
+        nome: document.getElementById('inp-nome').value,
+        escola: document.getElementById('inp-escola').value,
+        turma: document.getElementById('inp-turma').value,
+        componente: document.getElementById('inp-componente').value,
+        ciclo: document.getElementById('inp-ciclo').value
+      },
+      passos: estado.passos,
+      seqCount: seqCount,
+      sequencias: seqs,
+      // campos texto e checkboxes
+      s1q1: document.getElementById('s1q1').value,
+      s1q2: Array.from(document.querySelectorAll('input[name="s1q2"]:checked')).map(cb => cb.value),
+      s3q1: document.querySelector('input[name="s3q1"]:checked') ? document.querySelector('input[name="s3q1"]:checked').value : '',
+      s3q2: document.getElementById('s3q2').value,
+      s3q3: Array.from(document.querySelectorAll('input[name="s3q3"]:checked')).map(cb => cb.value),
+      s4q1: document.querySelector('input[name="s4q1"]:checked') ? document.querySelector('input[name="s4q1"]:checked').value : '',
+      s4q2: Array.from(document.querySelectorAll('input[name="s4q2"]:checked')).map(cb => cb.value),
+      s4q3: document.getElementById('s4q3').value,
+      s5q1: document.querySelector('input[name="s5q1"]:checked') ? document.querySelector('input[name="s5q1"]:checked').value : '',
+      s5q2: document.getElementById('s5q2').value,
+      s5q3: document.getElementById('s5q3').value
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
+    console.log('✅ Dados salvos no localStorage');
+  }
+
+  function carregarDoLocalStorage() {
+    const dadosRaw = localStorage.getItem(STORAGE_KEY);
+    if (!dadosRaw) return false;
+    try {
+      const dados = JSON.parse(dadosRaw);
+      // Identificação
+      if (dados.identificacao) {
+        document.getElementById('inp-nome').value = dados.identificacao.nome || '';
+        document.getElementById('inp-escola').value = dados.identificacao.escola || '';
+        document.getElementById('inp-turma').value = dados.identificacao.turma || '';
+        document.getElementById('inp-componente').value = dados.identificacao.componente || '';
+        document.getElementById('inp-ciclo').value = dados.identificacao.ciclo || '';
+        estado.nome = dados.identificacao.nome || '';
+        estado.escola = dados.identificacao.escola || '';
+        estado.turma = dados.identificacao.turma || '';
+        estado.componente = dados.identificacao.componente || '';
+        estado.ciclo = dados.identificacao.ciclo || '';
+      }
+      estado.passos = dados.passos || 0;
+
+      // Restaurar sequências
+      if (dados.sequencias && dados.sequencias.length > 0) {
+        seqCount = dados.seqCount || dados.sequencias.length;
+        // Limpar container atual
+        const container = document.getElementById('sequencias-container');
+        container.innerHTML = '';
+        // Recriar cada sequência
+        dados.sequencias.forEach(seq => {
+          const n = seq.id;
+          const div = document.createElement('div');
+          div.className = 'seq-card';
+          div.id = 'seq-' + n;
+          div.innerHTML = `
+            <div class="seq-card-header">
+              <div class="seq-num">${n}</div>
+              <input type="text" class="seq-title-input" id="seq-tema-${n}" placeholder="Tema / conteúdo da sequência..." value="${escapeHtml(seq.tema || '')}">
+              <button class="remove-btn" onclick="removerSeq(${n})"><i class="fas fa-trash-alt"></i></button>
+            </div>
+            <div class="seq-mini-grid">
+              <div><label>Número de aulas previsto</label><input type="number" id="seq-aulas-${n}" min="1" max="40" value="${seq.aulas || '1'}" style="width:80px"></div>
+              <div><label>Retomada necessária?</label><select id="seq-retomada-${n}"><option value="Sim" ${seq.retomada === 'Sim' ? 'selected' : ''}>Sim</option><option value="Não" ${seq.retomada === 'Não' ? 'selected' : ''}>Não</option><option value="Talvez" ${seq.retomada === 'Talvez' ? 'selected' : ''}>Talvez</option></select></div>
+            </div>
+            <div style="margin-bottom:8px"><label>Conhecimentos prévios exigidos / pré-requisitos</label><input type="text" id="seq-prereq-${n}" placeholder="Ex.: domínio de frações, leitura inferencial..." value="${escapeHtml(seq.prereq || '')}"></div>
+            <div style="margin-bottom:8px"><label>Material que será utilizado para retomada</label><input type="text" id="seq-material-${n}" placeholder="Ex.: Aula 2 do 2º bimestre, Khan Academy..." value="${escapeHtml(seq.material || '')}"></div>
+            <div><label>Atividades que serão adaptadas</label><input type="text" id="seq-adaptacao-${n}" placeholder="Ex.: Atividades 2 e 3 da Aula 4, simplificação..." value="${escapeHtml(seq.adaptacao || '')}"></div>
+          `;
+          container.appendChild(div);
+        });
+      } else {
+        // se não há sequências salvas, garantir pelo menos uma vazia
+        if (document.querySelectorAll('.seq-card').length === 0) adicionarSequencia();
+      }
+
+      // campos texto
+      if (dados.s1q1) document.getElementById('s1q1').value = dados.s1q1;
+      if (dados.s3q2) document.getElementById('s3q2').value = dados.s3q2;
+      if (dados.s4q3) document.getElementById('s4q3').value = dados.s4q3;
+      if (dados.s5q2) document.getElementById('s5q2').value = dados.s5q2;
+      if (dados.s5q3) document.getElementById('s5q3').value = dados.s5q3;
+
+      // checkboxes s1q2
+      if (dados.s1q2 && Array.isArray(dados.s1q2)) {
+        document.querySelectorAll('input[name="s1q2"]').forEach(cb => {
+          cb.checked = dados.s1q2.includes(cb.value);
+        });
+      }
+      // checkboxes s3q3
+      if (dados.s3q3 && Array.isArray(dados.s3q3)) {
+        document.querySelectorAll('input[name="s3q3"]').forEach(cb => {
+          cb.checked = dados.s3q3.includes(cb.value);
+        });
+      }
+      // checkboxes s4q2
+      if (dados.s4q2 && Array.isArray(dados.s4q2)) {
+        document.querySelectorAll('input[name="s4q2"]').forEach(cb => {
+          cb.checked = dados.s4q2.includes(cb.value);
+        });
+      }
+
+      // radios
+      if (dados.s3q1) {
+        let r = document.querySelector(`input[name="s3q1"][value="${escapeHtml(dados.s3q1)}"]`);
+        if (r) r.checked = true;
+      }
+      if (dados.s4q1) {
+        let r = document.querySelector(`input[name="s4q1"][value="${escapeHtml(dados.s4q1)}"]`);
+        if (r) r.checked = true;
+      }
+      if (dados.s5q1) {
+        let r = document.querySelector(`input[name="s5q1"][value="${escapeHtml(dados.s5q1)}"]`);
+        if (r) r.checked = true;
+      }
+
+      atualizarDots();
+      return true;
+    } catch(e) { console.error('Erro ao carregar dados', e); return false; }
+  }
+
+  function limparDados() {
+    if (confirm('⚠️ Tem certeza que deseja apagar TODOS os dados salvos? Essa ação não pode ser desfeita.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+  }
+
+  function salvarProgressoManual() {
+    salvarParaLocalStorage();
+    alert('✅ Progresso salvo com sucesso!');
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  // ========== FUNÇÕES EXISTENTES (adaptadas) ==========
+  function iniciarMissao() {
+    let n = document.getElementById('inp-nome').value.trim();
+    let e = document.getElementById('inp-escola').value.trim();
+    let t = document.getElementById('inp-turma').value.trim();
+    let c = document.getElementById('inp-componente').value;
+    let ci = document.getElementById('inp-ciclo').value;
+    if (!n || !e || !t || !c || !ci) { alert('Preencha todos os campos para iniciar a missão!'); return; }
+    estado.nome = n; estado.escola = e; estado.turma = t; estado.componente = c; estado.ciclo = ci;
+    // garantir pelo menos uma sequência
+    if (document.querySelectorAll('.seq-card').length === 0) adicionarSequencia();
+    salvarParaLocalStorage();
+    mostrarScreen('s1');
+    atualizarDots();
+    renderNav('s1', 0);
+  }
+
+  function mostrarScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+    window.scrollTo(0,0);
+  }
+
+  function atualizarDots() {
+    let dots = document.getElementById('progress-dots');
+    dots.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      let d = document.createElement('div');
+      d.className = 'dot' + (i < estado.passos ? ' done' : i === estado.passos ? ' current' : '');
+      dots.appendChild(d);
+    }
+    let pct = Math.round((estado.passos / TOTAL) * 100);
+    document.getElementById('xp-bar').style.width = pct + '%';
+    document.getElementById('xp-label').textContent = estado.passos + ' / ' + TOTAL + ' marcos da rota concluídos';
+  }
+
+  function renderNav(screenId, stepIdx) {
+    let nav = document.getElementById('nav-' + screenId);
+    if (!nav) return;
+    nav.innerHTML = '';
+    ETAPAS.forEach((nome, i) => {
+      let btn = document.createElement('div');
+      btn.className = 'nav-step' + (i < stepIdx ? ' done-nav' : i === stepIdx ? ' current-nav' : '');
+      btn.textContent = (i + 1) + '. ' + nome;
+      nav.appendChild(btn);
+    });
+  }
+
+  function avancar(de, para, passoAtual) {
+    if (passoAtual >= estado.passos) estado.passos = passoAtual + 1;
+    salvarParaLocalStorage();
+    atualizarDots();
+    mostrarScreen(para);
+    let idx = passoAtual + 1;
+    if (idx <= TOTAL) renderNav(para, idx);
+  }
+
+  function adicionarSequencia() {
+    seqCount++;
+    let n = seqCount;
+    let container = document.getElementById('sequencias-container');
+    let div = document.createElement('div');
+    div.className = 'seq-card';
+    div.id = 'seq-' + n;
+    div.innerHTML = `
+      <div class="seq-card-header">
+        <div class="seq-num">${n}</div>
+        <input type="text" class="seq-title-input" id="seq-tema-${n}" placeholder="Tema / conteúdo da sequência...">
+        <button class="remove-btn" onclick="removerSeq(${n})"><i class="fas fa-trash-alt"></i></button>
+      </div>
+      <div class="seq-mini-grid">
+        <div><label>Número de aulas previsto</label><input type="number" id="seq-aulas-${n}" min="1" max="40" value="1" style="width:80px"></div>
+        <div><label>Retomada necessária?</label><select id="seq-retomada-${n}"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Talvez">Talvez</option></select></div>
+      </div>
+      <div style="margin-bottom:8px"><label>Conhecimentos prévios exigidos / pré-requisitos</label><input type="text" id="seq-prereq-${n}" placeholder="Ex.: domínio de frações, leitura inferencial..."></div>
+      <div style="margin-bottom:8px"><label>Material que será utilizado para retomada</label><input type="text" id="seq-material-${n}" placeholder="Ex.: Aula 2 do 2º bimestre, Khan Academy..."></div>
+      <div><label>Atividades que serão adaptadas</label><input type="text" id="seq-adaptacao-${n}" placeholder="Ex.: Atividades 2 e 3 da Aula 4, simplificação..."></div>
+    `;
+    container.appendChild(div);
+    salvarParaLocalStorage(); // salva após adicionar
+  }
+
+  function removerSeq(id) {
+    let el = document.getElementById('seq-' + id);
+    if (el) el.remove();
+    salvarParaLocalStorage();
+  }
+
+  function getChecked(name) {
+    let vals = [];
+    document.querySelectorAll('input[name="' + name + '"]:checked').forEach(cb => vals.push(cb.value));
+    return vals.length ? vals.join('; ') : 'Nenhum item marcado';
+  }
+  function getRadio(name) {
+    let el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : 'Não respondido';
+  }
+  function getVal(id) { let el = document.getElementById(id); return el ? el.value.trim() || 'Não preenchido' : 'Não preenchido'; }
+
+  function coletarSequencias() {
+    let seqs = [];
+    document.querySelectorAll('.seq-card').forEach(card => {
+      let id = card.id.replace('seq-', '');
+      let tema = document.getElementById('seq-tema-' + id);
+      let aulas = document.getElementById('seq-aulas-' + id);
+      let ret = document.getElementById('seq-retomada-' + id);
+      let prereq = document.getElementById('seq-prereq-' + id);
+      let material = document.getElementById('seq-material-' + id);
+      let adapt = document.getElementById('seq-adaptacao-' + id);
+      if (tema) seqs.push({
+        n: id, tema: tema.value.trim() || '(sem título)', aulas: aulas ? aulas.value : '—',
+        retomada: ret ? ret.value : '—', prereq: prereq ? prereq.value.trim() || '—' : '—',
+        material: material ? material.value.trim() || '—' : '—', adaptacao: adapt ? adapt.value.trim() || '—' : '—'
+      });
+    });
+    return seqs;
+  }
+
+  function gerarRelatorio() {
+    let data = new Date();
+    let dataStr = data.toLocaleDateString('pt-BR') + ' às ' + data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    let seqs = coletarSequencias();
+    let html = '';
+    html += `<div class="report-section"><h3><i class="fas fa-user"></i> Identificação</h3><div class="report-item"><span class="report-label">Professor(a): </span>${estado.nome}</div><div class="report-item"><span class="report-label">Escola: </span>${estado.escola}</div><div class="report-item"><span class="report-label">Turma: </span>${estado.turma}</div><div class="report-item"><span class="report-label">Componente: </span>${estado.componente}</div><div class="report-item"><span class="report-label">Ciclo: </span>${estado.ciclo}</div><div class="report-item"><span class="report-label">Data: </span>${dataStr}</div></div>`;
+    html += `<div class="report-section"><h3><i class="fas fa-map-pin"></i> Marco 1 — Ponto de partida</h3><div class="report-item"><span class="report-label">Principais lacunas: </span>${getVal('s1q1')}</div><div class="report-item"><span class="report-label">Materiais disponíveis: </span>${getChecked('s1q2')}</div></div>`;
+    html += `<div class="report-section"><h3><i class="fas fa-route"></i> Marco 2 — Sequências (${seqs.length})</h3>`;
+    if (seqs.length === 0) html += '<p>Nenhuma sequência registrada.</p>';
+    seqs.forEach(s => {
+      html += `<div style="background:#f8fafc;border-radius:20px;padding:0.75rem;margin-bottom:0.75rem;"><h4 style="font-weight:700;">${s.n}. ${s.tema}</h4><div class="report-item"><span class="report-label">Aulas: </span>${s.aulas} · Retomada: ${s.retomada}</div><div class="report-item"><span class="report-label">Pré-requisitos: </span>${s.prereq}</div><div class="report-item"><span class="report-label">Material retomada: </span>${s.material}</div><div class="report-item"><span class="report-label">Adaptações: </span>${s.adaptacao}</div></div>`;
+    });
+    html += `</div><div class="report-section"><h3><i class="fas fa-refresh"></i> Marco 3 — Retomadas</h3><div class="report-item"><span class="report-label">Quantidade: </span>${getRadio('s3q1')}</div><div class="report-item"><span class="report-label">Conteúdo mais crítico: </span>${getVal('s3q2')}</div><div class="report-item"><span class="report-label">Estratégias: </span>${getChecked('s3q3')}</div></div>`;
+    html += `<div class="report-section"><h3><i class="fas fa-adjust"></i> Marco 4 — Adaptações</h3><div class="report-item"><span class="report-label">Necessidade: </span>${getRadio('s4q1')}</div><div class="report-item"><span class="report-label">Tipos: </span>${getChecked('s4q2')}</div><div class="report-item"><span class="report-label">Apoio necessário: </span>${getVal('s4q3')}</div></div>`;
+    html += `<div class="report-section"><h3><i class="fas fa-compass"></i> Marco 5 — Visão geral</h3><div class="report-item"><span class="report-label">Clareza: </span>${getRadio('s5q1')}</div><div class="report-item"><span class="report-label">Maior desafio: </span>${getVal('s5q2')}</div><div class="report-item"><span class="report-label">Minha rota: </span><em>${getVal('s5q3')}</em></div></div>`;
+    document.getElementById('relatorio-conteudo').innerHTML = html;
+    mostrarScreen('relatorio');
+  }
+
+  function imprimirSomenteRelatorio() {
+    const conteudo = document.getElementById('relatorio-conteudo');
+    if (!conteudo || !conteudo.innerHTML.trim() || conteudo.innerHTML === '') {
+      alert('Nenhum relatório foi gerado ainda. Complete a missão e gere o relatório primeiro.');
+      return;
+    }
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = 'none';
+    document.body.appendChild(iframe);
+    const doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Relatório Missão 2 - Traçando a Rota</title>
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            padding: 30px;
+            color: #1e293b;
+          }
+          .print-header {
+            text-align: center;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 16px;
+          }
+          .print-header h1 {
+            color: #0a2f6c;
+            font-size: 1.5rem;
+          }
+          .print-header p {
+            color: #475569;
+            font-size: 0.8rem;
+          }
+          .report-section {
+            border-left: 3px solid #d32f2f;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+          }
+          .report-section h3 {
+            font-size: 0.9rem;
+            color: #0a2f6c;
+            margin-bottom: 0.5rem;
+          }
+          .report-item {
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            line-height: 1.5;
+          }
+          .report-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #d32f2f;
+          }
+          hr { margin: 1rem 0; }
+        </style>
+      </head>
+      <body>
+        <div class="print-header">
+          <h1>🗺️ Relatório da Missão 2 – Traçando a Rota</h1>
+          <p>Jornada da Aprendizagem · URE CENTRO SUL - Seduc SP</p>
+        </div>
+        ${conteudo.outerHTML}
+        <hr>
+        <p style="text-align: center; font-size: 0.7rem; color: #64748b; margin-top: 20px;">Documento gerado em ${new Date().toLocaleString('pt-BR')}</p>
+      </body>
+      </html>
+    `);
+    doc.close();
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+    setTimeout(() => { document.body.removeChild(iframe); }, 1000);
+  }
+
+  // Carregar dados salvos ao iniciar
+  const dadosCarregados = carregarDoLocalStorage();
+  if (dadosCarregados && (estado.nome || estado.passos > 0)) {
+    let telaAtual = '';
+    if (estado.passos === 1) telaAtual = 's1';
+    else if (estado.passos === 2) telaAtual = 's2';
+    else if (estado.passos === 3) telaAtual = 's3';
+    else if (estado.passos === 4) telaAtual = 's4';
+    else if (estado.passos === 5) telaAtual = 's5';
+    else if (estado.passos >= 6) telaAtual = 'fim';
+    if (telaAtual) {
+      mostrarScreen(telaAtual);
+      atualizarDots();
+      let stepIdx = estado.passos === 1 ? 0 : estado.passos === 2 ? 1 : estado.passos === 3 ? 2 : estado.passos === 4 ? 3 : estado.passos === 5 ? 4 : 5;
+      renderNav(telaAtual, stepIdx);
+    } else {
+      mostrarScreen('cadastro');
+    }
+  } else {
+    // se não há dados, fica na tela de cadastro e garante uma sequência vazia
+    if (document.querySelectorAll('.seq-card').length === 0) adicionarSequencia();
+    mostrarScreen('cadastro');
+  }
+
+  // Auto-save em todas as mudanças de inputs
+  function addAutoSaveEvents() {
+    const allInputs = document.querySelectorAll('input, select, textarea');
+    allInputs.forEach(el => {
+      el.addEventListener('change', () => salvarParaLocalStorage());
+      el.addEventListener('blur', () => salvarParaLocalStorage());
+    });
+    document.querySelectorAll('.checkbox-item input, .radio-item input').forEach(cb => {
+      cb.addEventListener('change', () => salvarParaLocalStorage());
+    });
+  }
+  addAutoSaveEvents();
+</script>
+</body>
+</html>
