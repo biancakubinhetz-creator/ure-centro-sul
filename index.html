@@ -2,86 +2,661 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>URE Centro Sul - Replanejamento 2026</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Replanejamento 2026 | Central de Materiais · URE CENTRO SUL - Seduc SP</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f2f2f2;
-    margin: 0;
-    padding: 0;
-}
+  /* ========== IDENTIDADE VISUAL (baseada no checklist) ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-header {
-    background: #005baa;
-    color: white;
-    text-align: center;
-    padding: 25px;
-}
-
-h1 {
-    margin: 0;
-    font-size: 28px;
-}
-
-.container {
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(145deg, #0a2f6c 0%, #041a3a 100%);
+    min-height: 100vh;
     padding: 20px;
-    max-width: 800px;
-    margin: auto;
-}
+    color: #1e293b;
+  }
 
-.botao {
-    display: block;
+  .main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #0f1a24;
+    border-radius: 48px;
+    padding: 20px;
+    box-shadow: 0 30px 35px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255,255,200,0.1);
+    border: 1px solid #d32f2f;
+  }
+
+  /* cabeçalho */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 47, 108, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 12px 24px;
+    border-radius: 60px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .logo-area img {
+    height: 55px;
+    width: auto;
+    border-radius: 12px;
     background: white;
-    color: #005baa;
-    text-decoration: none;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
-    box-shadow: 0 2px 5px #aaa;
-}
-
-.botao:hover {
-    background: #005baa;
+    padding: 4px;
+    object-fit: contain;
+  }
+  .logo-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffec9e;
+    line-height: 1.3;
+  }
+  .title-badge {
+    background: #d32f2f;
     color: white;
-}
+    padding: 6px 18px;
+    border-radius: 3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+  }
 
-footer {
+  /* cards padrão */
+  .card {
+    background: white;
+    border-radius: 32px;
+    padding: 1.5rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border: 1px solid #e0e4e9;
+    transition: all 0.2s;
+  }
+  .card-header {
+    font-weight: 800;
+    font-size: 1rem;
+    color: #003b66;
+    border-left: 4px solid #ffb347;
+    padding-left: 12px;
+    margin-bottom: 20px;
+  }
+  .card-header.red {
+    border-left-color: #d32f2f;
+    color: #b91c1c;
+  }
+
+  h2, h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    color: #0a2f6c;
+  }
+
+  .section-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #d32f2f;
+    margin-bottom: 0.5rem;
+  }
+
+  /* grids e elementos originais adaptados */
+  .steps-grid, .obj-grid, .novidades-grid, .parada-grid, .aspectos-grid, .gabarito-grid, .recursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1rem 0;
+  }
+
+  .step-card, .obj-card, .novidade-card, .parada-card, .aspecto-card, .gabarito-card, .recurso-card {
+    background: #f8fafc;
+    border-radius: 24px;
+    padding: 1.2rem;
+    border: 1px solid #e2e8f0;
+    transition: 0.2s;
+  }
+  .recurso-card {
+    background: #ffffff;
+    border-left: 4px solid #d32f2f;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .recurso-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+  }
+  .recurso-card .recurso-titulo {
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #0a2f6c;
+  }
+  .recurso-card .recurso-desc {
+    font-size: 0.8rem;
+    color: #475569;
+    margin-bottom: 0.8rem;
+  }
+  .recurso-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #0a2f6c;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: 0.2s;
+  }
+  .recurso-link:hover {
+    background: #d32f2f;
+  }
+
+  .obj-card {
+    background: #0a2f6c;
+    color: white;
+    border-left: 4px solid #d32f2f;
+  }
+  .obj-card h3, .obj-card p { color: white; }
+  .obj-card p { color: #cbd5e6; }
+
+  .step-card .step-num {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #d32f2f;
+    margin-bottom: 0.5rem;
+  }
+
+  .info-box, .warn-box {
+    border-radius: 24px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+  }
+  .info-box {
+    background: #eef2ff;
+    border-left: 4px solid #0a2f6c;
+    color: #1e293b;
+  }
+  .warn-box {
+    background: #fff8e1;
+    border-left: 4px solid #f9a825;
+    color: #5d4a00;
+  }
+
+  /* tabelas */
+  .percurso-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  .percurso-table th {
+    background: #0a2f6c;
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .percurso-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+
+  /* abas de atividades */
+  .atividades-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+  .tab-btn {
+    background: #e2e8f0;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .tab-btn.active {
+    background: #d32f2f;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .atividade-panel { display: none; }
+  .atividade-panel.active { display: block; }
+
+  .atividade-box {
+    background: #f1f5f9;
+    border-radius: 28px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e2e8f0;
+  }
+  .ativ-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .ativ-num {
+    width: 40px;
+    height: 40px;
+    background: #d32f2f;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+  }
+  .campo {
+    background: white;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid #e2e8f0;
+  }
+  textarea.resposta {
+    width: 100%;
+    min-height: 80px;
+    border-radius: 16px;
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 8px;
+  }
+  .save-btn {
+    background: #0a2f6c;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 6px 18px;
+    font-weight: 600;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+  .saved-msg {
+    font-size: 0.7rem;
+    color: #16a34a;
+    display: none;
+    margin-top: 6px;
+  }
+
+  /* checklist gestor */
+  .checklist-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .chk-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 12px 16px;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+  }
+  .chk-item.done {
+    background: #e6f7ef;
+    border-color: #16a34a;
+  }
+  .chk-box {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: 2px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #16a34a;
+  }
+  .chk-item.done .chk-box { border-color: #16a34a; background: #16a34a; color: white; }
+  .chk-progress-bar {
+    background: #e2e8f0;
+    border-radius: 12px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .chk-progress-fill {
+    background: linear-gradient(90deg, #0a2f6c, #d32f2f);
+    height: 100%;
+    width: 0%;
+  }
+
+  /* simulador */
+  .simulador {
+    background: white;
+    border-radius: 28px;
+    padding: 1.5rem;
+  }
+  .sim-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 1rem 0;
+  }
+  .sim-card {
+    background: #f1f5f9;
+    border-radius: 20px;
+    padding: 12px;
+    flex: 1;
+    min-width: 160px;
+    cursor: pointer;
     text-align: center;
-    padding: 20px;
-    color: #555;
-}
+    border: 1px solid #e2e8f0;
+  }
+  .sim-card.sel {
+    border: 2px solid #d32f2f;
+    background: #fff0f0;
+  }
+  .sim-output {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 1rem;
+    font-size: 0.85rem;
+    border-left: 4px solid #d32f2f;
+  }
+
+  /* navegação fixa estilo checklist */
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: #0f1a24;
+    border-radius: 60px;
+    padding: 6px 12px;
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+  .nav-links a {
+    color: #cbd5e6;
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 60px;
+    transition: 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    background: #d32f2f;
+    color: white;
+  }
+
+  /* footer */
+  footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    color: #b4c8e0;
+    font-size: 0.75rem;
+    border-top: 1px solid #2c4c6e;
+  }
+
+  .print-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: linear-gradient(135deg, #0a2f6c, #052050);
+    color: white;
+    border: none;
+    border-radius: 60px;
+    padding: 12px 24px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    z-index: 10;
+  }
+  .print-btn:hover { background: #d32f2f; }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .main-container { background: white; padding: 0; box-shadow: none; border: none; }
+    .header { background: #0a2f6c; -webkit-print-color-adjust: exact; }
+    .print-btn, .nav-links { display: none; }
+    .card { break-inside: avoid; border: 1px solid #ccc; }
+  }
 </style>
-
 </head>
-
 <body>
+<div class="main-container">
+  <!-- CABEÇALHO IDENTIDADE -->
+  <div class="header">
+    <div class="logo-area">
+      <img src="https://i.ibb.co/0p01LzxB/logo3de.jpg" alt="Logo SEDUC SP">
+      <div class="logo-text">URE CENTRO SUL - Seduc SP</div>
+    </div>
+    <div class="title-badge"><i class="fas fa-chalkboard-user"></i> Replanejamento 2026 · Jornada da Aprendizagem</div>
+  </div>
 
-<header>
-<h1>URE Centro Sul</h1>
-<p>Replanejamento 2026 - 2º Semestre</p>
-</header>
+  <!-- NAVEGAÇÃO ÂNCORA -->
+  <div class="nav-links">
+    <a href="#recursos">📌 Materiais</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#objetivos">Objetivos</a>
+    <a href="https://pne-de-cai.github.io/checklists2replanejamento/">Checklist</a>
+    <a href="#missao1">Missão 1</a>
+    <a href="#missao2">Missão 2</a>
+    <a href="#missao3">Missão 3</a>
+    <a href="https://forms.gle/mgQQ5tKXXwu9Bp6g7">Compartilhar</a>
+    <a href="https://datastudio.google.com/reporting/3fe75299-6a17-4de2-b294-9ebde6bf9ab9">Painel de missões</a>
+  </div>
 
-<div class="container">
+  <!-- SEÇÃO: MATERIAIS DE APOIO E LINKS OFICIAIS (estrutura principal) -->
+  <section id="recursos" class="card">
+    <div class="card-header red"><i class="fas fa-link"></i> 📚 Materiais oficiais e roteiros 2026</div>
+    <h2>Acesse os recursos essenciais para o replanejamento</h2>
+    <div class="recursos-grid">
+      <!-- Calendário Pedagógico -->
+      <div class="recurso-card">
+        <div class="recurso-titulo"><i class="fas fa-calendar-alt"></i> Calendário Pedagógico 2026</div>
+        <div class="recurso-desc">Datas, prazos e organização letiva – SEDUC/SP</div>
+        <br><a href="https://docs.google.com/presentation/d/1UVLXPQrTLs4Jw433CcUK8CK-YwX74WL2dVVGubnI7_E/edit?usp=sharing" target="_blank" class="recurso-link">Acessar SEDUC/SP<i class="fas fa-external-link-alt"></i></a><br>
+        <br><a href="https://pne-de-cai.github.io/calendariourecai2026coordenadores/" target="_blank" class="recurso-link">Acessar calendario personalizado <i class="fas fa-external-link-alt"></i></a><br>
+      </div>
+      <!-- Live oficial SEDUC -->
+      <div class="recurso-card">
+        <div class="recurso-titulo"><i class="fab fa-youtube"></i> Live – Replanejamento 2º Semestre</div>
+        <div class="recurso-desc">Transmissão completa com orientações da SEDUC</div>
+        <a href="https://youtu.be/8CFSTZAmSCs?is=gUeSBJxubDq5UdZc" target="_blank" class="recurso-link">Assistir <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <!-- Roteiro oficial SEDUC -->
+      <div class="recurso-card">
+        <div class="recurso-titulo"><i class="fas fa-chalkboard"></i> Roteiro de Replanejamento Escolar</div>
+        <div class="recurso-desc">Documento base da Subsecretaria Pedagógica</div>
+        <a href="https://docs.google.com/presentation/d/1ta5aS-IyxvuV28tv-jU98ibwYtX2ZsVro5Be0g5r-TU/edit?usp=sharing" target="_blank" class="recurso-link">Visualizar <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <!-- Sugestão de Acolhimento -->
+      <div class="recurso-card">
+        <div class="recurso-titulo"><i class="fas fa-hands-helping"></i> Sugestão de Acolhimento</div>
+        <div class="recurso-desc">Dinâmicas e boas-vindas para os dois dias</div>
+        <br><a href="https://pne-de-cai.github.io/acolhimento2S2026/" target="_blank" class="recurso-link">Explorar jogo digital <i class="fas fa-external-link-alt"></i></a><br>
+        <br><a href="https://pne-de-cai.github.io/tetrisfisicoacolhimento/" target="_blank" class="recurso-link">Explorar jogo fisico<i class="fas fa-external-link-alt"></i></a><br>
+      </div>
+      <!-- IFA e Paineis -->
+      <div class="recurso-card">
+        <div class="recurso-titulo"><i class="fas fa-target"></i> IFA & PAINEIS</div>
+        <div class="recurso-desc">Olhando para alguns dados da nossa URE</div>
+        <br><a href="https://datastudio.google.com/reporting/370cb320-0126-41c4-8b13-b1147c182184" target="_blank" class="recurso-link">Painel compilado <i class="fas fa-external-link-alt"></i></a><br>
+        <br><a href="https://pne-de-cai.github.io/projetorsemana20anonimizado/" target="_blank" class="recurso-link">Projeção de frequencia IFA Nivel URE<i class="fas fa-external-link-alt"></i></a><br>
+      </div>
+      <!-- Checklist Pré-Preparo -->
+      <div class="recurso-card">
+        <div class="recurso-titulo"><i class="fas fa-check-double"></i> Checklist Pré-Preparo</div>
+        <div class="recurso-desc">Organização antecipada para gestores</div>
+        <a href="https://pne-de-cai.github.io/checklists2replanejamento/" target="_blank" class="recurso-link">Ver checklist <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <!-- Missão 01 Completa -->
+      <div class="recurso-card">
+        <div class="recurso-titulo">Missão 01 – Arrumando a Mochila</div>
+        <div class="recurso-desc">Material detalhado com vídeos e estudos</div>
+        <br><a href="https://pne-de-cai.github.io/missao01s2replanejamento/" target="_blank" class="recurso-link">Acessar <i class="fas fa-external-link-alt"></i></a><br>
+        <br><a href="https://docs.google.com/presentation/d/1JynsuHc4FJio80tCaCK2wQXJvX0mM-dpH-7vtff7Bc4/edit?usp=sharing" target="_blank" class="recurso-link">Acessar slide <i class="fas fa-external-link-alt"></i></a><br>
+        <br><a href="https://drive.google.com/file/d/1IDj6HYwdmUvJ8qaS_ymofMT-BEb2WhCk/view?usp=sharing" target="_blank" class="recurso-link">Acessar pdf <i class="fas fa-external-link-alt"></i></a><br>
+      </div>
+      <!-- Missão 02 Completa -->
+      <div class="recurso-card">
+        <div class="recurso-titulo"> Missão 02 – Traçando o Percurso</div>
+        <div class="recurso-desc">Escopo-sequência e planejamento do 3º bimestre</div>
+        <br><a href="https://pne-de-cai.github.io/missao02s2replanejamento/" target="_blank" class="recurso-link">Acessar <i class="fas fa-external-link-alt"></i></a><br>
+        <br><a href="https://docs.google.com/presentation/d/1HfPdN4wKORlEswZrpI77AHxlSOdw_k4N9ropO_8ZVbQ/edit?usp=sharing" target="_blank" class="recurso-link">Acessar slide<i class="fas fa-external-link-alt"></i></a><br>
+        <br><a href="https://drive.google.com/file/d/1GmAJlWuE0b4-WQE4ZwZwAzHDT8uZg1AH/view?usp=sharing target="_blank" class="recurso-link">Acessar pdf<i class="fas fa-external-link-alt"></i></a><br>
+      </div>
+      <!-- Missão 03 Completa -->
+      <div class="recurso-card">
+        <div class="recurso-titulo">Missão 03 – Pontos de Parada</div>
+        <div class="recurso-desc">Verificações e ajustes nas primeiras aulas</div>
+        <br><a href="https://pne-de-cai.github.io/missao03s2replanejamento/" target="_blank" class="recurso-link">Acessar <i class="fas fa-external-link-alt"></i></a><br>
+        <br><a href="https://docs.google.com/presentation/d/1405E8Q2XkDLeYf1fxAG9kmXpMaLLvpgUSmZ2uNNAOKQ/edit?usp=sharing" target="_blank" class="recurso-link">Acessar slide<i class="fas fa-external-link-alt"></i></a><br>
+        <br><a href="https://drive.google.com/file/d/1hji7ZGGjaiR7yZGje6TeU9i9cJFKR870/view?usp=sharing" target="_blank" class="recurso-link">Acessar pdf<i class="fas fa-external-link-alt"></i></a><br>
+      </div>
+    </div>
+    <div class="info-box"><i class="fas fa-info-circle"></i> Utilize os links acima como material base para cada missão. Os conteúdos interativos abaixo complementam sua jornada de planejamento.</div>
+  </section>
 
-<a class="botao" href="#">Orientações</a>
+  <!-- SOBRE -->
+  <section id="sobre" class="card">
+    <div class="card-header red">📘 Orientação de uso</div>
+    <h2>Como utilizar este material</h2>
+    <p class="section-lead" style="margin-bottom: 20px;">Roteiro estruturado em dois tipos de conteúdo. Gestores e professores encontram orientações específicas.</p>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">🔵 Fundo Azul</div><p><strong>Para gestores:</strong> orientações gerais e como conduzir cada momento.</p></div>
+      <div class="step-card"><div class="step-num">⬜ Fundo Branco</div><p><strong>Para professores:</strong> slides adaptáveis para interação coletiva.</p></div>
+      <div class="step-card"><div class="step-num">⏱ Tempo total</div><p>Jornada distribui <strong>9 horas</strong>: 6h (Missão 1), 2h (Missão 2), 1h (Missão 3).</p></div>
+    </div>
+  </section>
 
-<a class="botao" href="#">Documentos</a>
+  <!-- OBJETIVOS -->
+  <section id="objetivos" class="card">
+    <div class="card-header red">🎯 Por que replanejar?</div>
+    <h2>Objetivos do Replanejamento 2026</h2>
+    <div class="obj-grid">
+      <div class="obj-card"><h3>🎯 Planejamento do 3º bimestre</h3><p>Planejar aulas considerando aprendizagens essenciais e necessidades dos estudantes.</p></div>
+      <div class="obj-card"><h3>📊 Análise do 1º semestre</h3><p>Identificar avanços, desafios e ajustes com base em dados reais.</p></div>
+      <div class="obj-card"><h3>🔄 Recuperação e aprofundamento</h3><p>Organizar período de recuperação antes da prova de recuperação.</p></div>
+    </div>
+  </section>
 
-<a class="botao" href="#">Formulários</a>
+  <!-- MISSÃO 1 (com link para material completo) -->
+  <section id="missao1" class="card">
+    <div class="card-header red">🎒 1ª Missão: Arrumando a Mochila</div>
+    <div class="info-box"><strong>Tempo estimado: 6 horas</strong> · Produto: Anotações pedagógicas · <a href="#recursos" target="_blank" style="color:#d32f2f; font-weight:600;">📎 Acessar material completo da Missão 01 →</a></div>
+    <p>Os professores organizam insumos: vídeos AVA-EFAPE, Guia do Currículo Priorizado e dados das turmas.</p>
+    <div class="steps-grid" style="margin-top: 16px;">
+      <div class="step-card"><div class="step-num">Etapa 1</div><p>Assistir aos vídeos por componente/ciclo no AVA-EFAPE.</p></div>
+      <div class="step-card"><div class="step-num">Etapa 2</div><p>Estudo do Guia do Currículo Priorizado (2º semestre) e novidades.</p></div>
+      <div class="step-card"><div class="step-num">Etapa 3</div><p>Análise dos painéis da Prova Paulista e outras avaliações.</p></div>
+    </div>
+    <div class="warn-box">⚠️ Novidade: Materiais acessibilizados para Educação Especial (LP e MAT, 6º ano à 3ª série).</div>
+  </section>
 
-<a class="botao" href="#">Materiais</a>
+  <!-- MISSÃO 2 (link para material) -->
+  <section id="missao2" class="card">
+    <div class="card-header red">🗺 2ª Missão: Traçando o Percurso</div>
+    <div class="info-box"><strong>Tempo: 2 horas</strong> · Produto: Percurso do 3º bimestre · <a href="#recursos" target="_blank" style="color:#d32f2f; font-weight:600;">📎 Acessar material completo da Missão 02 →</a></div>
+    <p>Professores analisam o Escopo-Sequência e definem retomadas necessárias.</p>
+    <div class="percurso-table" style="overflow-x: auto;">
+      <table class="percurso-table">
+        <thead><tr><th>Tema</th><th>Retomada necessária?</th><th>Materiais</th></tr></thead>
+        <tbody><tr><td>Porcentagem (6º ano)</td><td>Sim – frações não consolidadas</td><td>Aula 2 do 2º bimestre + Khan Academy</td></tr></tbody>
+      </table>
+    </div>
+  </section>
 
-<a class="botao" href="#">Calendário</a>
+  <!-- MISSÃO 3 (link para material) -->
+  <section id="missao3" class="card">
+    <div class="card-header red">🚶 3ª Missão: Desenhando Pontos de Parada</div>
+    <div class="info-box"><strong>Tempo: 1 hora</strong> · Foco nas 3 primeiras aulas do bimestre · <a href="#recursos" target="_blank" style="color:#d32f2f; font-weight:600;">📎 Acessar material completo da Missão 03 →</a></div>
+    <p>Estratégias de verificação e ajustes durante as aulas.</p>
+    <div class="parada-grid">
+      <div class="parada-card"><div class="step-num">💬 Perguntas abertas</div><p>Exigir explicação do raciocínio, evitar sim/não.</p></div>
+      <div class="parada-card"><div class="step-num">📋 Demonstração no quadro</div><p>Identificar erros conceituais coletivamente.</p></div>
+    </div>
+  </section>
 
+  <!-- ASPECTOS DA AULA -->
+  <section id="aspectos" class="card">
+    <div class="card-header red">✨ Aspectos centrais de uma aula que gera aprendizagem</div>
+    <div class="aspectos-grid">
+      <div class="aspecto-card"><h3>🎯 Planejamento</h3><p>Objetivo evidente, recursos alinhados, segurança conceitual.</p></div>
+      <div class="aspecto-card"><h3>🔄 Estratégias</h3><p>Verificações contínuas, ajustes, tempos adequados.</p></div>
+      <div class="aspecto-card"><h3>👥 Gestão de sala</h3><p>Envolvimento ativo, ambiente favorável à aprendizagem.</p></div>
+    </div>
+  </section>
+
+
+  <!-- ENCERRAMENTO -->
+  <section id="encerramento" class="card">
+    <div class="card-header red">🎯 Três certezas para o 2º semestre</div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">Certeza 1</div><p>Planejamento é documento vivo — revisitar sempre.</p></div>
+      <div class="step-card"><div class="step-num">Certeza 2</div><p>Uma boa aula é aquela que gera aprendizagem.</p></div>
+      <div class="step-card"><div class="step-num">Certeza 3</div><p>Aprendizagem é percurso — as paradas indicam o caminho.</p></div>
+    </div>
+    <div class="info-box" style="margin-top: 20px;"><strong> Replanejamento Escolar 2026</strong><br></div>
+  </section>
+
+  <footer><i class="fas fa-chalkboard-user"></i> URE CENTRO SUL  - Jornada da Aprendizagem | 22 e 23 de julho de 2026 | <a href="#recursos" style="color:#ffb347;">Acesse os materiais de apoio</a></footer>
 </div>
 
-<footer>
-URE Centro Sul - 2026
-</footer>
-
+<script>
+  function toggleChk(item) {
+    item.classList.toggle('done');
+    const box = item.querySelector('.chk-box');
+    box.textContent = item.classList.contains('done') ? '✓' : '';
+    updateProgress();
+  }
+  function updateProgress() {
+    const items = document.querySelectorAll('#chk-gestor .chk-item');
+    const done = document.querySelectorAll('#chk-gestor .chk-item.done').length;
+    const pct = Math.round((done / items.length) * 100);
+    document.getElementById('chk-fill').style.width = pct + '%';
+    document.getElementById('chk-label').textContent = done + ' de ' + items.length + ' ações concluídas (' + pct + '%)';
+  }
+  function showPanel(id) {
+    document.querySelectorAll('.atividade-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (event && event.target) event.target.classList.add('active');
+  }
+  function saveField(btn) {
+    const msg = btn.nextElementSibling;
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 2500);
+  }
+  const simData = {
+    'Muitos erros na atividade': '🔄 Parar e retomar o conceito com outra abordagem. Identificar o ponto de ruptura e propor atividade intermediária.',
+    'Dúvidas recorrentes': '💬 Responder para toda a sala. Reapresentar com exemplo diferente. Usar perguntas abertas.',
+    'Turma avançou rápido': '🚀 Disponibilizar desafio adicional, conectar com próxima AE ou usar plataformas com níveis progressivos.',
+    'Turma dividida': '🤝 Organizar duplas produtivas, propor duas atividades paralelas e circular estrategicamente.'
+  };
+  function selectSim(card) {
+    document.querySelectorAll('.sim-card').forEach(c => c.classList.remove('sel'));
+    card.classList.add('sel');
+    const label = card.querySelector('.label').textContent;
+    document.getElementById('sim-output').innerHTML = `<strong>Estratégia sugerida:</strong><br>${simData[label] || 'Reflita sobre ajustes na sua prática.'}`;
+  }
+  updateProgress();
+</script>
 </body>
-  </html>
+</html>
