@@ -1,78 +1,1038 @@
-        <div class="legend-row">
-            <span class="dot" style="background:#f59e0b"></span>
-            <strong>Aniversário da cidade</strong>
-            <span>Datas comemorativas dos municípios.</span>
-        </div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendário Pedagógico 2026 — Seduc SP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ========== CSS (mesmo do original) ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #0a2f6c 0%, #041a3a 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #1e293b;
+        }
+        .main-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            background: #0f1a24;
+            border-radius: 48px;
+            padding: 20px;
+            box-shadow: 0 30px 35px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255,255,200,0.1);
+            border: 1px solid #d32f2f;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 47, 108, 0.85);
+            backdrop-filter: blur(4px);
+            padding: 12px 24px;
+            border-radius: 60px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .logo-area img {
+            height: 55px;
+            width: auto;
+            border-radius: 12px;
+            background: white;
+            padding: 4px;
+            object-fit: contain;
+        }
+        .logo-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffec9e;
+            line-height: 1.3;
+        }
+        .logo-text small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.75rem;
+            color: rgba(255,236,158,0.6);
+        }
+        .title-badge {
+            background: #d32f2f;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 3rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+        .app {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 20px;
+            padding: 0 8px 8px;
+        }
+        .card {
+            background: white;
+            border-radius: 32px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border: 1px solid #e0e4e9;
+        }
+        .hero {
+            background: linear-gradient(135deg, #0a2f6c, #1a4a7a);
+            border-radius: 28px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 0;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .hero-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .hero h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ffec9e;
+            line-height: 1.2;
+        }
+        .hero .hero-sub {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            font-weight: 400;
+            color: #ffec9e;
+        }
+        .hero-stat {
+            text-align: center;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 60px;
+        }
+        .hero-stat strong {
+            font-size: 1.4rem;
+            display: block;
+            color: #4ade80;
+        }
+        .hero-stat span {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.8;
+        }
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .nav-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid #e2e8f0;
+            background: #f8fafc;
+            color: #0a2f6c;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .nav-btn:hover {
+            background: #0a2f6c;
+            color: white;
+            border-color: #0a2f6c;
+            transform: scale(1.05);
+        }
+        .month-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #0a2f6c;
+        }
+        .city-filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .city-filter-bar label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #0a2f6c;
+        }
+        .city-filter-bar select {
+            padding: 5px 12px;
+            border-radius: 60px;
+            border: 1px solid #cbd5e1;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            background: white;
+            color: #1e293b;
+            cursor: pointer;
+        }
+        .city-filter-bar select:focus {
+            outline: none;
+            border-color: #d32f2f;
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.15);
+        }
+        .weekdays-row {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            margin-bottom: 6px;
+        }
+        .weekday-label {
+            text-align: center;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #d32f2f;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 6px 0;
+        }
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 14px;
+        }
+        .filter-chip {
+            font-size: 0.62rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 60px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .filter-chip:hover {
+            border-color: #0a2f6c;
+            color: #0a2f6c;
+        }
+        .filter-chip.active {
+            background: #0a2f6c;
+            color: white;
+            border-color: #0a2f6c;
+        }
+        .filter-chip .fdot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            margin-right: 3px;
+            vertical-align: middle;
+        }
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+        }
+        .day-cell {
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            position: relative;
+            border: 2px solid transparent;
+            background: #f8fafc;
+            min-height: 52px;
+        }
+        .day-cell.has-day:hover {
+            background: #e0e7ff;
+            transform: translateY(-1px);
+        }
+        .day-cell.selected {
+            border-color: #d32f2f;
+            background: #fee2e2;
+        }
+        .day-cell.today {
+            box-shadow: inset 0 0 0 2px #0a2f6c;
+        }
+        .day-cell.empty {
+            background: transparent;
+            cursor: default;
+        }
+        .day-number {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1;
+        }
+        .day-cell.today .day-number {
+            color: #0a2f6c;
+            font-weight: 800;
+        }
+        .day-cell.selected .day-number {
+            color: #d32f2f;
+        }
+        .event-dots {
+            display: flex;
+            gap: 2px;
+            margin-top: 3px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 36px;
+        }
+        .event-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .stats-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #f1f5f9;
+        }
+        .stat-chip {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 60px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            white-space: nowrap;
+        }
+        .stat-chip strong {
+            color: #0a2f6c;
+        }
+        .legend-section {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid #f1f5f9;
+        }
+        .legend-title {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #d32f2f;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .legend-group { margin-bottom: 10px; }
+        .legend-group-title {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .legend-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px 10px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.68rem;
+            color: #475569;
+            font-weight: 500;
+        }
+        .legend-swatch {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .panel-header { margin-bottom: 14px; }
+        .panel-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #d32f2f;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .panel-date {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0a2f6c;
+        }
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 4px;
+            scrollbar-width: thin;
+            scrollbar-color: #e2e8f0 transparent;
+        }
+        .event-list::-webkit-scrollbar { width: 4px; }
+        .event-list::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 2px; }
+        .event-card {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 10px 12px;
+            border-radius: 16px;
+            background: #f8fafc;
+            border-left: 4px solid #94a3b8;
+            transition: all 0.15s;
+        }
+        .event-card:hover {
+            background: #eef2ff;
+        }
+        .event-card-content { flex: 1; min-width: 0; }
+        .event-card-type {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #1e293b;
+            line-height: 1.3;
+        }
+        .event-card-desc {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 28px 16px;
+            color: #94a3b8;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+        .empty-state small {
+            display: block;
+            font-style: normal;
+            font-size: 0.7rem;
+            margin-top: 4px;
+            color: #cbd5e1;
+        }
+        .page-footer {
+            text-align: center;
+            font-size: 0.68rem;
+            color: rgba(255,236,158,0.35);
+            margin-top: 20px;
+            padding: 0 8px;
+            font-weight: 400;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        .fade-in { animation: fadeIn 0.25s ease forwards; }
+        @media print {
+            body { background: white !important; padding: 0; }
+            .main-container {
+                background: white;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                padding: 0;
+            }
+            .header { background: #0a2f6c; border-radius: 0; }
+            .app { grid-template-columns: 1fr; }
+            .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; border-radius: 16px; }
+        }
+        @media (max-width: 960px) {
+            .app { grid-template-columns: 1fr; }
+            .main-container { border-radius: 28px; padding: 14px; }
+            .header { border-radius: 32px; }
+        }
+        @media (max-width: 500px) {
+            body { padding: 10px; }
+            .main-container { border-radius: 20px; padding: 10px; }
+            .header { border-radius: 24px; padding: 10px 16px; }
+            .logo-area img { height: 40px; }
+            .card { border-radius: 20px; padding: 1rem; }
+            .hero { border-radius: 20px; padding: 1rem; }
+            .hero h2 { font-size: 1.1rem; }
+            .day-cell { min-height: 40px; border-radius: 8px; }
+            .day-number { font-size: 0.72rem; }
+            .event-dot { width: 5px; height: 5px; }
+            .month-title { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
 
-        <div class="legend-row">
-            <span class="dot" style="background:#8b5cf6"></span>
-            <strong>Padroeiro(a)</strong>
-            <span>Feriados municipais religiosos.</span>
-        </div>
+<div class="main-container">
 
-        <div class="legend-row">
-            <span class="dot" style="background:#78716c"></span>
-            <strong>Outro</strong>
-            <span>Outras ações cadastradas.</span>
+    <!-- CABEÇALHO INSTITUCIONAL (sem botões de ação) -->
+    <div class="header">
+        <div class="logo-area">
+            
+            <div class="logo-text">
+                Calendário Pedagógico 2026
+                <small>Secretaria da Educação — São Paulo</small>
+            </div>
         </div>
-
+        <span class="title-badge">SEDUC SP</span>
     </div>
 
+    <div class="app">
+
+        <!-- COLUNA CALENDÁRIO -->
+        <div class="calendar-col">
+
+            <div class="hero" id="heroBar" style="margin-bottom:20px;">
+                <div class="hero-row">
+                    <div>
+                        <h2 id="heroMonth">Janeiro 2026</h2>
+                        <div class="hero-sub" id="heroSub">Navegue pelo calendário para ver as ações</div>
+                    </div>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                        <div class="hero-stat"><strong id="heroTotal">0</strong><span>ações</span></div>
+                        <div class="hero-stat"><strong id="heroFeriados">0</strong><span>feriados</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="calendar-nav">
+                    <button class="nav-btn" id="prevMonth" aria-label="Mês anterior">◀</button>
+                    <span class="month-title" id="monthTitle">Janeiro 2026</span>
+                    <button class="nav-btn" id="nextMonth" aria-label="Próximo mês">▶</button>
+                </div>
+
+                <!-- FILTRO POR MUNICÍPIO -->
+                <div class="city-filter-bar">
+                    <label for="cityFilter">Município:</label>
+                    <select id="cityFilter">
+                        <option value="Todos">Todos</option>
+                        <option value="Caieiras">Caieiras</option>
+                        <option value="Cajamar">Cajamar</option>
+                        <option value="Francisco Morato">Francisco Morato</option>
+                        <option value="Franco da Rocha">Franco da Rocha</option>
+                        <option value="Mairiporã">Mairiporã</option>
+                    </select>
+                </div>
+
+                <div class="weekdays-row" id="weekdaysRow"></div>
+                <div class="filter-bar" id="filterBar"></div>
+                <div class="days-grid" id="daysGrid"></div>
+                <div class="stats-row" id="statsRow"></div>
+
+                <div class="legend-section">
+                    <div class="legend-title">Legenda de categorias</div>
+                    <div id="legendContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR (apenas ações do dia) -->
+        <div class="sidebar">
+            <div class="card" id="panelCard">
+                <div class="panel-header">
+                    <div class="panel-label">📋 Ações do dia</div>
+                    <div class="panel-date" id="panelDate">Selecione um dia</div>
+                </div>
+                <div class="event-list" id="eventList">
+                    <div class="empty-state">Clique em um dia no calendário<small>para ver as ações programadas</small></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        UNIDADE REGIONAL DE ENSINO CAIEIRAS
+    </div>
 </div>
 
+<!-- ==================== FIREBASE SDK E CÓDIGO MODIFICADO ==================== -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
-<style>
+<script>
+(function() {
+    'use strict';
 
-.legend-explanation{
-    max-width:1440px;
-    margin:25px auto;
-    background:white;
-    border-radius:30px;
-    padding:25px;
-    box-shadow:0 8px 20px rgba(0,0,0,.2);
-}
+    // ========== CONFIGURAÇÃO DO FIREBASE ==========
+    const firebaseConfig = {
+        apiKey: "AIzaSyA623RxOE0Jz8EMx8cd8vRcAD8Z3Vc06Ec",
+        authDomain: "urehoot.firebaseapp.com",
+        databaseURL: "https://urehoot-default-rtdb.firebaseio.com",
+        projectId: "urehoot",
+        storageBucket: "urehoot.firebasestorage.app",
+        messagingSenderId: "945876578083",
+        appId: "1:945876578083:web:e2119ce69812ee46ad2696"
+    };
 
-.legend-explanation h2{
-    color:#0a2f6c;
-    font-size:1.2rem;
-    margin-bottom:20px;
-    text-align:center;
-}
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
 
-.legend-box{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:10px;
-}
+    // ========== DADOS E VARIÁVEIS ==========
+    // Categorias incluindo as novas municipais
+    const CATEGORIES = [
+        { key:'Férias docentes',                          raw:'#2563eb', group:'Ano letivo' },
+        { key:'Recesso escolar',                          raw:'#6366f1', group:'Ano letivo' },
+        { key:'Planejamento',                             raw:'#ca8a04', group:'Ano letivo' },
+        { key:'Início do bimestre',                       raw:'#7c3aed', group:'Ano letivo' },
+        { key:'Feriado / Emenda',                         raw:'#ea580c', group:'Feriados' },
+        { key:'Atividades diagnósticas',                  raw:'#0d9488', group:'Avaliações' },
+        { key:'Prova Paulista',                           raw:'#dc2626', group:'Avaliações' },
+        { key:'Período de recuperação e aprofundamento',  raw:'#d97706', group:'Avaliações' },
+        { key:'Prova de recuperação',                     raw:'#b91c1c', group:'Avaliações' },
+        { key:'SARESP',                                   raw:'#6d28d9', group:'Avaliações' },
+        { key:'Avaliação de fluência leitora - Entrada',  raw:'#059669', group:'Avaliações' },
+        { key:'Avaliação de fluência leitora - Saída',    raw:'#0891b2', group:'Avaliações' },
+        { key:'Mapa Classe - Sondagem',                   raw:'#c2410c', group:'Avaliações' },
+        { key:'OMASP',                                    raw:'#1e293b', group:'Olimpíadas' },
+        { key:'OLISP',                                    raw:'#991b1b', group:'Olimpíadas' },
+        { key:'Registro de percurso AF', raw:'#e91e63', group:'Avaliações' },
+        { key:'Atividade final de unidade ALURA', raw:'#ffd700', group:'Avaliações' },
+        // Novas categorias municipais
+        { key:'Aniversário da cidade', raw:'#f59e0b', group:'Municipal' },
+        { key:'Padroeiro(a)', raw:'#8b5cf6', group:'Municipal' },
+        { key:'Outro',                                    raw:'#78716c', group:'Outros' }
+    ];
 
-.legend-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:10px;
-    border-radius:15px;
-    background:#f8fafc;
-    font-size:.85rem;
-}
+    const COLOR_MAP = {};
+    CATEGORIES.forEach(c => COLOR_MAP[c.key] = c.raw);
 
-.legend-row strong{
-    color:#0a2f6c;
-}
+    const MONTH_NAMES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+    const WEEKDAY_LABELS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
 
-.legend-row span:last-child{
-    color:#64748b;
-}
+    let currentMonth = 0;
+    let currentYear = 2026;
+    let selectedDateKey = null;
+    let events = {};
+    let activeFilters = new Set();
+    let selectedCity = 'Todos';
+    let isLoading = true;
 
-.dot{
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    display:inline-block;
-    flex-shrink:0;
-}
+    const $ = id => document.getElementById(id);
+    const $daysGrid = $('daysGrid');
+    const $monthTitle = $('monthTitle');
+    const $weekdaysRow = $('weekdaysRow');
+    const $panelDate = $('panelDate');
+    const $eventList = $('eventList');
+    const $statsRow = $('statsRow');
+    const $legendContent = $('legendContent');
+    const $filterBar = $('filterBar');
+    const $heroMonth = $('heroMonth');
+    const $heroSub = $('heroSub');
+    const $heroTotal = $('heroTotal');
+    const $heroFeriados = $('heroFeriados');
+    const $cityFilter = $('cityFilter');
 
-</style>
+    // ========== FUNÇÕES AUXILIARES ==========
+    function dk(y,m,d){ return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+    function parseKey(k){ const [y,m,d]=k.split('-').map(Number); return {year:y,month:m-1,day:d}; }
+    function getColor(type){ return COLOR_MAP[type]||'#78716c'; }
+    function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+    function todayKey(){ const t=new Date(); return dk(t.getFullYear(),t.getMonth(),t.getDate()); }
+
+    function dateRange(y1,m1,d1,y2,m2,d2){
+        const dates=[], s=new Date(y1,m1,d1), e=new Date(y2,m2,d2);
+        for(let c=new Date(s);c<=e;c.setDate(c.getDate()+1))
+            dates.push(dk(c.getFullYear(),c.getMonth(),c.getDate()));
+        return dates;
+    }
+    function singleDate(y,m,d){ return [dk(y,m,d)]; }
+
+    // ========== OPERAÇÕES NO FIREBASE ==========
+
+    async function loadEventsFromFirebase() {
+        try {
+            const snapshot = await database.ref('events').once('value');
+            const data = snapshot.val();
+            if (data && typeof data === 'object') {
+                events = data;
+                // Garantir que todo evento tenha campo city (vazio se não tiver)
+                for (const dateKey in events) {
+                    events[dateKey] = events[dateKey].map(e => {
+                        if (!e.city) e.city = '';
+                        return e;
+                    });
+                }
+                console.log('✅ Dados carregados do Firebase:', Object.keys(events).length, 'dias com eventos');
+            } else {
+                events = {};
+                console.log('ℹ️ Nenhum dado encontrado no Firebase.');
+            }
+        } catch (error) {
+            console.error('❌ Erro ao carregar do Firebase:', error);
+            try {
+                const local = localStorage.getItem('ped_events_2026_v3');
+                if (local) {
+                    events = JSON.parse(local);
+                    console.log('📂 Dados carregados do localStorage (fallback)');
+                } else {
+                    events = {};
+                }
+            } catch(e) {
+                events = {};
+            }
+        }
+    }
+
+    async function saveEventsToFirebase() {
+        try {
+            await database.ref('events').set(events);
+            console.log('✅ Dados salvos no Firebase');
+        } catch (error) {
+            console.error('❌ Erro ao salvar no Firebase:', error);
+            try {
+                localStorage.setItem('ped_events_2026_v3', JSON.stringify(events));
+            } catch(e) {}
+        }
+    }
+
+    // ========== SEED DE DADOS PADRÃO (com city) ==========
+
+    function addBulkEvent(dates, type, desc, city = '') {
+        dates.forEach(d => {
+            if (!events[d]) events[d] = [];
+            if (!events[d].some(e => e.type === type && (e.description || '') === (desc || '') && (e.city || '') === city))
+                events[d].push({ id: uid(), type, description: desc || '', city: city || '' });
+        });
+    }
+
+    function seedDefaultEvents() {
+        console.log('🌱 Semeando eventos padrão...');
+        // --- Eventos gerais (city vazio) ---
+        addBulkEvent(dateRange(2026,0,2,2026,0,17),'Férias docentes','');
+        addBulkEvent(dateRange(2026,6,6,2026,6,21),'Férias docentes','');
+        addBulkEvent(dateRange(2026,0,18,2026,0,31),'Recesso escolar','');
+        addBulkEvent(dateRange(2026,11,21,2026,11,23),'Recesso escolar','');
+        addBulkEvent(dateRange(2026,11,28,2026,11,31),'Recesso escolar','');
+        addBulkEvent(dateRange(2026,1,18,2026,1,20),'Planejamento','');
+        addBulkEvent(singleDate(2026,6,22),'Planejamento','');
+        addBulkEvent(singleDate(2026,6,23),'Planejamento','');
+        addBulkEvent(singleDate(2026,1,2),'Início do bimestre','1º Bimestre');
+        addBulkEvent(singleDate(2026,3,23),'Início do bimestre','2º Bimestre');
+        addBulkEvent(singleDate(2026,6,24),'Início do bimestre','3º Bimestre');
+        addBulkEvent(singleDate(2026,9,5),'Início do bimestre','4º Bimestre');
+        addBulkEvent(dateRange(2026,1,2,2026,1,13),'Atividades diagnósticas','');
+        addBulkEvent(dateRange(2026,7,10,2026,7,14),'Atividades diagnósticas','');
+        addBulkEvent(dateRange(2026,3,7,2026,3,10),'Mapa Classe - Sondagem','');
+        addBulkEvent(dateRange(2026,8,8,2026,8,11),'Mapa Classe - Sondagem','');
+        addBulkEvent(dateRange(2026,2,9,2026,2,27),'Avaliação de fluência leitora - Entrada','2º ano EF');
+        addBulkEvent(dateRange(2026,10,23,2026,10,27),'Avaliação de fluência leitora - Saída','2º ano EF');
+        addBulkEvent(dateRange(2026,3,13,2026,3,17),'Prova Paulista','');
+        addBulkEvent(dateRange(2026,5,15,2026,5,19),'Prova Paulista','');
+        addBulkEvent(dateRange(2026,8,21,2026,8,25),'Prova Paulista','');
+        addBulkEvent(dateRange(2026,5,23,2026,5,26),'SARESP','3ª série EM');
+        addBulkEvent(dateRange(2026,10,3,2026,10,6),'SARESP','');
+        addBulkEvent(dateRange(2026,10,9,2026,10,13),'SARESP','');
+        addBulkEvent(dateRange(2026,10,16,2026,10,19),'SARESP','');
+        addBulkEvent(singleDate(2026,10,30),'SARESP','');
+        addBulkEvent(dateRange(2026,11,1,2026,11,4),'SARESP','');
+        addBulkEvent(dateRange(2026,3,23,2026,3,30),'Período de recuperação e aprofundamento','');
+        addBulkEvent(dateRange(2026,6,24,2026,6,31),'Período de recuperação e aprofundamento','');
+        addBulkEvent(dateRange(2026,11,1,2026,11,4),'Período de recuperação e aprofundamento','');
+        addBulkEvent(dateRange(2026,7,3,2026,7,7),'Prova de recuperação','');
+        addBulkEvent(dateRange(2026,11,7,2026,11,9),'Prova de recuperação','');
+        addBulkEvent(dateRange(2026,4,18,2026,4,22),'OMASP','2ª fase');
+        addBulkEvent(dateRange(2026,7,24,2026,7,28),'OLISP','');
+        addBulkEvent(singleDate(2026,0,1),'Feriado / Emenda','Confraternização Universal');
+        addBulkEvent(singleDate(2026,1,16),'Feriado / Emenda','Carnaval');
+        addBulkEvent(singleDate(2026,1,17),'Feriado / Emenda','Carnaval');
+        addBulkEvent(singleDate(2026,3,3),'Feriado / Emenda','Sexta-Feira Santa');
+        addBulkEvent(singleDate(2026,3,20),'Feriado / Emenda','Emenda');
+        addBulkEvent(singleDate(2026,3,21),'Feriado / Emenda','Tiradentes');
+        addBulkEvent(singleDate(2026,4,1),'Feriado / Emenda','Dia do Trabalho');
+        addBulkEvent(singleDate(2026,4,2),'Feriado / Emenda','Emenda');
+        addBulkEvent(singleDate(2026,5,4),'Feriado / Emenda','Corpus Christi');
+        addBulkEvent(singleDate(2026,5,5),'Feriado / Emenda','Emenda');
+        addBulkEvent(singleDate(2026,6,9),'Feriado / Emenda','Revolução Constitucionalista');
+        addBulkEvent(singleDate(2026,8,7),'Feriado / Emenda','Independência do Brasil');
+        addBulkEvent(singleDate(2026,9,12),'Feriado / Emenda','Nossa Senhora Aparecida');
+        addBulkEvent(singleDate(2026,9,15),'Feriado / Emenda','Dia do Professor');
+        addBulkEvent(singleDate(2026,9,28),'Feriado / Emenda','Dia do Servidor Público');
+        addBulkEvent(singleDate(2026,10,2),'Feriado / Emenda','Finados');
+        addBulkEvent(singleDate(2026,10,15),'Feriado / Emenda','Proclamação da República');
+        addBulkEvent(singleDate(2026,10,20),'Feriado / Emenda','Consciência Negra');
+        addBulkEvent(singleDate(2026,11,24),'Feriado / Emenda','Emenda');
+        addBulkEvent(singleDate(2026,11,25),'Feriado / Emenda','Natal');
+
+        // --- Eventos municipais ---
+        const cityEvents = [
+            { city: 'Caieiras', anniversary: '2026-12-14', patron: '2026-06-13', patronDesc: 'Santo Antônio' },
+            { city: 'Cajamar', anniversary: '2026-02-18', patron: '2026-01-20', patronDesc: 'São Sebastião' },
+            { city: 'Francisco Morato', anniversary: '2026-03-21', patron: null, patronDesc: null },
+            { city: 'Franco da Rocha', anniversary: '2026-11-30', patron: '2026-12-08', patronDesc: 'Nossa Sra. da Conceição' },
+            { city: 'Mairiporã', anniversary: '2026-03-27', patron: '2026-09-15', patronDesc: 'Nossa Sra. do Desterro' }
+        ];
+
+        cityEvents.forEach(ce => {
+            // Aniversário
+            if (ce.anniversary) {
+                const d = ce.anniversary.split('-').map(Number);
+                addBulkEvent([dk(d[0], d[1]-1, d[2])], 'Aniversário da cidade', ce.city, ce.city);
+            }
+            // Padroeiro
+            if (ce.patron) {
+                const d = ce.patron.split('-').map(Number);
+                addBulkEvent([dk(d[0], d[1]-1, d[2])], 'Padroeiro(a)', ce.patronDesc + ' - ' + ce.city, ce.city);
+            }
+        });
+    }
+
+    // ========== RENDERIZAÇÃO ==========
+
+    function renderWeekdays(){
+        $weekdaysRow.innerHTML = WEEKDAY_LABELS.map(l=>`<div class="weekday-label">${l}</div>`).join('');
+    }
+
+    function renderLegend(){
+        const groups={};
+        CATEGORIES.forEach(c=>{ if(!groups[c.group])groups[c.group]=[]; groups[c.group].push(c); });
+        let html='';
+        for(const [g,items] of Object.entries(groups)){
+            html+=`<div class="legend-group">
+                <div class="legend-group-title">${g}</div>
+                <div class="legend-grid">${items.map(c=>`<div class="legend-item"><div class="legend-swatch" style="background:${c.raw}"></div>${c.key}</div>`).join('')}</div>
+            </div>`;
+        }
+        $legendContent.innerHTML=html;
+    }
+
+    function renderFilters(){
+        let html='<div class="filter-chip active" data-filter="all">Todos</div>';
+        CATEGORIES.forEach(c=>{
+            html+=`<div class="filter-chip" data-filter="${c.key}"><span class="fdot" style="background:${c.raw}"></span>${c.key}</div>`;
+        });
+        $filterBar.innerHTML=html;
+        $filterBar.querySelectorAll('.filter-chip').forEach(chip=>{
+            chip.addEventListener('click',()=>{
+                const f=chip.dataset.filter;
+                if(f==='all'){
+                    activeFilters.clear();
+                    $filterBar.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+                    chip.classList.add('active');
+                } else {
+                    $filterBar.querySelector('[data-filter="all"]').classList.remove('active');
+                    chip.classList.toggle('active');
+                    if(chip.classList.contains('active')) activeFilters.add(f);
+                    else activeFilters.delete(f);
+                    if(activeFilters.size===0) $filterBar.querySelector('[data-filter="all"]').classList.add('active');
+                }
+                renderCalendar();
+            });
+        });
+    }
+
+    // Filtra eventos por município e categoria
+    function getVisibleEvents(dateK){
+        const dayEv = events[dateK];
+        if (!dayEv) return [];
+        let filtered = dayEv;
+        // Filtro por categoria
+        if (activeFilters.size > 0) {
+            filtered = filtered.filter(e => activeFilters.has(e.type));
+        }
+        // Filtro por município: mostra eventos da cidade selecionada + eventos gerais (city vazio)
+        if (selectedCity !== 'Todos') {
+            filtered = filtered.filter(e => e.city === selectedCity || e.city === '');
+        }
+        return filtered;
+    }
+
+    function updateHero(){
+        $heroMonth.textContent=`${MONTH_NAMES[currentMonth]} ${currentYear}`;
+        let total=0, feriados=0;
+        for(const [dateK,arr] of Object.entries(events)){
+            const {year,month}=parseKey(dateK);
+            if(year===currentYear&&month===currentMonth){
+                const filtered = getVisibleEvents(dateK);
+                total += filtered.length;
+                feriados += filtered.filter(e=>e.type==='Feriado / Emenda').length;
+            }
+        }
+        $heroTotal.textContent=total;
+        $heroFeriados.textContent=feriados;
+        $heroSub.textContent=total>0?`${total} ${total>1?'':''} programada${total>1?'s':''} neste mês`:'Nenhuma ação programada neste mês';
+    }
+
+    function renderCalendar(){
+        if (isLoading) return;
+        $monthTitle.textContent=`${MONTH_NAMES[currentMonth]} ${currentYear}`;
+        const firstDay=new Date(currentYear,currentMonth,1).getDay();
+        const daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
+        const tk=todayKey();
+
+        let html='';
+        for(let i=0;i<firstDay;i++) html+='<div class="day-cell empty"></div>';
+
+        for(let d=1;d<=daysInMonth;d++){
+            const dateK=dk(currentYear,currentMonth,d);
+            const visible=getVisibleEvents(dateK);
+            const isSelected=dateK===selectedDateKey;
+            const isToday=dateK===tk;
+
+            let cls='day-cell has-day';
+            if(isSelected) cls+=' selected';
+            if(isToday) cls+=' today';
+
+            let dots='';
+            if(visible.length>0){
+                dots='<div class="event-dots">'+
+                    visible.slice(0,6).map(e=>`<div class="event-dot" style="background:${getColor(e.type)}"></div>`).join('')+
+                    (visible.length>6?'<div class="event-dot" style="background:#555"></div>':'')+
+                    '</div>';
+            }
+
+            html+=`<div class="${cls}" data-date="${dateK}"><div class="day-number">${d}</div>${dots}</div>`;
+        }
+        $daysGrid.innerHTML=html;
+        $daysGrid.querySelectorAll('.day-cell.has-day').forEach(cell=>{
+            cell.addEventListener('click',()=>selectDay(cell.dataset.date));
+        });
+        renderStats();
+        updateHero();
+    }
+
+    function renderStats(){
+        const monthEv={};
+        let total=0;
+        for(const [dateK,arr] of Object.entries(events)){
+            const {year,month}=parseKey(dateK);
+            if(year===currentYear&&month===currentMonth){
+                const filtered = getVisibleEvents(dateK);
+                filtered.forEach(e=>{ monthEv[e.type]=(monthEv[e.type]||0)+1; total++; });
+            }
+        }
+        if(total===0){ $statsRow.innerHTML=''; return; }
+        let html=`<div class="stat-chip"><strong>${total}</strong> ${total>1?'':''} este mês</div>`;
+        for(const [type,cnt] of Object.entries(monthEv)){
+            const short=type.length>24?type.slice(0,24)+'…':type;
+            html+=`<div class="stat-chip"><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:${getColor(type)};margin-right:4px;vertical-align:middle;"></span>${cnt}× ${short}</div>`;
+        }
+        $statsRow.innerHTML=html;
+    }
+
+    function selectDay(dateK){
+        selectedDateKey=dateK;
+        renderCalendar();
+        renderPanel();
+    }
+
+    function renderPanel(){
+        if(!selectedDateKey){
+            $panelDate.textContent='Selecione um dia';
+            $eventList.innerHTML='<div class="empty-state">Clique em um dia no calendário<small>para ver as ações programadas</small></div>';
+            return;
+        }
+        const {year,month,day}=parseKey(selectedDateKey);
+        const dateObj=new Date(year,month,day);
+        $panelDate.textContent=dateObj.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+        const dayEv = events[selectedDateKey];
+        if(!dayEv || dayEv.length===0){
+            $eventList.innerHTML='<div class="empty-state">Nenhuma ação neste dia</div>';
+            return;
+        }
+
+        // Exibe apenas os eventos, com indicação do município (se houver)
+        $eventList.innerHTML=dayEv.map(ev=>{
+            const c=getColor(ev.type);
+            return `<div class="event-card fade-in" style="border-left-color:${c}">
+                <div class="event-card-content">
+                    <div class="event-card-type">${ev.type}</div>
+                    ${ev.description ? `<div class="event-card-desc">${ev.description}</div>` : ''}
+                    ${ev.city ? `<div class="event-card-desc" style="font-weight:500;color:#0a2f6c;">📍 ${ev.city}</div>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // ========== INICIALIZAÇÃO ==========
+
+    async function init(){
+        isLoading = true;
+
+        await loadEventsFromFirebase();
+
+        if (Object.keys(events).length === 0) {
+            console.log('📭 Nenhum evento encontrado. Gerando dados padrão...');
+            seedDefaultEvents();
+            await saveEventsToFirebase();
+        } else {
+            console.log(`📊 ${Object.keys(events).length} dias com eventos carregados.`);
+        }
+
+        renderWeekdays();
+        renderLegend();
+        renderFilters();
+
+        const t=new Date();
+        const tk=todayKey();
+        const pk=parseKey(tk);
+        if(pk.year===2026){
+            currentMonth=pk.month;
+        } else {
+            currentMonth=0;
+        }
+        currentYear=2026;
+
+        isLoading = false;
+        renderCalendar();
+
+        if (pk.year===2026 && events[tk]) {
+            selectDay(tk);
+        } else {
+            let firstEventDay = null;
+            for (const dateKey of Object.keys(events).sort()) {
+                const {year, month} = parseKey(dateKey);
+                if (year === currentYear && month === currentMonth) {
+                    firstEventDay = dateKey;
+                    break;
+                }
+            }
+            if (firstEventDay) selectDay(firstEventDay);
+            else selectDay(dk(2026,0,2));
+        }
+
+        // Navegação
+        $('prevMonth').addEventListener('click',()=>{
+            currentMonth--;
+            if(currentMonth<0){currentMonth=11;currentYear--;}
+            selectedDateKey=null;
+            renderCalendar(); renderPanel();
+        });
+        $('nextMonth').addEventListener('click',()=>{
+            currentMonth++;
+            if(currentMonth>11){currentMonth=0;currentYear++;}
+            selectedDateKey=null;
+            renderCalendar(); renderPanel();
+        });
+
+        // Filtro por município
+        $cityFilter.addEventListener('change', () => {
+            selectedCity = $cityFilter.value;
+            renderCalendar();
+            renderPanel();
+        });
+
+        console.log('✅ Calendário carregado com sucesso!');
+    }
+
+    init();
+})();
+</script>
 </body>
-
 </html>
-
