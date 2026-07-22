@@ -1613,7 +1613,147 @@ salvarLimpeza();
 
 </script>
 
+<!-- EXPLICAÇÃO DOS PONTINHOS DO CALENDÁRIO -->
+<div class="legend-explanation">
 
+    <h2>O que significa cada pontinho do calendário</h2>
+
+    <div class="legend-box">
+
+        <div class="legend-row">
+            <span class="dot" style="background:#2563eb"></span>
+            <strong>Férias docentes</strong>
+            <span>Período de férias dos professores.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#6366f1"></span>
+            <strong>Recesso escolar</strong>
+            <span>Suspensão das atividades escolares.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#ca8a04"></span>
+            <strong>Planejamento</strong>
+            <span>Organização pedagógica e planejamento escolar.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#7c3aed"></span>
+            <strong>Início do bimestre</strong>
+            <span>Início dos períodos letivos.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#ea580c"></span>
+            <strong>Feriado / Emenda</strong>
+            <span>Feriados nacionais, estaduais e pontos facultativos.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#0d9488"></span>
+            <strong>Atividades diagnósticas</strong>
+            <span>Avaliações diagnósticas da aprendizagem.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#dc2626"></span>
+            <strong>Prova Paulista</strong>
+            <span>Avaliações oficiais da rede estadual.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#d97706"></span>
+            <strong>Recuperação e aprofundamento</strong>
+            <span>Momentos de recuperação da aprendizagem.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#6d28d9"></span>
+            <strong>SARESP</strong>
+            <span>Avaliação externa estadual.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#1e293b"></span>
+            <strong>OMASP / OLISP</strong>
+            <span>Olimpíadas e competições educacionais.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#f59e0b"></span>
+            <strong>Aniversário da cidade</strong>
+            <span>Datas comemorativas dos municípios.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#8b5cf6"></span>
+            <strong>Padroeiro(a)</strong>
+            <span>Feriados municipais religiosos.</span>
+        </div>
+
+        <div class="legend-row">
+            <span class="dot" style="background:#78716c"></span>
+            <strong>Outro</strong>
+            <span>Outras ações cadastradas.</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+
+.legend-explanation{
+    max-width:1440px;
+    margin:25px auto;
+    background:white;
+    border-radius:30px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+.legend-explanation h2{
+    color:#0a2f6c;
+    font-size:1.2rem;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.legend-box{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:10px;
+}
+
+.legend-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px;
+    border-radius:15px;
+    background:#f8fafc;
+    font-size:.85rem;
+}
+
+.legend-row strong{
+    color:#0a2f6c;
+}
+
+.legend-row span:last-child{
+    color:#64748b;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    display:inline-block;
+    flex-shrink:0;
+}
+
+</style>
 </body>
 
 </html>
