@@ -978,15 +978,9 @@
         renderLegend();
         renderFilters();
 
-        const t=new Date();
-        const tk=todayKey();
-        const pk=parseKey(tk);
-        if(pk.year===2026){
-            currentMonth=pk.month;
-        } else {
-            currentMonth=0;
-        }
-        currentYear=2026;
+        // Abrir sempre no mês de Julho de 2026
+currentMonth = 6; // Julho (Janeiro=0, Fevereiro=1... Julho=6)
+currentYear = 2026;
 
         isLoading = false;
         renderCalendar();
