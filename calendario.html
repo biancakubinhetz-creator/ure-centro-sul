@@ -985,9 +985,22 @@ currentYear = 2026;
         isLoading = false;
         renderCalendar();
 
-        if (pk.year===2026 && events[tk]) {
-            selectDay(tk);
-        } else {
+        // Seleciona primeiro evento de julho
+let firstEventDay = null;
+
+for (const dateKey of Object.keys(events).sort()) {
+    const {year, month} = parseKey(dateKey);
+    if (year === 2026 && month === 6) {
+        firstEventDay = dateKey;
+        break;
+    }
+}
+
+if (firstEventDay) {
+    selectDay(firstEventDay);
+} else {
+    selectDay(dk(2026,6,1));
+} else {
             let firstEventDay = null;
             for (const dateKey of Object.keys(events).sort()) {
                 const {year, month} = parseKey(dateKey);
