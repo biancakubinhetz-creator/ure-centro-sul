@@ -1,1 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Missão 1 · Arrumando a Mochila | Jornada da Aprendizagem · URE CENTRO SUL</title>
+<!-- FONTES E ÍCONES (IDENTIDADE VISUAL) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  /* ========== IDENTIDADE VISUAL (baseada no checklist) ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(145deg, #0a2f6c 0%, #041a3a 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #1e293b;
+  }
+
+  .main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #0f1a24;
+    border-radius: 48px;
+    padding: 20px;
+    box-shadow: 0 30px 35px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255,255,200,0.1);
+    border: 1px solid #d32f2f;
+  }
+
+  /* cabeçalho institucional */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 47, 108, 0.85);
+    backdrop-filter: blur(4px);
+    padding: 12px 24px;
+    border-radius: 60px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .logo-area img {
+    height: 55px;
+    width: auto;
+    border-radius: 12px;
+    background: white;
+    padding: 4px;
+    object-fit: contain;
+  }
+  .logo-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffec9e;
+    line-height: 1.3;
+  }
+  .title-badge {
+    background: #d32f2f;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+  }
+
+  /* cards e elementos internos */
+  .card {
+    background: white;
+    border-radius: 32px;
+    padding: 1.5rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border: 1px solid #e0e4e9;
+    transition: all 0.2s;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0a2f6c, #1a4a7a);
+    border-radius: 32px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+  }
+  .hero p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+  .xp-bar-wrap {
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    height: 10px;
+    margin-top: 1rem;
+    overflow: hidden;
+  }
+  .xp-bar {
+    background: #4ade80;
+    height: 100%;
+    width: 0%;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  .xp-label {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+  }
+  .progress-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.5);
+    background: transparent;
+    transition: 0.2s;
+  }
+  .dot.done {
+    background: #4ade80;
+    border-color: #4ade80;
+  }
+  .dot.current {
+    background: white;
+    border-color: white;
+  }
+
+  /* badges e navegação */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 60px;
+    margin-bottom: 0.75rem;
+  }
+  .badge-blue { background: #eef2ff; color: #1e40af; }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-amber { background: #ffedd5; color: #9a3412; }
+  .badge-red { background: #fee2e2; color: #b91c1c; }
+
+  .progress-nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .nav-step {
+    padding: 5px 12px;
+    border-radius: 60px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    cursor: default;
+  }
+  .nav-step.done-nav {
+    background: #0a2f6c;
+    color: white;
+    border-color: #0a2f6c;
+  }
+  .nav-step.current-nav {
+    background: #d32f2f;
+    color: white;
+    border-color: #d32f2f;
+  }
+
+  /* formulários */
+  label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1e4663;
+    display: block;
+    margin-bottom: 6px;
+  }
+  input, select, textarea {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    border-radius: 60px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    transition: 0.2s;
+  }
+  textarea {
+    border-radius: 24px;
+    resize: vertical;
+    min-height: 90px;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #d32f2f;
+    box-shadow: 0 0 0 3px rgba(211,47,47,0.2);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 60px;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    transition: 0.2s;
+  }
+  .btn-primary {
+    background: #0a2f6c;
+    color: white;
+    border-color: #0a2f6c;
+  }
+  .btn-primary:hover {
+    background: #d32f2f;
+    border-color: #d32f2f;
+  }
+  .btn-danger {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fecaca;
+  }
+  .btn-danger:hover {
+    background: #fecaca;
+  }
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 1.2rem;
+  }
+  .question-label {
+    font-weight: 700;
+    color: #0a2f6c;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+  }
+  .checkbox-group, .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .checkbox-item, .radio-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    border-radius: 60px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+  }
+  .checkbox-item:hover, .radio-item:hover {
+    background: #eef2ff;
+  }
+  .checkbox-item input, .radio-item input {
+    width: 18px;
+    accent-color: #d32f2f;
+    margin-top: 2px;
+  }
+  .star-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .star-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: 0.1s;
+  }
+  .star-btn.lit {
+    opacity: 1;
+  }
+  .mission-step {
+    background: #f1f5f9;
+    border-radius: 20px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #d32f2f;
+  }
+  .unlocked-badge {
+    text-align: center;
+    padding: 1.5rem;
+    background: #e6f1fb;
+    border-radius: 28px;
+    margin-bottom: 1rem;
+  }
+  .unlocked-badge .medal {
+    font-size: 3rem;
+  }
+  .item-mochila {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 60px;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .report-section {
+    border-left: 3px solid #d32f2f;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .report-section h3 {
+    font-size: 0.9rem;
+    color: #0a2f6c;
+    margin-bottom: 0.5rem;
+  }
+  .report-item {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+  .report-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #d32f2f;
+  }
+  .screen {
+    display: none;
+  }
+  .screen.active {
+    display: block;
+  }
+  .print-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: linear-gradient(135deg, #0a2f6c, #052050);
+    color: white;
+    border: none;
+    border-radius: 60px;
+    padding: 12px 24px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    font-family: 'Inter', sans-serif;
+  }
+  .print-btn:hover {
+    background: #d32f2f;
+  }
+  @media (max-width: 640px) {
+    .two-col { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.2rem; }
+  }
+  /* Estilos para impressão do relatório (usado no iframe) */
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #print-report-area, #print-report-area * {
+      visibility: visible;
+    }
+    #print-report-area {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin: 0;
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="main-container">
+  <!-- CABEÇALHO IDENTIDADE VISUAL -->
+  <div class="header">
+    <div class="logo-area">
+      
+      <div class="logo-text">URE CENTRO SUL - Seduc SP</div>
+    </div>
+    <div class="title-badge"><i class="fas fa-chalkboard-user"></i> Jornada da Aprendizagem · Missão 1</div>
+  </div>
+
+  <div id="app">
+    <!-- HERO PERSONALIZADO -->
+    <div class="hero">
+      <h1><i class="fas fa-backpack"></i> Jornada da Aprendizagem</h1>
+      <p>Primeira missão: Arrumando a mochila</p>
+      <div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar"></div></div>
+      <div class="xp-label" id="xp-label">0 / 6 itens na mochila</div>
+      <div class="progress-dots" id="progress-dots"></div>
+    </div>
+
+    <!-- TELA DE CADASTRO -->
+    <div id="screen-cadastro" class="screen active">
+      <div class="card">
+        <div class="badge badge-blue"><i class="fas fa-user"></i> identificação</div>
+        <p class="question-label">Antes de começar, quem é você nessa jornada?</p>
+        <div style="margin-bottom:1rem">
+          <label>Nome completo</label>
+          <input type="text" id="inp-nome" placeholder="Seu nome">
+        </div>
+        <div class="two-col" style="margin-bottom:1rem">
+          <div><label>Escola</label><input type="text" id="inp-escola" placeholder="Nome da escola"></div>
+          <div><label>Turma / coordenação</label><input type="text" id="inp-turma" placeholder="Ex: 9º A, 3ª série EM"></div>
+        </div>
+        <div class="two-col" style="margin-bottom:1rem">
+          <div>
+            <label>Componente curricular</label>
+            <select id="inp-componente">
+              <option value="">Selecione...</option>
+              <option>Língua Portuguesa</option>
+<option>Matemática</option>
+<option>Ciências</option>
+<option>História</option>
+<option>Geografia</option>
+<option>Arte</option>
+<option>Inglês</option>
+<option>Educação Física</option>
+<option>Física</option>
+<option>Química</option>
+<option>Biologia</option>
+<option>Filosofia</option>
+<option>Sociologia</option>
+<option>Ensino Religioso</option>
+<option>Projeto de Vida</option>
+<option>Tecnologia e Inovação</option>
+<option>Eletivas</option>
+<option>Redação e Leitura</option>
+<option>Educação Financeira</option>
+<option>Pensamento Computacional</option>
+<option>Práticas Experimentais</option>
+<option>Educação Especial / AEE</option>
+<option>Coordenação Pedagógica</option>
+<option>Orientação Educacional</option>
+<option>Direção Escolar</option>
+            </select>
+          </div>
+          <div>
+            <label>Ciclo</label>
+            <select id="inp-ciclo">
+              <option value="">Selecione...</option>
+              <option>Anos Iniciais (1º ao 5º ano)</option>
+              <option>Anos Finais (6º ao 9º ano)</option>
+              <option>Ensino Médio</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="iniciarMissao()"><i class="fas fa-arrow-right"></i> Iniciar missão</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ETAPA 1 -->
+    <div id="screen-s1" class="screen">
+      <div class="progress-nav" id="nav-s1"></div>
+      <div class="card">
+        <div class="badge badge-blue"><i class="fas fa-video"></i> etapa 1 de 6 — vídeo SEDUC</div>
+        <div class="mission-step"><h3><i class="fas fa-bullseye"></i> O que fazer</h3><p>Acesse o AVA-EFAPE e assista ao vídeo do seu componente e ciclo, disponível a partir de 22 de julho.</p></div>
+        <div style="margin-bottom:1rem"><p class="question-label">Quais aprendizagens do 1º semestre ainda <strong>não foram consolidadas</strong> pela sua turma?</p><textarea id="s1q1" placeholder="Escreva aqui suas anotações sobre as lacunas observadas..."></textarea></div>
+        <div style="margin-bottom:1rem"><p class="question-label">O que mais te chamou atenção no vídeo?</p><textarea id="s1q2" placeholder="Anotações livres sobre o vídeo..."></textarea></div>
+        <div style="margin-bottom:1rem"><p class="question-label">Como você avalia a relação entre o vídeo e o que você já observava na sua turma?</p>
+          <div class="radio-group" id="s1q3-group">
+            <label class="radio-item"><input type="radio" name="s1q3" value="O vídeo confirmou o que eu já observava"> O vídeo confirmou o que eu já observava</label>
+            <label class="radio-item"><input type="radio" name="s1q3" value="O vídeo trouxe informações novas sobre minha turma"> O vídeo trouxe informações novas sobre minha turma</label>
+            <label class="radio-item"><input type="radio" name="s1q3" value="O que o vídeo apontou é diferente do que observo na minha turma"> O que o vídeo apontou é diferente do que observo na minha turma</label>
+            <label class="radio-item"><input type="radio" name="s1q3" value="Ainda não assisti ao vídeo"> Ainda não assisti ao vídeo</label>
+          </div>
+        </div>
+        <div class="btn-group"><button class="btn btn-primary" onclick="avancar('s1','s2',0)"><i class="fas fa-save"></i> Guardar na mochila ↗</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 2 -->
+    <div id="screen-s2" class="screen">
+      <div class="progress-nav" id="nav-s2"></div>
+      <div class="card">
+        <div class="badge badge-green"><i class="fas fa-map"></i> etapa 2 de 6 — guia do currículo priorizado</div>
+        <div class="mission-step"><h3><i class="fas fa-bullseye"></i> O que fazer</h3><p>Abra o Guia do seu componente e explore as aprendizagens essenciais, escopo-sequência e novas seções.</p></div>
+        <div><p class="question-label">Quais itens do Guia você explorou?</p><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="s2q1" value="Aprendizagens essenciais do ano/série"> Aprendizagens essenciais do ano/série</label><label class="checkbox-item"><input type="checkbox" name="s2q1" value="Detalhamento das AEs e conhecimentos prévios"> Detalhamento das AEs e conhecimentos prévios</label><label class="checkbox-item"><input type="checkbox" name="s2q1" value="Escopo-sequência (sequência das aulas)"> Escopo-sequência</label><label class="checkbox-item"><input type="checkbox" name="s2q1" value="De olho na Prova Paulista"> "De olho na Prova Paulista"</label><label class="checkbox-item"><input type="checkbox" name="s2q1" value="Mapa SARESP (Anos Finais)"> Mapa SARESP</label></div></div>
+        <div><p class="question-label">O que te chamou atenção nas aprendizagens essenciais do 2º semestre?</p><textarea id="s2q2" placeholder="Registre seus destaques..."></textarea></div>
+        <div><p class="question-label">Algo nos descritores da Prova Paulista ou SARESP te surpreendeu?</p><textarea id="s2q3" placeholder="Anotações sobre os descritores..."></textarea></div>
+        <div class="btn-group"><button class="btn" onclick="voltar('s1')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s2','s3',1)"><i class="fas fa-save"></i> Guardar na mochila</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 3 -->
+    <div id="screen-s3" class="screen">
+      <div class="progress-nav" id="nav-s3"></div>
+      <div class="card">
+        <div class="badge badge-amber"><i class="fas fa-laptop"></i> etapa 3 de 6 — materiais e plataformas</div>
+        <div class="mission-step"><h3><i class="fas fa-bullseye"></i> O que fazer</h3><p>Explore materiais digitais, impressos e plataformas (Tarefa SP, Redação Paulista, Khan, Matific, etc.)</p></div>
+        <div><p class="question-label">Quais plataformas você já utiliza com sua turma?</p><div class="checkbox-group" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Tarefa SP"> Tarefa SP</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Redação Paulista"> Redação Paulista</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Khan Academy"> Khan Academy</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Matific"> Matific</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Leia SP"> Leia SP</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Elefante Letrado"> Elefante Letrado</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Alura"> Alura</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Speak"> Speak</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Material digital editável"> Material digital</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Livro do estudante"> Livro impresso</label></div></div>
+        <div><p class="question-label">Que tipo de atividade ou recurso mais chamou sua atenção para o 3º bimestre?</p><textarea id="s3q2" placeholder="Descreva..."></textarea></div>
+        <div><p class="question-label">Há aulas ou temas desafiadores para sua turma? Quais?</p><textarea id="s3q3" placeholder="Liste..."></textarea></div>
+        <div class="btn-group"><button class="btn" onclick="voltar('s2')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s3','s4',2)"><i class="fas fa-save"></i> Guardar</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 4 -->
+    <div id="screen-s4" class="screen">
+      <div class="progress-nav" id="nav-s4"></div>
+      <div class="card">
+        <div class="badge badge-red"><i class="fas fa-chart-line"></i> etapa 4 de 6 — dados de aprendizagem</div>
+        <div class="mission-step"><h3><i class="fas fa-bullseye"></i> O que fazer</h3><p>Consulte Prova Paulista, Mapa Classe ou fluência leitora.</p></div>
+        <div><p class="question-label">Fontes consultadas:</p><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="s4q1" value="Painel Prova Paulista 1B"> Prova Paulista 1B</label><label class="checkbox-item"><input type="checkbox" name="s4q1" value="Painel Prova Paulista 2B"> Prova Paulista 2B</label><label class="checkbox-item"><input type="checkbox" name="s4q1" value="Mapa Classe (1º ao 5º ano)"> Mapa Classe</label><label class="checkbox-item"><input type="checkbox" name="s4q1" value="Avaliação de fluência leitora (2º ano)"> Fluência leitora</label></div></div>
+        <div><p class="question-label">Os dados confirmam ou contradizem o vídeo?</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s4q2" value="Os dados confirmam o que o vídeo apontou"> Confirmam</label><label class="radio-item"><input type="radio" name="s4q2" value="Os dados revelam algo diferente do vídeo"> Diferente</label><label class="radio-item"><input type="radio" name="s4q2" value="Os dados complementam o vídeo"> Complementam</label></div></div>
+        <div><p class="question-label">Principais lacunas reveladas pelos dados:</p><textarea id="s4q3" placeholder="Cite habilidades, descritores..."></textarea></div>
+        <div><p class="question-label">Estudantes ou grupos que precisam de atenção especial:</p><textarea id="s4q4" placeholder="Descreva perfis..."></textarea></div>
+        <div class="btn-group"><button class="btn" onclick="voltar('s3')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s4','s5',3)"><i class="fas fa-save"></i> Guardar</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 5 -->
+    <div id="screen-s5" class="screen">
+      <div class="progress-nav" id="nav-s5"></div>
+      <div class="card">
+        <div class="badge badge-blue"><i class="fas fa-lightbulb"></i> etapa 5 de 6 — reflexão pedagógica</div>
+        <div><p class="question-label">Principal prioridade pedagógica para o 3º bimestre:</p><textarea id="s5q1" placeholder="Descreva..."></textarea></div>
+        <div><p class="question-label">Estratégias de inclusão / material acessibilizado:</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s5q2" value="Sim, já conheço e utilizarei"> Sim, usarei</label><label class="radio-item"><input type="radio" name="s5q2" value="Quero conhecer melhor antes de usar"> Quero conhecer</label><label class="radio-item"><input type="radio" name="s5q2" value="Não tenho estudantes elegíveis"> Não se aplica</label></div></div>
+        <div><p class="question-label">Que apoio você precisaria da coordenação ou URE?</p><textarea id="s5q3" placeholder="Formações, materiais..."></textarea></div>
+        <div><p class="question-label">Disposição para o 2º semestre:</p><div class="star-row" id="stars-s5"><button class="star-btn" onclick="setStars(1)">⭐</button><button class="star-btn" onclick="setStars(2)">⭐</button><button class="star-btn" onclick="setStars(3)">⭐</button><button class="star-btn" onclick="setStars(4)">⭐</button><button class="star-btn" onclick="setStars(5)">⭐</button></div><div style="font-size:12px;color:#475569;" id="star-label">Selecione de 1 a 5 estrelas</div></div>
+        <div class="btn-group"><button class="btn" onclick="voltar('s4')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s5','s6',4)"><i class="fas fa-save"></i> Guardar</button></div>
+      </div>
+    </div>
+
+    <!-- ETAPA 6 -->
+    <div id="screen-s6" class="screen">
+      <div class="progress-nav" id="nav-s6"></div>
+      <div class="card">
+        <div class="badge badge-green"><i class="fas fa-trophy"></i> etapa 6 de 6 — mochila pronta!</div>
+        <div class="unlocked-badge"><div class="medal">🎒✅</div><h2>Missão 1 concluída!</h2><p>Você organizou todos os itens da sua mochila pedagógica.</p></div>
+        <div class="item-mochila"><i class="fas fa-video"></i> Reflexões sobre o vídeo da SEDUC</div>
+        <div class="item-mochila"><i class="fas fa-map"></i> Destaques do Guia do Currículo</div>
+        <div class="item-mochila"><i class="fas fa-laptop"></i> Recursos e materiais mapeados</div>
+        <div class="item-mochila"><i class="fas fa-chart-line"></i> Dados de aprendizagem analisados</div>
+        <div class="item-mochila"><i class="fas fa-lightbulb"></i> Prioridades e reflexão registradas</div>
+        <div class="item-mochila"><i class="fas fa-file-alt"></i> Relatório completo gerado</div>
+        <div class="btn-group" style="margin-top:1rem"><button class="btn btn-primary" onclick="avancar('s6','relatorio',5)"><i class="fas fa-download"></i> Gerar relatório completo</button></div>
+      </div>
+    </div>
+
+    <!-- RELATÓRIO FINAL -->
+    <div id="screen-relatorio" class="screen">
+      <div class="card" style="border-top:4px solid #d32f2f">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem">
+          <div><p style="font-size:0.7rem;color:#d32f2f;font-weight:800">Jornada da Aprendizagem — URE CENTRO SUL</p><h2 style="color:#0a2f6c;">Relatório · Missão 1: Arrumando a mochila</h2></div>
+          <button class="btn" onclick="imprimirSomenteRelatorio()"><i class="fas fa-print"></i> Imprimir / PDF</button>
+        </div>
+        <div id="relatorio-conteudo"></div>
+        <div class="btn-group">
+          <button class="btn" onclick="mostrarScreen('s6')"><i class="fas fa-arrow-left"></i> Voltar</button>
+          <button class="btn btn-primary" onclick="imprimirSomenteRelatorio()"><i class="fas fa-print"></i> Imprimir / salvar PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position: fixed; bottom: 24px; left: 24px; z-index: 10; display: flex; gap: 12px;">
+  <button class="btn btn-danger" onclick="limparDados()" style="background: #fee2e2; color: #b91c1c;"><i class="fas fa-trash-alt"></i> Limpar todos os dados</button>
+  <button class="btn btn-primary" onclick="salvarProgressoManual()" style="background: #0a2f6c;"><i class="fas fa-save"></i> Salvar progresso agora</button>
+</div>
+<button class="print-btn" onclick="imprimirSomenteRelatorio()"><i class="fas fa-print"></i> Imprimir / Salvar PDF</button>
+
+<script>
+  // estado da jornada
+  let estado = { nome: '', escola: '', turma: '', componente: '', ciclo: '', passos: 0, estrelas: 0 };
+  const TOTAL = 6;
+  const NOMES_ETAPAS = ['Vídeo SEDUC', 'Guia Currículo', 'Materiais', 'Dados', 'Reflexão', 'Concluído'];
+  const STORAGE_KEY = 'missao1_jornada';
+
+  // ========== FUNÇÕES CRUD LOCALSTORAGE ==========
+  function salvarParaLocalStorage() {
+    const dados = {
+      identificacao: {
+        nome: document.getElementById('inp-nome').value,
+        escola: document.getElementById('inp-escola').value,
+        turma: document.getElementById('inp-turma').value,
+        componente: document.getElementById('inp-componente').value,
+        ciclo: document.getElementById('inp-ciclo').value
+      },
+      passos: estado.passos,
+      estrelas: estado.estrelas,
+      s1q1: document.getElementById('s1q1').value,
+      s1q2: document.getElementById('s1q2').value,
+      s1q3: document.querySelector('input[name="s1q3"]:checked') ? document.querySelector('input[name="s1q3"]:checked').value : '',
+      s2q1: Array.from(document.querySelectorAll('input[name="s2q1"]:checked')).map(cb => cb.value),
+      s2q2: document.getElementById('s2q2').value,
+      s2q3: document.getElementById('s2q3').value,
+      s3q1: Array.from(document.querySelectorAll('input[name="s3q1"]:checked')).map(cb => cb.value),
+      s3q2: document.getElementById('s3q2').value,
+      s3q3: document.getElementById('s3q3').value,
+      s4q1: Array.from(document.querySelectorAll('input[name="s4q1"]:checked')).map(cb => cb.value),
+      s4q2: document.querySelector('input[name="s4q2"]:checked') ? document.querySelector('input[name="s4q2"]:checked').value : '',
+      s4q3: document.getElementById('s4q3').value,
+      s4q4: document.getElementById('s4q4').value,
+      s5q1: document.getElementById('s5q1').value,
+      s5q2: document.querySelector('input[name="s5q2"]:checked') ? document.querySelector('input[name="s5q2"]:checked').value : '',
+      s5q3: document.getElementById('s5q3').value
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
+    console.log('✅ Dados salvos no localStorage');
+  }
+
+  function carregarDoLocalStorage() {
+    const dadosRaw = localStorage.getItem(STORAGE_KEY);
+    if (!dadosRaw) return false;
+    try {
+      const dados = JSON.parse(dadosRaw);
+      // identificação
+      if (dados.identificacao) {
+        document.getElementById('inp-nome').value = dados.identificacao.nome || '';
+        document.getElementById('inp-escola').value = dados.identificacao.escola || '';
+        document.getElementById('inp-turma').value = dados.identificacao.turma || '';
+        document.getElementById('inp-componente').value = dados.identificacao.componente || '';
+        document.getElementById('inp-ciclo').value = dados.identificacao.ciclo || '';
+        estado.nome = dados.identificacao.nome || '';
+        estado.escola = dados.identificacao.escola || '';
+        estado.turma = dados.identificacao.turma || '';
+        estado.componente = dados.identificacao.componente || '';
+        estado.ciclo = dados.identificacao.ciclo || '';
+      }
+      estado.passos = dados.passos || 0;
+      estado.estrelas = dados.estrelas || 0;
+
+      // campos texto
+      if (dados.s1q1) document.getElementById('s1q1').value = dados.s1q1;
+      if (dados.s1q2) document.getElementById('s1q2').value = dados.s1q2;
+      if (dados.s1q3) {
+        let radio = document.querySelector(`input[name="s1q3"][value="${dados.s1q3.replace(/"/g, '&quot;')}"]`);
+        if (radio) radio.checked = true;
+      }
+      if (dados.s2q2) document.getElementById('s2q2').value = dados.s2q2;
+      if (dados.s2q3) document.getElementById('s2q3').value = dados.s2q3;
+      if (dados.s3q2) document.getElementById('s3q2').value = dados.s3q2;
+      if (dados.s3q3) document.getElementById('s3q3').value = dados.s3q3;
+      if (dados.s4q3) document.getElementById('s4q3').value = dados.s4q3;
+      if (dados.s4q4) document.getElementById('s4q4').value = dados.s4q4;
+      if (dados.s5q1) document.getElementById('s5q1').value = dados.s5q1;
+      if (dados.s5q3) document.getElementById('s5q3').value = dados.s5q3;
+
+      // checkboxes s2q1
+      if (dados.s2q1 && Array.isArray(dados.s2q1)) {
+        document.querySelectorAll('input[name="s2q1"]').forEach(cb => {
+          cb.checked = dados.s2q1.includes(cb.value);
+        });
+      }
+      if (dados.s3q1 && Array.isArray(dados.s3q1)) {
+        document.querySelectorAll('input[name="s3q1"]').forEach(cb => {
+          cb.checked = dados.s3q1.includes(cb.value);
+        });
+      }
+      if (dados.s4q1 && Array.isArray(dados.s4q1)) {
+        document.querySelectorAll('input[name="s4q1"]').forEach(cb => {
+          cb.checked = dados.s4q1.includes(cb.value);
+        });
+      }
+
+      // radios
+      if (dados.s4q2) {
+        let r = document.querySelector(`input[name="s4q2"][value="${dados.s4q2.replace(/"/g, '&quot;')}"]`);
+        if (r) r.checked = true;
+      }
+      if (dados.s5q2) {
+        let r = document.querySelector(`input[name="s5q2"][value="${dados.s5q2.replace(/"/g, '&quot;')}"]`);
+        if (r) r.checked = true;
+      }
+
+      // estrelas
+      if (estado.estrelas > 0) {
+        setStars(estado.estrelas);
+      }
+
+      atualizarDots();
+      return true;
+    } catch(e) { console.error('Erro ao carregar dados', e); return false; }
+  }
+
+  function limparDados() {
+    if (confirm('⚠️ Tem certeza que deseja apagar TODOS os dados salvos? Essa ação não pode ser desfeita.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      // recarregar a página para limpar tudo
+      location.reload();
+    }
+  }
+
+  function salvarProgressoManual() {
+    salvarParaLocalStorage();
+    alert('✅ Progresso salvo com sucesso!');
+  }
+
+  // ========== FUNÇÕES EXISTENTES (adaptadas para salvar automaticamente) ==========
+  function iniciarMissao() {
+    let n = document.getElementById('inp-nome').value.trim();
+    let e = document.getElementById('inp-escola').value.trim();
+    let t = document.getElementById('inp-turma').value.trim();
+    let c = document.getElementById('inp-componente').value;
+    let ci = document.getElementById('inp-ciclo').value;
+    if (!n || !e || !t || !c || !ci) { alert('Preencha todos os campos para começar a missão!'); return; }
+    estado.nome = n; estado.escola = e; estado.turma = t; estado.componente = c; estado.ciclo = ci;
+    salvarParaLocalStorage(); // salva identificação
+    mostrarScreen('s1');
+    atualizarDots();
+    renderNav('s1', 0);
+  }
+
+  function mostrarScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+  }
+
+  function atualizarDots() {
+    let dots = document.getElementById('progress-dots');
+    dots.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      let d = document.createElement('div');
+      d.className = 'dot' + (i < estado.passos ? ' done' : i === estado.passos ? ' current' : '');
+      dots.appendChild(d);
+    }
+    let pct = Math.round((estado.passos / TOTAL) * 100);
+    document.getElementById('xp-bar').style.width = pct + '%';
+    document.getElementById('xp-label').textContent = estado.passos + ' / ' + TOTAL + ' itens na mochila';
+  }
+
+  function renderNav(screenId, stepIdx) {
+    let nav = document.getElementById('nav-' + screenId);
+    if (!nav) return;
+    nav.innerHTML = '';
+    NOMES_ETAPAS.forEach((nome, i) => {
+      let btn = document.createElement('div');
+      btn.className = 'nav-step' + (i < stepIdx ? ' done-nav' : i === stepIdx ? ' current-nav' : '');
+      btn.textContent = (i + 1) + '. ' + nome;
+      nav.appendChild(btn);
+    });
+  }
+
+  function avancar(de, para, passoAtual) {
+    if (passoAtual >= estado.passos) estado.passos = passoAtual + 1;
+    salvarParaLocalStorage(); // salva antes de avançar
+    atualizarDots();
+    if (para === 'relatorio') gerarRelatorio();
+    mostrarScreen(para);
+    let idx = passoAtual + 1;
+    if (idx < TOTAL) renderNav(para, idx);
+    window.scrollTo(0, 0);
+  }
+
+  function voltar(para) {
+    mostrarScreen(para);
+  }
+
+  function setStars(n) {
+    estado.estrelas = n;
+    let btns = document.querySelectorAll('#stars-s5 .star-btn');
+    btns.forEach((b, i) => b.classList.toggle('lit', i < n));
+    let labels = ['', 'Precisando de apoio', 'Com algumas dúvidas', 'Preparado(a)', 'Motivado(a)', 'Muito animado(a) e pronto(a)!'];
+    document.getElementById('star-label').textContent = labels[n] || '';
+    salvarParaLocalStorage(); // salva estrelas
+  }
+
+  function getChecked(name) {
+    let vals = [];
+    document.querySelectorAll('input[name="' + name + '"]:checked').forEach(cb => vals.push(cb.value));
+    return vals.join(', ') || 'Nenhum item marcado';
+  }
+  function getRadio(name) {
+    let el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : 'Não respondido';
+  }
+  function getVal(id) { return document.getElementById(id) ? document.getElementById(id).value.trim() || 'Não preenchido' : 'Não preenchido'; }
+
+  function gerarRelatorio() {
+    let data = new Date();
+    let dataStr = data.toLocaleDateString('pt-BR') + ' às ' + data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    let starLabels = ['', 'Precisando de apoio', 'Com algumas dúvidas', 'Preparado(a)', 'Motivado(a)', 'Muito animado(a)'];
+    let html = '';
+    html += '<div class="report-section"><h3><i class="fas fa-user"></i> Identificação</h3>';
+    html += '<div class="report-item"><span class="report-label">Professor(a): </span>' + estado.nome + '</div>';
+    html += '<div class="report-item"><span class="report-label">Escola: </span>' + estado.escola + '</div>';
+    html += '<div class="report-item"><span class="report-label">Turma: </span>' + estado.turma + '</div>';
+    html += '<div class="report-item"><span class="report-label">Componente: </span>' + estado.componente + '</div>';
+    html += '<div class="report-item"><span class="report-label">Ciclo: </span>' + estado.ciclo + '</div><div class="report-item"><span class="report-label">Data: </span>' + dataStr + '</div></div>';
+
+    html += '<div class="report-section"><h3><i class="fas fa-video"></i> Etapa 1 — Vídeo SEDUC</h3><div class="report-item"><span class="report-label">Aprendizagens não consolidadas: </span>' + getVal('s1q1') + '</div><div class="report-item"><span class="report-label">Destaques do vídeo: </span>' + getVal('s1q2') + '</div><div class="report-item"><span class="report-label">Relação vídeo × turma: </span>' + getRadio('s1q3') + '</div></div>';
+    html += '<div class="report-section"><h3><i class="fas fa-map"></i> Etapa 2 — Guia Currículo</h3><div class="report-item"><span class="report-label">Itens explorados: </span>' + getChecked('s2q1') + '</div><div class="report-item"><span class="report-label">Destaques nas AEs: </span>' + getVal('s2q2') + '</div><div class="report-item"><span class="report-label">Descritores / surpresas: </span>' + getVal('s2q3') + '</div></div>';
+    html += '<div class="report-section"><h3><i class="fas fa-laptop"></i> Etapa 3 — Materiais</h3><div class="report-item"><span class="report-label">Plataformas utilizadas: </span>' + getChecked('s3q1') + '</div><div class="report-item"><span class="report-label">Recursos que chamaram atenção: </span>' + getVal('s3q2') + '</div><div class="report-item"><span class="report-label">Temas desafiadores: </span>' + getVal('s3q3') + '</div></div>';
+    html += '<div class="report-section"><h3><i class="fas fa-chart-line"></i> Etapa 4 — Dados</h3><div class="report-item"><span class="report-label">Fontes consultadas: </span>' + getChecked('s4q1') + '</div><div class="report-item"><span class="report-label">Dados × vídeo: </span>' + getRadio('s4q2') + '</div><div class="report-item"><span class="report-label">Lacunas principais: </span>' + getVal('s4q3') + '</div><div class="report-item"><span class="report-label">Grupos com atenção especial: </span>' + getVal('s4q4') + '</div></div>';
+    html += '<div class="report-section"><h3><i class="fas fa-lightbulb"></i> Etapa 5 — Reflexão</h3><div class="report-item"><span class="report-label">Prioridade para o 3º bimestre: </span>' + getVal('s5q1') + '</div><div class="report-item"><span class="report-label">Inclusão/acessibilidade: </span>' + getRadio('s5q2') + '</div><div class="report-item"><span class="report-label">Apoio necessário: </span>' + getVal('s5q3') + '</div><div class="report-item"><span class="report-label">Disposição: </span>' + (estado.estrelas ? '★'.repeat(estado.estrelas) + ' — ' + starLabels[estado.estrelas] : 'Não avaliado') + '</div></div>';
+    document.getElementById('relatorio-conteudo').innerHTML = html;
+  }
+
+  function imprimirSomenteRelatorio() {
+    const conteudo = document.getElementById('relatorio-conteudo');
+    if (!conteudo || !conteudo.innerHTML.trim() || conteudo.innerHTML === '') {
+      alert('Nenhum relatório foi gerado ainda. Complete a missão e gere o relatório primeiro.');
+      return;
+    }
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = 'none';
+    document.body.appendChild(iframe);
+    const doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Relatório Missão 1 - Arrumando a Mochila</title>
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            padding: 30px;
+            color: #1e293b;
+          }
+          .print-header {
+            text-align: center;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 16px;
+          }
+          .print-header h1 {
+            color: #0a2f6c;
+            font-size: 1.5rem;
+          }
+          .print-header p {
+            color: #475569;
+            font-size: 0.8rem;
+          }
+          .report-section {
+            border-left: 3px solid #d32f2f;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+          }
+          .report-section h3 {
+            font-size: 0.9rem;
+            color: #0a2f6c;
+            margin-bottom: 0.5rem;
+          }
+          .report-item {
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            line-height: 1.5;
+          }
+          .report-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #d32f2f;
+          }
+          hr { margin: 1rem 0; }
+        </style>
+      </head>
+      <body>
+        <div class="print-header">
+          <h1>🎒 Relatório da Missão 1 – Arrumando a Mochila</h1>
+          <p>Jornada da Aprendizagem · URE CENTRO SUL - Seduc SP</p>
+        </div>
+        ${conteudo.outerHTML}
+        <hr>
+        <p style="text-align: center; font-size: 0.7rem; color: #64748b; margin-top: 20px;">Documento gerado em ${new Date().toLocaleString('pt-BR')}</p>
+      </body>
+      </html>
+    `);
+    doc.close();
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+    setTimeout(() => { document.body.removeChild(iframe); }, 1000);
+  }
+
+  // Carregar dados salvos ao iniciar
+  const dadosCarregados = carregarDoLocalStorage();
+  if (dadosCarregados && (estado.nome || estado.passos > 0)) {
+    // Se há dados, pular tela de cadastro e ir para o último passo salvo
+    if (estado.passos > 0) {
+      let telaAtual = '';
+      if (estado.passos === 1) telaAtual = 's1';
+      else if (estado.passos === 2) telaAtual = 's2';
+      else if (estado.passos === 3) telaAtual = 's3';
+      else if (estado.passos === 4) telaAtual = 's4';
+      else if (estado.passos === 5) telaAtual = 's5';
+      else if (estado.passos >= 6) telaAtual = 's6';
+      if (telaAtual) {
+        mostrarScreen(telaAtual);
+        atualizarDots();
+        renderNav(telaAtual, estado.passos === 1 ? 0 : estado.passos === 2 ? 1 : estado.passos === 3 ? 2 : estado.passos === 4 ? 3 : estado.passos === 5 ? 4 : 5);
+      } else {
+        mostrarScreen('cadastro');
+      }
+    } else {
+      mostrarScreen('cadastro');
+    }
+  } else {
+    // se não há dados, fica na tela de cadastro
+    mostrarScreen('cadastro');
+  }
+  
+  // adicionar eventos para salvar automaticamente em mudanças de inputs (opcional, mas seguro)
+  function addAutoSaveEvents() {
+    const allInputs = document.querySelectorAll('input, textarea, select');
+    allInputs.forEach(el => {
+      el.addEventListener('change', () => salvarParaLocalStorage());
+      el.addEventListener('blur', () => salvarParaLocalStorage());
+    });
+    // para checkboxes e radios
+    document.querySelectorAll('.checkbox-item input, .radio-item input').forEach(cb => {
+      cb.addEventListener('change', () => salvarParaLocalStorage());
+    });
+  }
+  addAutoSaveEvents();
+</script>
+</body>
+</html>
 
