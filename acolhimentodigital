@@ -1,1 +1,708 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Tetris Educativo • Replanejamento Escolar 2026 • SEDUC SP</title>
+  <style>
+    /* ========== IDENTIDADE VISUAL (fornecida) ========== */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(145deg, #0a2f6c 0%, #041a3a 100%);
+      min-height: 100vh;
+      padding: 12px;
+      color: #1e293b;
+    }
+    .main-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #0f1a24;
+      border-radius: 40px;
+      padding: 16px;
+      box-shadow: 0 30px 35px rgba(0,0,0,0.5), inset 0 1px 4px rgba(255,255,200,0.1);
+      border: 1px solid #d32f2f;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 47, 108, 0.85);
+      backdrop-filter: blur(4px);
+      padding: 10px 18px;
+      border-radius: 60px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .logo-area img {
+      height: 45px;
+      width: auto;
+      border-radius: 12px;
+      background: white;
+      padding: 3px;
+      object-fit: contain;
+    }
+    .logo-text {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffec9e;
+      line-height: 1.2;
+    }
+    .title-badge {
+      background: #d32f2f;
+      color: white;
+      padding: 5px 14px;
+      border-radius: 3rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      font-size: 0.75rem;
+    }
+    .card {
+      background: white;
+      border-radius: 32px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      border: 1px solid #e0e4e9;
+    }
+    .card-header {
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: #003b66;
+      border-left: 4px solid #ffb347;
+      padding-left: 12px;
+      margin-bottom: 16px;
+    }
+    .card-header.red {
+      border-left-color: #d32f2f;
+      color: #b91c1c;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 40px;
+      margin: 0 3px 6px 0;
+      background: #f1f5f9;
+      color: #1e4663;
+    }
+    .badge.bp { background: #eef2ff; color: #1e40af; }
+    .badge.bt { background: #dcfce7; color: #166534; }
+    .badge.bc { background: #ffede3; color: #9a3412; }
+    .badge.bb { background: #e0f2fe; color: #0369a1; }
+    .chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 12px 0 8px;
+      justify-content: center;
+    }
+    .chip {
+      font-size: 0.65rem;
+      background: #f1f5f9;
+      padding: 4px 10px;
+      border-radius: 60px;
+      color: #334155;
+      font-weight: 500;
+    }
+    footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding: 0.8rem;
+      color: #b4c8e0;
+      font-size: 0.7rem;
+      border-top: 1px solid #2c4c6e;
+    }
+
+    /* ========== TETRIS RESPONSIVO + TOUCH ========== */
+    .tetris-card {
+      background: #fefef7;
+      border-radius: 32px;
+      padding: 1rem;
+    }
+    .tetris-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .game-area {
+      text-align: center;
+      flex: 2;
+      min-width: 250px;
+    }
+    canvas#boardCanvas {
+      background-color: #0b1a24;
+      border-radius: 20px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4), inset 0 0 0 2px #d32f2f;
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      height: auto;
+      max-width: 350px;
+      cursor: pointer;
+    }
+    .info-panel {
+      background: #eef2ff;
+      border-radius: 28px;
+      padding: 16px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+      min-width: 160px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    .next-piece {
+      background: white;
+      border-radius: 24px;
+      padding: 12px;
+      text-align: center;
+      width: 100%;
+    }
+    .next-piece h3 {
+      margin: 0 0 10px 0;
+      color: #0a2f6c;
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      background: #ffec9e;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 40px;
+    }
+    canvas#nextCanvas {
+      background-color: #0b1a24;
+      border-radius: 16px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: inset 0 0 0 1px #d32f2f;
+      width: 100%;
+      max-width: 120px;
+      height: auto;
+    }
+    .score-board {
+      background: white;
+      border-radius: 24px;
+      padding: 10px;
+      width: 100%;
+      text-align: center;
+    }
+    .score-board p {
+      margin: 6px 0;
+      color: #1e4663;
+      font-weight: bold;
+      font-size: 0.9rem;
+      background: #f8fafc;
+      border-radius: 32px;
+      padding: 5px;
+    }
+    .score-board span {
+      color: #b91c1c;
+      font-size: 1.3rem;
+      font-weight: 800;
+      display: inline-block;
+      min-width: 70px;
+      background: #fff0d6;
+      padding: 2px 10px;
+      border-radius: 40px;
+      margin-left: 6px;
+    }
+    button {
+      background: #d32f2f;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 10px 18px;
+      border-radius: 60px;
+      color: white;
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.2s;
+      box-shadow: 0 3px 0 #771d1d;
+      margin-top: 4px;
+      width: 100%;
+    }
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #771d1d;
+    }
+    .controls-tip {
+      font-size: 0.65rem;
+      color: #2c3e50;
+      text-align: center;
+      margin-top: 12px;
+      background: #f1f5f9;
+      padding: 6px;
+      border-radius: 30px;
+      font-weight: 500;
+    }
+    /* Botões touch para mobile */
+    .touch-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .touch-btn {
+      background: #0a2f6c;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      padding: 12px 18px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: 0 3px 0 #041a3a;
+      cursor: pointer;
+      transition: 0.05s linear;
+      min-width: 70px;
+      touch-action: manipulation;
+    }
+    .touch-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #041a3a;
+    }
+    .touch-btn.rotate {
+      background: #f59e0b;
+    }
+    .touch-btn.drop {
+      background: #10b981;
+    }
+    .context-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 650px) {
+      .tetris-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+      .info-panel {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: space-around;
+      }
+      .next-piece, .score-board {
+        width: auto;
+        min-width: 130px;
+      }
+      .touch-btn {
+        padding: 10px 14px;
+        font-size: 1rem;
+        min-width: 60px;
+      }
+      .header {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+    @media (max-width: 480px) {
+      .touch-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      .score-board span {
+        font-size: 1.1rem;
+        min-width: 55px;
+      }
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .main-container { background: white; padding: 0; box-shadow: none; border: none; }
+      .touch-controls, .controls-tip, button { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="main-container">
+  <div class="header">
+    <div class="logo-area">
+      
+      <div class="logo-text">Secretaria da Educação<br>URE CENTRO SUL - Replanejamento 2026</div>
+    </div>
+    <div class="title-badge">📱 TETRIS PEDAGÓGICO</div>
+  </div>
+
+  <div class="card tetris-card">
+    <div class="card-header red">
+      🧩 TETRIS DAS PALAVRAS-CHAVE • APRENDIZAGENS ESSENCIAIS
+    </div>
+    <div class="context-badges">
+      <span class="badge bp">📘 PLANEJAR</span>
+      <span class="badge bt">📊 ANALISAR</span>
+      <span class="badge bc">🗂️ ORGANIZAR</span>
+      <span class="badge bb">⚡ RECUP/APROF</span>
+      <span class="badge">🎯 RESULT/DESAFIOS</span>
+    </div>
+    <div class="tetris-wrapper">
+      <div class="game-area">
+        <canvas id="boardCanvas" width="350" height="700" style="width:100%; height:auto; max-width:350px; aspect-ratio:350/700"></canvas>
+        <div class="controls-tip">
+          💡 Toque nos botões ou use teclado | Cada peça é uma palavra do replanejamento
+        </div>
+        <!-- Botões touch para celular -->
+        <div class="touch-controls">
+          <button class="touch-btn" id="moveLeftBtn">◀ ESQ</button>
+          <button class="touch-btn" id="moveRightBtn">DIR ▶</button>
+          <button class="touch-btn rotate" id="rotateBtn">🔄 GIRAR</button>
+          <button class="touch-btn" id="softDropBtn">▼ DESCER</button>
+          <button class="touch-btn drop" id="hardDropBtn">⭐ QUEDA</button>
+        </div>
+      </div>
+      <div class="info-panel">
+        <div class="next-piece">
+          <h3>🔮 PRÓXIMA PALAVRA</h3>
+          <canvas id="nextCanvas" width="140" height="140" style="width:100%; height:auto; max-width:120px; aspect-ratio:140/140"></canvas>
+        </div>
+        <div class="score-board">
+          <p>🏆 PONTOS <span id="scoreValue">0</span></p>
+          <p>📚 LINHAS <span id="linesValue">0</span></p>
+          <p>📈 NÍVEL <span id="levelValue">1</span></p>
+        </div>
+        <button id="resetButton">🔄 NOVO JOGO</button>
+      </div>
+    </div>
+    <div class="chips">
+      <div class="chip"><b>🎯 objetivo:</b> organizar linhas completas = consolidar planejamento e recuperação</div>
+      <div class="chip"><b>📱 toque nos botões</b> para mover e girar as peças</div>
+    </div>
+  </div>
+  <footer>
+    🧠 Replanejamento Escolar 2026 – 3º bimestre | Recuperação + Aprofundamento | Análise 1º semestre
+  </footer>
+</div>
+
+<script>
+  (function(){
+    // ---------- PALAVRAS DO CONTEXTO EDUCACIONAL ----------
+    const PIECES_WORDS = ["PLANEJ","ANALIS","ORGNIZ","RECUP","APROF","RESULT","DESAFI"];
+    const COLORS = ["#3b82f6","#f59e0b","#10b981","#ef4444","#a855f7","#f97316","#14b8a6"];
+    const SHAPES = [
+      { matrix: [[1,1,1,1]], wordIdx: 0 },        // I
+      { matrix: [[1,1],[1,1]], wordIdx: 1 },      // O
+      { matrix: [[0,1,0],[1,1,1]], wordIdx: 2 },  // T
+      { matrix: [[1,0,0],[1,1,1]], wordIdx: 3 },  // L
+      { matrix: [[0,0,1],[1,1,1]], wordIdx: 4 },  // J
+      { matrix: [[0,1,1],[1,1,0]], wordIdx: 5 },  // S
+      { matrix: [[1,1,0],[0,1,1]], wordIdx: 6 }   // Z
+    ];
+
+    const COLS = 10, ROWS = 20;
+    const CELL_SIZE = 35;       // canvas interno 350x700
+    const NEXT_CELL_SIZE = 28;
+    
+    let boardCanvas = document.getElementById('boardCanvas');
+    let ctx = boardCanvas.getContext('2d');
+    let nextCanvas = document.getElementById('nextCanvas');
+    let nextCtx = nextCanvas.getContext('2d');
+    
+    let grid = Array(ROWS).fill().map(() => Array(COLS).fill(null));
+    let currentPiece = null, nextPiece = null;
+    let score = 0, linesCleared = 0, level = 1, gameOver = false;
+    let gameInterval = null;
+    let baseSpeed = 500;
+    
+    const scoreSpan = document.getElementById('scoreValue');
+    const linesSpan = document.getElementById('linesValue');
+    const levelSpan = document.getElementById('levelValue');
+    const resetBtn = document.getElementById('resetButton');
+    
+    // elementos touch
+    const leftBtn = document.getElementById('moveLeftBtn');
+    const rightBtn = document.getElementById('moveRightBtn');
+    const rotateBtn = document.getElementById('rotateBtn');
+    const softDropBtn = document.getElementById('softDropBtn');
+    const hardDropBtn = document.getElementById('hardDropBtn');
+    
+    function updateUI() {
+      scoreSpan.innerText = score;
+      linesSpan.innerText = linesCleared;
+      levelSpan.innerText = level;
+    }
+    
+    function getDelayByLevel() {
+      return Math.max(100, baseSpeed - (level-1) * 35);
+    }
+    
+    function restartGameLoop() {
+      if (gameInterval) clearInterval(gameInterval);
+      if (!gameOver) gameInterval = setInterval(gameTick, getDelayByLevel());
+    }
+    
+    function getRandomPiece() {
+      const idx = Math.floor(Math.random() * SHAPES.length);
+      const shape = SHAPES[idx];
+      const matrixCopy = shape.matrix.map(row => [...row]);
+      return {
+        matrix: matrixCopy,
+        wordIdx: shape.wordIdx,
+        x: Math.floor((COLS - matrixCopy[0].length) / 2),
+        y: 0
+      };
+    }
+    
+    function spawnNewPiece() {
+      if (!nextPiece) nextPiece = getRandomPiece();
+      currentPiece = {
+        matrix: nextPiece.matrix.map(row => [...row]),
+        wordIdx: nextPiece.wordIdx,
+        x: Math.floor((COLS - nextPiece.matrix[0].length) / 2),
+        y: 0
+      };
+      nextPiece = getRandomPiece();
+      if (collision(currentPiece.matrix, currentPiece.x, currentPiece.y)) {
+        gameOver = true;
+        if (gameInterval) clearInterval(gameInterval);
+        gameInterval = null;
+        drawAll();
+      } else drawAll();
+    }
+    
+    function collision(matrix, offsetX, offsetY) {
+      for (let row = 0; row < matrix.length; row++) {
+        for (let col = 0; col < matrix[0].length; col++) {
+          if (matrix[row][col]) {
+            const bx = offsetX + col, by = offsetY + row;
+            if (bx < 0 || bx >= COLS || by >= ROWS || by < 0) return true;
+            if (by >= 0 && grid[by][bx] !== null) return true;
+          }
+        }
+      }
+      return false;
+    }
+    
+    function mergePiece() {
+      for (let row = 0; row < currentPiece.matrix.length; row++) {
+        for (let col = 0; col < currentPiece.matrix[0].length; col++) {
+          if (currentPiece.matrix[row][col]) {
+            const bx = currentPiece.x + col, by = currentPiece.y + row;
+            if (by >= 0 && by < ROWS && bx >= 0 && bx < COLS) grid[by][bx] = currentPiece.wordIdx;
+          }
+        }
+      }
+      clearLines();
+      spawnNewPiece();
+      if (!gameOver) {
+        if (gameInterval) clearInterval(gameInterval);
+        gameInterval = setInterval(gameTick, getDelayByLevel());
+      }
+      drawAll();
+    }
+    
+    function clearLines() {
+      let rowsRemoved = 0;
+      for (let row = ROWS-1; row >= 0; ) {
+        let full = true;
+        for (let col = 0; col < COLS; col++) if (grid[row][col] === null) { full = false; break; }
+        if (full) {
+          for (let r = row; r > 0; r--) grid[r] = [...grid[r-1]];
+          grid[0] = Array(COLS).fill(null);
+          rowsRemoved++;
+        } else row--;
+      }
+      if (rowsRemoved) {
+        const lineScores = {1:100,2:300,3:500,4:800};
+        score += (lineScores[rowsRemoved] || 100) * level;
+        linesCleared += rowsRemoved;
+        const newLevel = Math.floor(linesCleared / 10) + 1;
+        if (newLevel > level) { level = newLevel; if (!gameOver && gameInterval) { clearInterval(gameInterval); gameInterval = setInterval(gameTick, getDelayByLevel()); } }
+        updateUI();
+      }
+      updateUI();
+    }
+    
+    function movePiece(dx, dy) {
+      if (gameOver) return false;
+      const newX = currentPiece.x + dx, newY = currentPiece.y + dy;
+      if (!collision(currentPiece.matrix, newX, newY)) {
+        currentPiece.x = newX; currentPiece.y = newY;
+        drawAll();
+        return true;
+      } else if (dy === 1) { mergePiece(); drawAll(); }
+      return false;
+    }
+    
+    function rotatePiece() {
+      if (gameOver) return;
+      const matrix = currentPiece.matrix;
+      const rotated = matrix[0].map((_, idx) => matrix.map(row => row[idx]).reverse());
+      if (!collision(rotated, currentPiece.x, currentPiece.y)) {
+        currentPiece.matrix = rotated;
+        drawAll();
+      } else {
+        for (let offset of [-1,1,-2,2]) {
+          if (!collision(rotated, currentPiece.x + offset, currentPiece.y)) {
+            currentPiece.matrix = rotated;
+            currentPiece.x += offset;
+            drawAll();
+            break;
+          }
+        }
+      }
+    }
+    
+    function hardDrop() {
+      if (gameOver) return;
+      while (!collision(currentPiece.matrix, currentPiece.x, currentPiece.y+1)) currentPiece.y++;
+      mergePiece();
+      drawAll();
+    }
+    
+    function gameTick() {
+      if (!gameOver && currentPiece) {
+        if (!collision(currentPiece.matrix, currentPiece.x, currentPiece.y+1)) {
+          currentPiece.y++;
+          drawAll();
+        } else mergePiece();
+      }
+    }
+    
+    // Desenho com palavras dentro dos blocos
+    function drawBlock(ctx, x, y, wordIdx, isActive = false, cellSize = CELL_SIZE) {
+      const grad = ctx.createLinearGradient(x, y, x+cellSize, y+cellSize);
+      grad.addColorStop(0, COLORS[wordIdx]);
+      grad.addColorStop(1, COLORS[wordIdx]);
+      ctx.fillStyle = grad;
+      ctx.fillRect(x, y, cellSize-1, cellSize-1);
+      ctx.strokeStyle = '#ffffffcc';
+      ctx.strokeRect(x, y, cellSize-1, cellSize-1);
+      ctx.font = `bold ${Math.floor(cellSize * 0.28)}px "Inter", "Segoe UI"`;
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowBlur = 2;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(PIECES_WORDS[wordIdx], x + cellSize/2, y + cellSize/2);
+      ctx.shadowBlur = 0;
+      if (isActive) {
+        ctx.globalAlpha = 0.2;
+        ctx.fillStyle = '#ffffbb';
+        ctx.fillRect(x+2, y+2, cellSize-5, 4);
+        ctx.globalAlpha = 1;
+      }
+    }
+    
+    function drawBoard() {
+      ctx.fillStyle = '#0b1a24';
+      ctx.fillRect(0, 0, COLS * CELL_SIZE, ROWS * CELL_SIZE);
+      ctx.strokeStyle = '#2d5a6e';
+      ctx.lineWidth = 0.6;
+      for (let i = 0; i <= ROWS; i++) { ctx.beginPath(); ctx.moveTo(0, i*CELL_SIZE); ctx.lineTo(COLS*CELL_SIZE, i*CELL_SIZE); ctx.stroke(); }
+      for (let i = 0; i <= COLS; i++) { ctx.beginPath(); ctx.moveTo(i*CELL_SIZE, 0); ctx.lineTo(i*CELL_SIZE, ROWS*CELL_SIZE); ctx.stroke(); }
+      for (let row = 0; row < ROWS; row++)
+        for (let col = 0; col < COLS; col++)
+          if (grid[row][col] !== null) drawBlock(ctx, col*CELL_SIZE, row*CELL_SIZE, grid[row][col], false);
+      if (currentPiece && !gameOver) {
+        for (let row = 0; row < currentPiece.matrix.length; row++)
+          for (let col = 0; col < currentPiece.matrix[0].length; col++)
+            if (currentPiece.matrix[row][col])
+              drawBlock(ctx, (currentPiece.x+col)*CELL_SIZE, (currentPiece.y+row)*CELL_SIZE, currentPiece.wordIdx, true);
+      }
+      if (gameOver) {
+        ctx.font = 'bold 20px "Inter"';
+        ctx.fillStyle = '#fff3d1';
+        ctx.fillText('📖 GAME OVER', COLS*CELL_SIZE/2-80, ROWS*CELL_SIZE/2-20);
+        ctx.font = '12px monospace';
+        ctx.fillStyle = '#ffdfaa';
+        ctx.fillText('Clique em NOVO JOGO', COLS*CELL_SIZE/2-70, ROWS*CELL_SIZE/2+20);
+      }
+    }
+    
+    function drawNext() {
+      nextCtx.clearRect(0, 0, 140, 140);
+      nextCtx.fillStyle = '#0b1a24';
+      nextCtx.fillRect(0, 0, 140, 140);
+      if (nextPiece) {
+        const matrix = nextPiece.matrix, wordIdx = nextPiece.wordIdx;
+        const blockW = NEXT_CELL_SIZE;
+        const colsM = matrix[0].length, rowsM = matrix.length;
+        const startX = (140 - (colsM * blockW))/2, startY = (140 - (rowsM * blockW))/2;
+        for (let row=0; row<rowsM; row++)
+          for (let col=0; col<colsM; col++)
+            if (matrix[row][col]) {
+              const x = startX + col*blockW, y = startY + row*blockW;
+              nextCtx.fillStyle = COLORS[wordIdx];
+              nextCtx.fillRect(x, y, blockW-1, blockW-1);
+              nextCtx.strokeStyle = '#ffcd94';
+              nextCtx.strokeRect(x, y, blockW-1, blockW-1);
+              nextCtx.font = `bold ${Math.floor(blockW*0.3)}px "Inter"`;
+              nextCtx.fillStyle = 'white';
+              nextCtx.textAlign = 'center';
+              nextCtx.textBaseline = 'middle';
+              nextCtx.fillText(PIECES_WORDS[wordIdx].substring(0,4), x+blockW/2, y+blockW/2);
+            }
+      }
+    }
+    
+    function drawAll() { drawBoard(); drawNext(); }
+    
+    function resetGame() {
+      if (gameInterval) clearInterval(gameInterval);
+      for (let i=0; i<ROWS; i++) for (let j=0; j<COLS; j++) grid[i][j] = null;
+      score = 0; linesCleared = 0; level = 1; gameOver = false;
+      updateUI();
+      nextPiece = getRandomPiece();
+      spawnNewPiece();
+      if (gameOver) gameOver = false;
+      gameInterval = setInterval(gameTick, getDelayByLevel());
+      drawAll();
+    }
+    
+    // eventos touch e teclado
+    function attachTouchEvents() {
+      leftBtn.addEventListener('click', (e) => { e.preventDefault(); movePiece(-1,0); });
+      rightBtn.addEventListener('click', (e) => { e.preventDefault(); movePiece(1,0); });
+      rotateBtn.addEventListener('click', (e) => { e.preventDefault(); rotatePiece(); });
+      softDropBtn.addEventListener('click', (e) => { e.preventDefault(); movePiece(0,1); });
+      hardDropBtn.addEventListener('click', (e) => { e.preventDefault(); hardDrop(); });
+      // evitar duplicação em touchstart
+      const btns = [leftBtn, rightBtn, rotateBtn, softDropBtn, hardDropBtn];
+      btns.forEach(btn => {
+        btn.addEventListener('touchstart', (e) => { e.preventDefault(); btn.click(); });
+      });
+    }
+    
+    function handleKeyDown(e) {
+      if (gameOver) { if (e.code === 'Space' || e.code === 'KeyR') { e.preventDefault(); resetGame(); } return; }
+      switch(e.key) {
+        case 'ArrowLeft': e.preventDefault(); movePiece(-1,0); break;
+        case 'ArrowRight': e.preventDefault(); movePiece(1,0); break;
+        case 'ArrowDown': e.preventDefault(); movePiece(0,1); break;
+        case 'ArrowUp': e.preventDefault(); rotatePiece(); break;
+        case ' ': case 'Space': e.preventDefault(); hardDrop(); break;
+        default: break;
+      }
+    }
+    
+    window.addEventListener('keydown', handleKeyDown);
+    resetBtn.addEventListener('click', () => resetGame());
+    attachTouchEvents();
+    
+    // Evitar scroll com toque nos botões
+    document.querySelectorAll('.touch-btn').forEach(btn => {
+      btn.addEventListener('touchstart', (e) => { e.preventDefault(); });
+    });
+    
+    // Ajuste de responsividade: redesenha ao mudar orientação (mantém proporção)
+    window.addEventListener('resize', () => { drawAll(); });
+    
+    resetGame();
+  })();
+</script>
+</body>
+</html>
