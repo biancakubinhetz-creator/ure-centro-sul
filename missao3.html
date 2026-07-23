@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Missão 1 · Arrumando a Mochila | Jornada da Aprendizagem · URE Caieiras</title>
+<title>Missão 3 · Pontos de Parada | Jornada da Aprendizagem · URE Caieiras</title>
 <!-- FONTES E ÍCONES (IDENTIDADE VISUAL) -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -72,7 +73,7 @@
     font-size: 0.85rem;
   }
 
-  /* cards e elementos internos */
+  /* cartões e elementos internos */
   .card {
     background: white;
     border-radius: 32px;
@@ -110,7 +111,7 @@
     overflow: hidden;
   }
   .xp-bar {
-    background: #4ade80;
+    background: #f472b6;
     height: 100%;
     width: 0%;
     border-radius: 20px;
@@ -136,15 +137,15 @@
     transition: 0.2s;
   }
   .dot.done {
-    background: #4ade80;
-    border-color: #4ade80;
+    background: #f472b6;
+    border-color: #f472b6;
   }
   .dot.current {
     background: white;
     border-color: white;
   }
 
-  /* badges e navegação */
+  /* badges */
   .badge {
     display: inline-flex;
     align-items: center;
@@ -159,7 +160,11 @@
   .badge-green { background: #dcfce7; color: #166534; }
   .badge-amber { background: #ffedd5; color: #9a3412; }
   .badge-red { background: #fee2e2; color: #b91c1c; }
+  .badge-teal { background: #e0f2e9; color: #0b5e42; }
+  .badge-purple { background: #eeedfe; color: #534ab7; }
+  .badge-pink { background: #fbeaf0; color: #993556; }
 
+  /* navegação */
   .progress-nav {
     display: flex;
     gap: 6px;
@@ -205,10 +210,14 @@
     background: white;
     transition: 0.2s;
   }
+  input[type="number"] {
+    width: auto;
+    max-width: 100px;
+  }
   textarea {
     border-radius: 24px;
     resize: vertical;
-    min-height: 90px;
+    min-height: 80px;
   }
   input:focus, select:focus, textarea:focus {
     outline: none;
@@ -283,40 +292,80 @@
     accent-color: #d32f2f;
     margin-top: 2px;
   }
-  .star-row {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
-  }
-  .star-btn {
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-    opacity: 0.4;
-    transition: 0.1s;
-  }
-  .star-btn.lit {
-    opacity: 1;
-  }
-  .mission-step {
-    background: #f1f5f9;
+  .mission-tip {
+    background: #eef2ff;
+    border-left: 4px solid #d32f2f;
     border-radius: 20px;
-    padding: 0.8rem 1rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: #1e293b;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .section-title {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    color: #0a2f6c;
+  }
+  .reflexao-card {
+    background: #fef9e6;
+    border-radius: 24px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #ffb347;
+  }
+  .principio-trio {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 640px) { .principio-trio { grid-template-columns: 1fr; } }
+  .principio-item {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 0.75rem;
+    border-top: 3px solid #d32f2f;
+    font-size: 0.75rem;
+  }
+  .aula-card {
+    background: #f8fafc;
+    border-radius: 28px;
+    border: 1px solid #e2e8f0;
+    padding: 1rem;
     margin-bottom: 1rem;
     border-left: 4px solid #d32f2f;
+  }
+  .aula-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.75rem;
+  }
+  .aula-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 30px;
+    background: #0a2f6c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
   }
   .unlocked-badge {
     text-align: center;
     padding: 1.5rem;
-    background: #e6f1fb;
+    background: #eef2ff;
     border-radius: 28px;
     margin-bottom: 1rem;
   }
-  .unlocked-badge .medal {
-    font-size: 3rem;
-  }
-  .item-mochila {
+  .item-conquista {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -325,11 +374,6 @@
     border-radius: 60px;
     margin-bottom: 8px;
     font-size: 0.8rem;
-  }
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
   }
   .report-section {
     border-left: 3px solid #d32f2f;
@@ -402,44 +446,37 @@
 </head>
 <body>
 <div class="main-container">
-  <!-- CABEÇALHO IDENTIDADE VISUAL -->
+  <!-- CABEÇALHO IDENTIDADE -->
   <div class="header">
     <div class="logo-area">
-     
+      <img src="https://i.ibb.co/0p01LzxB/logo3de.jpg" alt="Logo SEDUC SP">
       <div class="logo-text">URE CAIEIRAS - Seduc SP</div>
     </div>
-    <div class="title-badge"><i class="fas fa-chalkboard-user"></i> Jornada da Aprendizagem · Missão 1</div>
+    <div class="title-badge"><i class="fas fa-flag-checkered"></i> Jornada da Aprendizagem · Missão 3</div>
   </div>
 
   <div id="app">
-    <!-- HERO PERSONALIZADO -->
+    <!-- HERO -->
     <div class="hero">
-      <h1><i class="fas fa-backpack"></i> Jornada da Aprendizagem</h1>
-      <p>Primeira missão: Arrumando a mochila</p>
+      <h1><i class="fas fa-walking"></i> Jornada da Aprendizagem</h1>
+      <p>Terceira missão: Desenhando pontos de parada</p>
       <div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar"></div></div>
-      <div class="xp-label" id="xp-label">0 / 6 itens na mochila</div>
+      <div class="xp-label" id="xp-label">0 / 5 paradas desenhadas</div>
       <div class="progress-dots" id="progress-dots"></div>
     </div>
 
-    <!-- TELA DE CADASTRO -->
+    <!-- CADASTRO -->
     <div id="screen-cadastro" class="screen active">
       <div class="card">
-        <div class="badge badge-blue"><i class="fas fa-user"></i> identificação</div>
-        <p class="question-label">Antes de começar, quem é você nessa jornada?</p>
-        <div style="margin-bottom:1rem">
-          <label>Nome completo</label>
-          <input type="text" id="inp-nome" placeholder="Seu nome">
-        </div>
+        <div class="badge badge-purple"><i class="fas fa-user"></i> identificação</div>
+        <p class="section-title">Quem é o viajante que vai desenhar as paradas?</p>
+        <div style="margin-bottom:1rem"><label>Nome completo</label><input type="text" id="inp-nome" placeholder="Seu nome"></div>
         <div class="two-col" style="margin-bottom:1rem">
           <div><label>Escola</label><input type="text" id="inp-escola" placeholder="Nome da escola"></div>
           <div><label>Turma / coordenação</label><input type="text" id="inp-turma" placeholder="Ex: 9º A, 3ª série EM"></div>
         </div>
         <div class="two-col" style="margin-bottom:1rem">
-          <div>
-            <label>Componente curricular</label>
-            <select id="inp-componente">
-              <option value="">Selecione...</option>
-              <option>Língua Portuguesa</option>
+          <div><label>Componente curricular</label><select id="inp-componente"><option value="">Selecione...</option><option>Língua Portuguesa</option>
 <option>Matemática</option>
 <option>Ciências</option>
 <option>História</option>
@@ -463,124 +500,105 @@
 <option>Educação Especial / AEE</option>
 <option>Coordenação Pedagógica</option>
 <option>Orientação Educacional</option>
-<option>Direção Escolar</option>
-            </select>
-          </div>
-          <div>
-            <label>Ciclo</label>
-            <select id="inp-ciclo">
-              <option value="">Selecione...</option>
-              <option>Anos Iniciais (1º ao 5º ano)</option>
-              <option>Anos Finais (6º ao 9º ano)</option>
-              <option>Ensino Médio</option>
-            </select>
-          </div>
+<option>Direção Escolar</option></select></div>
+          <div><label>Ciclo</label><select id="inp-ciclo"><option value="">Selecione...</option><option>Anos Iniciais (1º ao 5º ano)</option><option>Anos Finais (6º ao 9º ano)</option><option>Ensino Médio</option></select></div>
         </div>
-        <div class="btn-group">
-          <button class="btn btn-primary" onclick="iniciarMissao()"><i class="fas fa-arrow-right"></i> Iniciar missão</button>
-        </div>
+        <div class="btn-group"><button class="btn btn-primary" onclick="iniciarMissao()"><i class="fas fa-flag"></i> Começar a missão ↗</button></div>
       </div>
     </div>
 
-    <!-- ETAPA 1 -->
+    <!-- PARADA 1 -->
     <div id="screen-s1" class="screen">
       <div class="progress-nav" id="nav-s1"></div>
       <div class="card">
-        <div class="badge badge-blue"><i class="fas fa-video"></i> etapa 1 de 6 — vídeo SEDUC</div>
-        <div class="mission-step"><h3><i class="fas fa-bullseye"></i> O que fazer</h3><p>Acesse o AVA-EFAPE e assista ao vídeo do seu componente e ciclo, disponível a partir de 22 de julho.</p></div>
-        <div style="margin-bottom:1rem"><p class="question-label">Quais aprendizagens do 1º semestre ainda <strong>não foram consolidadas</strong> pela sua turma?</p><textarea id="s1q1" placeholder="Escreva aqui suas anotações sobre as lacunas observadas..."></textarea></div>
-        <div style="margin-bottom:1rem"><p class="question-label">O que mais te chamou atenção no vídeo?</p><textarea id="s1q2" placeholder="Anotações livres sobre o vídeo..."></textarea></div>
-        <div style="margin-bottom:1rem"><p class="question-label">Como você avalia a relação entre o vídeo e o que você já observava na sua turma?</p>
-          <div class="radio-group" id="s1q3-group">
-            <label class="radio-item"><input type="radio" name="s1q3" value="O vídeo confirmou o que eu já observava"> O vídeo confirmou o que eu já observava</label>
-            <label class="radio-item"><input type="radio" name="s1q3" value="O vídeo trouxe informações novas sobre minha turma"> O vídeo trouxe informações novas sobre minha turma</label>
-            <label class="radio-item"><input type="radio" name="s1q3" value="O que o vídeo apontou é diferente do que observo na minha turma"> O que o vídeo apontou é diferente do que observo na minha turma</label>
-            <label class="radio-item"><input type="radio" name="s1q3" value="Ainda não assisti ao vídeo"> Ainda não assisti ao vídeo</label>
-          </div>
-        </div>
-        <div class="btn-group"><button class="btn btn-primary" onclick="avancar('s1','s2',0)"><i class="fas fa-save"></i> Guardar na mochila ↗</button></div>
+        <div class="badge badge-purple"><i class="fas fa-comment-dots"></i> parada 1 de 5 — reflexão inicial</div>
+        <div class="mission-tip"><strong>🎯 Ponto de partida</strong> Antes de desenhar as paradas, vamos refletir sobre como monitoramos a aprendizagem no dia a dia.</div>
+        <div class="reflexao-card"><p>"Não devemos esperar apenas os resultados das avaliações, como Prova Paulista e Mapa Classe, para saber o que foi ou não consolidado. Precisamos pensar em estratégias de saber isso a cada aula."</p></div>
+        <div><p class="question-label">Como você costuma perceber, durante a aula, se os estudantes estão compreendendo o conteúdo?</p><textarea id="s1q1" placeholder="Descreva suas estratégias atuais..."></textarea></div>
+        <div><p class="question-label">O que você faz quando percebe que parte da turma não está acompanhando?</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s1q2" value="Paro a aula e retomo a explicação para todos"> Paro a aula e retomo a explicação para todos</label><label class="radio-item"><input type="radio" name="s1q2" value="Atendo individualmente quem tem mais dificuldade"> Atendo individualmente</label><label class="radio-item"><input type="radio" name="s1q2" value="Proponho uma atividade diferente para quem ainda não entendeu"> Proponho atividade diferente</label><label class="radio-item"><input type="radio" name="s1q2" value="Continuo a aula e retomo no próximo encontro"> Continuo e retomo depois</label><label class="radio-item"><input type="radio" name="s1q2" value="Depende — faço coisas diferentes em situações diferentes"> Depende da situação</label></div></div>
+        <div><p class="question-label">Na sua opinião, o que diferencia uma aula que gera aprendizagem de uma que apenas "cobre o conteúdo"?</p><textarea id="s1q3" placeholder="Reflita livremente..."></textarea></div>
+        <div class="btn-group"><button class="btn btn-primary" onclick="avancar('s1','s2',0)"><i class="fas fa-arrow-right"></i> Próxima parada ↗</button></div>
       </div>
     </div>
 
-    <!-- ETAPA 2 -->
+    <!-- PARADA 2 -->
     <div id="screen-s2" class="screen">
       <div class="progress-nav" id="nav-s2"></div>
       <div class="card">
-        <div class="badge badge-green"><i class="fas fa-map"></i> etapa 2 de 6 — guia do currículo priorizado</div>
-        <div class="mission-step"><h3><i class="fas fa-bullseye"></i> O que fazer</h3><p>Abra o Guia do seu componente e explore as aprendizagens essenciais, escopo-sequência e novas seções.</p></div>
-        <div><p class="question-label">Quais itens do Guia você explorou?</p><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="s2q1" value="Aprendizagens essenciais do ano/série"> Aprendizagens essenciais do ano/série</label><label class="checkbox-item"><input type="checkbox" name="s2q1" value="Detalhamento das AEs e conhecimentos prévios"> Detalhamento das AEs e conhecimentos prévios</label><label class="checkbox-item"><input type="checkbox" name="s2q1" value="Escopo-sequência (sequência das aulas)"> Escopo-sequência</label><label class="checkbox-item"><input type="checkbox" name="s2q1" value="De olho na Prova Paulista"> "De olho na Prova Paulista"</label><label class="checkbox-item"><input type="checkbox" name="s2q1" value="Mapa SARESP (Anos Finais)"> Mapa SARESP</label></div></div>
-        <div><p class="question-label">O que te chamou atenção nas aprendizagens essenciais do 2º semestre?</p><textarea id="s2q2" placeholder="Registre seus destaques..."></textarea></div>
-        <div><p class="question-label">Algo nos descritores da Prova Paulista ou SARESP te surpreendeu?</p><textarea id="s2q3" placeholder="Anotações sobre os descritores..."></textarea></div>
-        <div class="btn-group"><button class="btn" onclick="voltar('s1')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s2','s3',1)"><i class="fas fa-save"></i> Guardar na mochila</button></div>
+        <div class="badge badge-pink"><i class="fas fa-chalkboard-teacher"></i> parada 2 de 5 — aula que gera aprendizagem</div>
+        <div class="principio-trio">
+          <div class="principio-item"><strong>Planejamento e domínio</strong>Objetivo claro, recursos alinhados, explicações que favorecem compreensão.</div>
+          <div class="principio-item"><strong>Estratégias de aprendizagem</strong>Verificações durante a aula, ajustes conforme dificuldades e avanços.</div>
+          <div class="principio-item"><strong>Gestão de sala</strong>Estudantes engajados, ambiente favorável, intervenções respeitosas.</div>
+        </div>
+        <div><p class="question-label">Qual desses três aspectos você considera seu maior ponto forte atualmente?</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s2q1" value="Planejamento e domínio do conteúdo"> Planejamento e domínio</label><label class="radio-item"><input type="radio" name="s2q1" value="Estratégias de aprendizagem (verificação e ajustes)"> Estratégias de aprendizagem</label><label class="radio-item"><input type="radio" name="s2q1" value="Gestão de sala de aula"> Gestão de sala</label><label class="radio-item"><input type="radio" name="s2q1" value="Tenho dúvida — são pontos equilibrados para mim"> Equilibrados</label></div></div>
+        <div><p class="question-label">Qual aspecto você gostaria de desenvolver mais no 3º bimestre?</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s2q2" value="Planejamento e domínio do conteúdo"> Planejamento</label><label class="radio-item"><input type="radio" name="s2q2" value="Verificações de aprendizagem mais frequentes e intencionais"> Verificações mais frequentes</label><label class="radio-item"><input type="radio" name="s2q2" value="Ajustes durante a aula conforme o que os estudantes mostram"> Ajustes durante a aula</label><label class="radio-item"><input type="radio" name="s2q2" value="Gestão do tempo e engajamento dos estudantes"> Gestão do tempo</label></div></div>
+        <div><p class="question-label">Descreva uma situação recente em que você percebeu que a turma não estava acompanhando e fez um ajuste na hora:</p><textarea id="s2q3" placeholder="Conte brevemente..."></textarea></div>
+        <div class="btn-group"><button class="btn" onclick="mostrarScreen('s1')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s2','s3',1)"><i class="fas fa-arrow-right"></i> Próxima parada ↗</button></div>
       </div>
     </div>
 
-    <!-- ETAPA 3 -->
+    <!-- PARADA 3 -->
     <div id="screen-s3" class="screen">
       <div class="progress-nav" id="nav-s3"></div>
       <div class="card">
-        <div class="badge badge-amber"><i class="fas fa-laptop"></i> etapa 3 de 6 — materiais e plataformas</div>
-        <div class="mission-step"><h3><i class="fas fa-bullseye"></i> O que fazer</h3><p>Explore materiais digitais, impressos e plataformas (Tarefa SP, Redação Paulista, Khan, Matific, etc.)</p></div>
-        <div><p class="question-label">Quais plataformas você já utiliza com sua turma?</p><div class="checkbox-group" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Tarefa SP"> Tarefa SP</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Redação Paulista"> Redação Paulista</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Khan Academy"> Khan Academy</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Matific"> Matific</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Leia SP"> Leia SP</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Elefante Letrado"> Elefante Letrado</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Alura"> Alura</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Speak"> Speak</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Material digital editável"> Material digital</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Livro do estudante"> Livro impresso</label></div></div>
-        <div><p class="question-label">Que tipo de atividade ou recurso mais chamou sua atenção para o 3º bimestre?</p><textarea id="s3q2" placeholder="Descreva..."></textarea></div>
-        <div><p class="question-label">Há aulas ou temas desafiadores para sua turma? Quais?</p><textarea id="s3q3" placeholder="Liste..."></textarea></div>
-        <div class="btn-group"><button class="btn" onclick="voltar('s2')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s3','s4',2)"><i class="fas fa-save"></i> Guardar</button></div>
+        <div class="badge badge-amber"><i class="fas fa-search"></i> parada 3 de 5 — estratégias de verificação</div>
+        <div><p class="question-label">Quais estratégias você já utiliza para verificar se os estudantes estão aprendendo durante a aula?</p><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Perguntas abertas que exigem explicação do raciocínio"> Perguntas abertas</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Pedir que estudantes demonstrem procedimentos no quadro"> Demonstração no quadro</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Circular pela sala observando produções e conversas"> Observação ativa</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Sínteses rápidas do que foi aprendido (oral ou escrito)"> Sínteses rápidas</label><label class="checkbox-item"><input type="checkbox" name="s3q1" value="Atividade rápida de saída (exit ticket)"> Exit ticket</label></div></div>
+        <div><p class="question-label">Quais estratégias de ajuste você usa quando percebe dificuldades ou avanços?</p><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="s3q2" value="Responder dúvidas recorrentes para a sala toda"> Responder dúvidas para toda a sala</label><label class="checkbox-item"><input type="checkbox" name="s3q2" value="Oferecer exemplos adicionais ou outra estratégia de explicação"> Outros exemplos</label><label class="checkbox-item"><input type="checkbox" name="s3q2" value="Propor atividades de apoio para quem ainda não consolidou"> Atividades de apoio</label><label class="checkbox-item"><input type="checkbox" name="s3q2" value="Disponibilizar desafios para quem já dominou o conteúdo"> Desafios</label><label class="checkbox-item"><input type="checkbox" name="s3q2" value="Usar as plataformas digitais de forma diferenciada"> Plataformas digitais</label></div></div>
+        <div><p class="question-label">Há alguma estratégia que você ainda não usa mas que gostaria de experimentar no 3º bimestre?</p><input type="text" id="s3q3" placeholder="Descreva..."></div>
+        <div class="btn-group"><button class="btn" onclick="mostrarScreen('s2')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s3','s4',2)"><i class="fas fa-arrow-right"></i> Próxima parada ↗</button></div>
       </div>
     </div>
 
-    <!-- ETAPA 4 -->
+    <!-- PARADA 4: 3 primeiras aulas -->
     <div id="screen-s4" class="screen">
       <div class="progress-nav" id="nav-s4"></div>
       <div class="card">
-        <div class="badge badge-red"><i class="fas fa-chart-line"></i> etapa 4 de 6 — dados de aprendizagem</div>
-        <div class="mission-step"><h3><i class="fas fa-bullseye"></i> O que fazer</h3><p>Consulte Prova Paulista, Mapa Classe ou fluência leitora.</p></div>
-        <div><p class="question-label">Fontes consultadas:</p><div class="checkbox-group"><label class="checkbox-item"><input type="checkbox" name="s4q1" value="Painel Prova Paulista 1B"> Prova Paulista 1B</label><label class="checkbox-item"><input type="checkbox" name="s4q1" value="Painel Prova Paulista 2B"> Prova Paulista 2B</label><label class="checkbox-item"><input type="checkbox" name="s4q1" value="Mapa Classe (1º ao 5º ano)"> Mapa Classe</label><label class="checkbox-item"><input type="checkbox" name="s4q1" value="Avaliação de fluência leitora (2º ano)"> Fluência leitora</label></div></div>
-        <div><p class="question-label">Os dados confirmam ou contradizem o vídeo?</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s4q2" value="Os dados confirmam o que o vídeo apontou"> Confirmam</label><label class="radio-item"><input type="radio" name="s4q2" value="Os dados revelam algo diferente do vídeo"> Diferente</label><label class="radio-item"><input type="radio" name="s4q2" value="Os dados complementam o vídeo"> Complementam</label></div></div>
-        <div><p class="question-label">Principais lacunas reveladas pelos dados:</p><textarea id="s4q3" placeholder="Cite habilidades, descritores..."></textarea></div>
-        <div><p class="question-label">Estudantes ou grupos que precisam de atenção especial:</p><textarea id="s4q4" placeholder="Descreva perfis..."></textarea></div>
-        <div class="btn-group"><button class="btn" onclick="voltar('s3')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s4','s5',3)"><i class="fas fa-save"></i> Guardar</button></div>
+        <div class="badge badge-pink"><i class="fas fa-clipboard-list"></i> parada 4 de 5 — as 3 primeiras aulas</div>
+        <div class="aula-card"><div class="aula-header"><div class="aula-num">1</div><div class="aula-title">Primeira aula do 3º bimestre</div></div><div><label>Tema / objetivo da aula</label><input type="text" id="a1-tema" placeholder="O que será trabalhado?"></div><div><label><i class="fas fa-search"></i> Como vou verificar se os estudantes estão aprendendo?</label><textarea id="a1-verif" placeholder="Ex.: Farei perguntas abertas..."></textarea></div><div><label><i class="fas fa-redo-alt"></i> O que farei se perceber dificuldades?</label><textarea id="a1-dific" placeholder="Retomo a explicação..."></textarea></div><div><label><i class="fas fa-star"></i> O que farei se perceber avanços?</label><textarea id="a1-avanc" placeholder="Desafio extra..."></textarea></div></div>
+        <div class="aula-card"><div class="aula-header"><div class="aula-num">2</div><div class="aula-title">Segunda aula do 3º bimestre</div></div><div><label>Tema / objetivo da aula</label><input type="text" id="a2-tema" placeholder="O que será trabalhado?"></div><div><label><i class="fas fa-search"></i> Como vou verificar a aprendizagem?</label><textarea id="a2-verif" placeholder="..."></textarea></div><div><label><i class="fas fa-redo-alt"></i> O que farei se perceber dificuldades?</label><textarea id="a2-dific" placeholder="..."></textarea></div><div><label><i class="fas fa-star"></i> O que farei se perceber avanços?</label><textarea id="a2-avanc" placeholder="..."></textarea></div></div>
+        <div class="aula-card"><div class="aula-header"><div class="aula-num">3</div><div class="aula-title">Terceira aula do 3º bimestre</div></div><div><label>Tema / objetivo da aula</label><input type="text" id="a3-tema" placeholder="O que será trabalhado?"></div><div><label><i class="fas fa-search"></i> Como vou verificar a aprendizagem?</label><textarea id="a3-verif" placeholder="..."></textarea></div><div><label><i class="fas fa-redo-alt"></i> O que farei se perceber dificuldades?</label><textarea id="a3-dific" placeholder="..."></textarea></div><div><label><i class="fas fa-star"></i> O que farei se perceber avanços?</label><textarea id="a3-avanc" placeholder="..."></textarea></div></div>
+        <div class="btn-group"><button class="btn" onclick="mostrarScreen('s3')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s4','s5',3)"><i class="fas fa-arrow-right"></i> Próxima parada ↗</button></div>
       </div>
     </div>
 
-    <!-- ETAPA 5 -->
+    <!-- PARADA 5: Compromisso -->
     <div id="screen-s5" class="screen">
       <div class="progress-nav" id="nav-s5"></div>
       <div class="card">
-        <div class="badge badge-blue"><i class="fas fa-lightbulb"></i> etapa 5 de 6 — reflexão pedagógica</div>
-        <div><p class="question-label">Principal prioridade pedagógica para o 3º bimestre:</p><textarea id="s5q1" placeholder="Descreva..."></textarea></div>
-        <div><p class="question-label">Estratégias de inclusão / material acessibilizado:</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s5q2" value="Sim, já conheço e utilizarei"> Sim, usarei</label><label class="radio-item"><input type="radio" name="s5q2" value="Quero conhecer melhor antes de usar"> Quero conhecer</label><label class="radio-item"><input type="radio" name="s5q2" value="Não tenho estudantes elegíveis"> Não se aplica</label></div></div>
-        <div><p class="question-label">Que apoio você precisaria da coordenação ou URE?</p><textarea id="s5q3" placeholder="Formações, materiais..."></textarea></div>
-        <div><p class="question-label">Disposição para o 2º semestre:</p><div class="star-row" id="stars-s5"><button class="star-btn" onclick="setStars(1)">⭐</button><button class="star-btn" onclick="setStars(2)">⭐</button><button class="star-btn" onclick="setStars(3)">⭐</button><button class="star-btn" onclick="setStars(4)">⭐</button><button class="star-btn" onclick="setStars(5)">⭐</button></div><div style="font-size:12px;color:#475569;" id="star-label">Selecione de 1 a 5 estrelas</div></div>
-        <div class="btn-group"><button class="btn" onclick="voltar('s4')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s5','s6',4)"><i class="fas fa-save"></i> Guardar</button></div>
+        <div class="badge badge-teal"><i class="fas fa-heart"></i> parada 5 de 5 — compromisso do viajante</div>
+        <div><p class="question-label">Complete a frase: "No 3º bimestre, meu compromisso com a verificação da aprendizagem é..."</p><textarea id="s5q1" placeholder="Escreva seu compromisso..."></textarea></div>
+        <div><p class="question-label">Como você se sente ao final dessa jornada de planejamento?</p><div class="radio-group"><label class="radio-item"><input type="radio" name="s5q2" value="Animado(a) e pronto(a) para colocar o pé na estrada"> Animado(a)</label><label class="radio-item"><input type="radio" name="s5q2" value="Bem, mas ainda tenho dúvidas que gostaria de resolver"> Bem, com dúvidas</label><label class="radio-item"><input type="radio" name="s5q2" value="Sobrecarregado(a) — o semestre parece desafiador"> Sobrecarregado(a)</label><label class="radio-item"><input type="radio" name="s5q2" value="Esperançoso(a) — sinto que esse planejamento vai fazer diferença"> Esperançoso(a)</label></div></div>
+        <div><p class="question-label">Há algo que a escola ou a URE poderiam fazer para apoiar a implementação dessas paradas?</p><input type="text" id="s5q3" placeholder="Sugestão..."></div>
+        <div><p class="question-label">Em uma palavra, como você resume o que leva dessa Jornada?</p><input type="text" id="s5q4" placeholder="Ex.: clareza, coragem..."></div>
+        <div class="btn-group"><button class="btn" onclick="mostrarScreen('s4')"><i class="fas fa-arrow-left"></i> Voltar</button><button class="btn btn-primary" onclick="avancar('s5','fim',4)"><i class="fas fa-flag-checkered"></i> Concluir a jornada ↗</button></div>
       </div>
     </div>
 
-    <!-- ETAPA 6 -->
-    <div id="screen-s6" class="screen">
-      <div class="progress-nav" id="nav-s6"></div>
+    <!-- TELA FIM -->
+    <div id="screen-fim" class="screen">
       <div class="card">
-        <div class="badge badge-green"><i class="fas fa-trophy"></i> etapa 6 de 6 — mochila pronta!</div>
-        <div class="unlocked-badge"><div class="medal">🎒✅</div><h2>Missão 1 concluída!</h2><p>Você organizou todos os itens da sua mochila pedagógica.</p></div>
-        <div class="item-mochila"><i class="fas fa-video"></i> Reflexões sobre o vídeo da SEDUC</div>
-        <div class="item-mochila"><i class="fas fa-map"></i> Destaques do Guia do Currículo</div>
-        <div class="item-mochila"><i class="fas fa-laptop"></i> Recursos e materiais mapeados</div>
-        <div class="item-mochila"><i class="fas fa-chart-line"></i> Dados de aprendizagem analisados</div>
-        <div class="item-mochila"><i class="fas fa-lightbulb"></i> Prioridades e reflexão registradas</div>
-        <div class="item-mochila"><i class="fas fa-file-alt"></i> Relatório completo gerado</div>
-        <div class="btn-group" style="margin-top:1rem"><button class="btn btn-primary" onclick="avancar('s6','relatorio',5)"><i class="fas fa-download"></i> Gerar relatório completo</button></div>
+        <div class="badge badge-green"><i class="fas fa-trophy"></i> jornada concluída!</div>
+        <div class="unlocked-badge"><div class="medal">🎉🚶✅</div><h2>Parabéns! Você completou as três missões!</h2><p>Mochila arrumada, rota traçada e pontos de parada desenhados. Bom semestre!</p></div>
+        <div class="item-conquista"><i class="fas fa-check-circle"></i> Reflexão sobre verificação da aprendizagem</div>
+        <div class="item-conquista"><i class="fas fa-check-circle"></i> Autoavaliação dos aspectos de uma boa aula</div>
+        <div class="item-conquista"><i class="fas fa-check-circle"></i> Repertório de estratégias de verificação e ajuste</div>
+        <div class="item-conquista"><i class="fas fa-check-circle"></i> Pontos de parada para as 3 primeiras aulas</div>
+        <div class="item-conquista"><i class="fas fa-check-circle"></i> Compromisso pedagógico registrado</div>
+        <div class="btn-group"><button class="btn btn-primary" onclick="gerarRelatorio()"><i class="fas fa-file-alt"></i> Gerar relatório completo ↗</button></div>
       </div>
     </div>
 
-    <!-- RELATÓRIO FINAL -->
+    <!-- RELATÓRIO (tela de visualização) -->
     <div id="screen-relatorio" class="screen">
       <div class="card" style="border-top:4px solid #d32f2f">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem">
-          <div><p style="font-size:0.7rem;color:#d32f2f;font-weight:800">Jornada da Aprendizagem — URE Caieiras</p><h2 style="color:#0a2f6c;">Relatório · Missão 1: Arrumando a mochila</h2></div>
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem">
+          <div><p style="font-size:0.7rem;color:#d32f2f;font-weight:800">Jornada da Aprendizagem — URE Caieiras</p><h2 style="color:#0a2f6c;">Relatório · Missão 3: Pontos de parada</h2></div>
           <button class="btn" onclick="imprimirSomenteRelatorio()"><i class="fas fa-print"></i> Imprimir / PDF</button>
         </div>
         <div id="relatorio-conteudo"></div>
         <div class="btn-group">
-          <button class="btn" onclick="mostrarScreen('s6')"><i class="fas fa-arrow-left"></i> Voltar</button>
+          <button class="btn" onclick="mostrarScreen('fim')"><i class="fas fa-arrow-left"></i> Voltar</button>
           <button class="btn btn-primary" onclick="imprimirSomenteRelatorio()"><i class="fas fa-print"></i> Imprimir / salvar PDF</button>
         </div>
       </div>
@@ -588,20 +606,21 @@
   </div>
 </div>
 
+<!-- Botões CRUD (inferior esquerdo) -->
 <div style="position: fixed; bottom: 24px; left: 24px; z-index: 10; display: flex; gap: 12px;">
   <button class="btn btn-danger" onclick="limparDados()" style="background: #fee2e2; color: #b91c1c;"><i class="fas fa-trash-alt"></i> Limpar todos os dados</button>
   <button class="btn btn-primary" onclick="salvarProgressoManual()" style="background: #0a2f6c;"><i class="fas fa-save"></i> Salvar progresso agora</button>
 </div>
+<!-- Botão fixo para imprimir relatório -->
 <button class="print-btn" onclick="imprimirSomenteRelatorio()"><i class="fas fa-print"></i> Imprimir / Salvar PDF</button>
 
 <script>
-  // estado da jornada
-  let estado = { nome: '', escola: '', turma: '', componente: '', ciclo: '', passos: 0, estrelas: 0 };
-  const TOTAL = 6;
-  const NOMES_ETAPAS = ['Vídeo SEDUC', 'Guia Currículo', 'Materiais', 'Dados', 'Reflexão', 'Concluído'];
-  const STORAGE_KEY = 'missao1_jornada';
+  let estado = { nome: '', escola: '', turma: '', componente: '', ciclo: '', passos: 0 };
+  const TOTAL = 5;
+  const ETAPAS = ['Reflexão inicial','Boa aula','Estratégias','3 primeiras aulas','Compromisso'];
+  const STORAGE_KEY = 'missao3_jornada';
 
-  // ========== FUNÇÕES CRUD LOCALSTORAGE ==========
+  // ========== CRUD LOCALSTORAGE ==========
   function salvarParaLocalStorage() {
     const dados = {
       identificacao: {
@@ -612,23 +631,33 @@
         ciclo: document.getElementById('inp-ciclo').value
       },
       passos: estado.passos,
-      estrelas: estado.estrelas,
+      // textos
       s1q1: document.getElementById('s1q1').value,
-      s1q2: document.getElementById('s1q2').value,
-      s1q3: document.querySelector('input[name="s1q3"]:checked') ? document.querySelector('input[name="s1q3"]:checked').value : '',
-      s2q1: Array.from(document.querySelectorAll('input[name="s2q1"]:checked')).map(cb => cb.value),
-      s2q2: document.getElementById('s2q2').value,
+      s1q2: document.querySelector('input[name="s1q2"]:checked') ? document.querySelector('input[name="s1q2"]:checked').value : '',
+      s1q3: document.getElementById('s1q3').value,
+      s2q1: document.querySelector('input[name="s2q1"]:checked') ? document.querySelector('input[name="s2q1"]:checked').value : '',
+      s2q2: document.querySelector('input[name="s2q2"]:checked') ? document.querySelector('input[name="s2q2"]:checked').value : '',
       s2q3: document.getElementById('s2q3').value,
       s3q1: Array.from(document.querySelectorAll('input[name="s3q1"]:checked')).map(cb => cb.value),
-      s3q2: document.getElementById('s3q2').value,
+      s3q2: Array.from(document.querySelectorAll('input[name="s3q2"]:checked')).map(cb => cb.value),
       s3q3: document.getElementById('s3q3').value,
-      s4q1: Array.from(document.querySelectorAll('input[name="s4q1"]:checked')).map(cb => cb.value),
-      s4q2: document.querySelector('input[name="s4q2"]:checked') ? document.querySelector('input[name="s4q2"]:checked').value : '',
-      s4q3: document.getElementById('s4q3').value,
-      s4q4: document.getElementById('s4q4').value,
       s5q1: document.getElementById('s5q1').value,
       s5q2: document.querySelector('input[name="s5q2"]:checked') ? document.querySelector('input[name="s5q2"]:checked').value : '',
-      s5q3: document.getElementById('s5q3').value
+      s5q3: document.getElementById('s5q3').value,
+      s5q4: document.getElementById('s5q4').value,
+      // aulas
+      a1_tema: document.getElementById('a1-tema').value,
+      a1_verif: document.getElementById('a1-verif').value,
+      a1_dific: document.getElementById('a1-dific').value,
+      a1_avanc: document.getElementById('a1-avanc').value,
+      a2_tema: document.getElementById('a2-tema').value,
+      a2_verif: document.getElementById('a2-verif').value,
+      a2_dific: document.getElementById('a2-dific').value,
+      a2_avanc: document.getElementById('a2-avanc').value,
+      a3_tema: document.getElementById('a3-tema').value,
+      a3_verif: document.getElementById('a3-verif').value,
+      a3_dific: document.getElementById('a3-dific').value,
+      a3_avanc: document.getElementById('a3-avanc').value
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
     console.log('✅ Dados salvos no localStorage');
@@ -639,7 +668,7 @@
     if (!dadosRaw) return false;
     try {
       const dados = JSON.parse(dadosRaw);
-      // identificação
+      // Identificação
       if (dados.identificacao) {
         document.getElementById('inp-nome').value = dados.identificacao.nome || '';
         document.getElementById('inp-escola').value = dados.identificacao.escola || '';
@@ -653,55 +682,59 @@
         estado.ciclo = dados.identificacao.ciclo || '';
       }
       estado.passos = dados.passos || 0;
-      estado.estrelas = dados.estrelas || 0;
 
-      // campos texto
+      // Textos
       if (dados.s1q1) document.getElementById('s1q1').value = dados.s1q1;
-      if (dados.s1q2) document.getElementById('s1q2').value = dados.s1q2;
-      if (dados.s1q3) {
-        let radio = document.querySelector(`input[name="s1q3"][value="${dados.s1q3.replace(/"/g, '&quot;')}"]`);
-        if (radio) radio.checked = true;
-      }
-      if (dados.s2q2) document.getElementById('s2q2').value = dados.s2q2;
+      if (dados.s1q3) document.getElementById('s1q3').value = dados.s1q3;
       if (dados.s2q3) document.getElementById('s2q3').value = dados.s2q3;
-      if (dados.s3q2) document.getElementById('s3q2').value = dados.s3q2;
       if (dados.s3q3) document.getElementById('s3q3').value = dados.s3q3;
-      if (dados.s4q3) document.getElementById('s4q3').value = dados.s4q3;
-      if (dados.s4q4) document.getElementById('s4q4').value = dados.s4q4;
       if (dados.s5q1) document.getElementById('s5q1').value = dados.s5q1;
       if (dados.s5q3) document.getElementById('s5q3').value = dados.s5q3;
+      if (dados.s5q4) document.getElementById('s5q4').value = dados.s5q4;
 
-      // checkboxes s2q1
-      if (dados.s2q1 && Array.isArray(dados.s2q1)) {
-        document.querySelectorAll('input[name="s2q1"]').forEach(cb => {
-          cb.checked = dados.s2q1.includes(cb.value);
-        });
+      // Radios s1q2
+      if (dados.s1q2) {
+        let r = document.querySelector(`input[name="s1q2"][value="${escapeHtml(dados.s1q2)}"]`);
+        if (r) r.checked = true;
       }
+      if (dados.s2q1) {
+        let r = document.querySelector(`input[name="s2q1"][value="${escapeHtml(dados.s2q1)}"]`);
+        if (r) r.checked = true;
+      }
+      if (dados.s2q2) {
+        let r = document.querySelector(`input[name="s2q2"][value="${escapeHtml(dados.s2q2)}"]`);
+        if (r) r.checked = true;
+      }
+      if (dados.s5q2) {
+        let r = document.querySelector(`input[name="s5q2"][value="${escapeHtml(dados.s5q2)}"]`);
+        if (r) r.checked = true;
+      }
+
+      // Checkboxes
       if (dados.s3q1 && Array.isArray(dados.s3q1)) {
         document.querySelectorAll('input[name="s3q1"]').forEach(cb => {
           cb.checked = dados.s3q1.includes(cb.value);
         });
       }
-      if (dados.s4q1 && Array.isArray(dados.s4q1)) {
-        document.querySelectorAll('input[name="s4q1"]').forEach(cb => {
-          cb.checked = dados.s4q1.includes(cb.value);
+      if (dados.s3q2 && Array.isArray(dados.s3q2)) {
+        document.querySelectorAll('input[name="s3q2"]').forEach(cb => {
+          cb.checked = dados.s3q2.includes(cb.value);
         });
       }
 
-      // radios
-      if (dados.s4q2) {
-        let r = document.querySelector(`input[name="s4q2"][value="${dados.s4q2.replace(/"/g, '&quot;')}"]`);
-        if (r) r.checked = true;
-      }
-      if (dados.s5q2) {
-        let r = document.querySelector(`input[name="s5q2"][value="${dados.s5q2.replace(/"/g, '&quot;')}"]`);
-        if (r) r.checked = true;
-      }
-
-      // estrelas
-      if (estado.estrelas > 0) {
-        setStars(estado.estrelas);
-      }
+      // Aulas
+      if (dados.a1_tema) document.getElementById('a1-tema').value = dados.a1_tema;
+      if (dados.a1_verif) document.getElementById('a1-verif').value = dados.a1_verif;
+      if (dados.a1_dific) document.getElementById('a1-dific').value = dados.a1_dific;
+      if (dados.a1_avanc) document.getElementById('a1-avanc').value = dados.a1_avanc;
+      if (dados.a2_tema) document.getElementById('a2-tema').value = dados.a2_tema;
+      if (dados.a2_verif) document.getElementById('a2-verif').value = dados.a2_verif;
+      if (dados.a2_dific) document.getElementById('a2-dific').value = dados.a2_dific;
+      if (dados.a2_avanc) document.getElementById('a2-avanc').value = dados.a2_avanc;
+      if (dados.a3_tema) document.getElementById('a3-tema').value = dados.a3_tema;
+      if (dados.a3_verif) document.getElementById('a3-verif').value = dados.a3_verif;
+      if (dados.a3_dific) document.getElementById('a3-dific').value = dados.a3_dific;
+      if (dados.a3_avanc) document.getElementById('a3-avanc').value = dados.a3_avanc;
 
       atualizarDots();
       return true;
@@ -711,7 +744,6 @@
   function limparDados() {
     if (confirm('⚠️ Tem certeza que deseja apagar TODOS os dados salvos? Essa ação não pode ser desfeita.')) {
       localStorage.removeItem(STORAGE_KEY);
-      // recarregar a página para limpar tudo
       location.reload();
     }
   }
@@ -721,24 +753,33 @@
     alert('✅ Progresso salvo com sucesso!');
   }
 
-  // ========== FUNÇÕES EXISTENTES (adaptadas para salvar automaticamente) ==========
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  // ========== FUNÇÕES EXISTENTES (adaptadas) ==========
   function iniciarMissao() {
     let n = document.getElementById('inp-nome').value.trim();
     let e = document.getElementById('inp-escola').value.trim();
     let t = document.getElementById('inp-turma').value.trim();
     let c = document.getElementById('inp-componente').value;
     let ci = document.getElementById('inp-ciclo').value;
-    if (!n || !e || !t || !c || !ci) { alert('Preencha todos os campos para começar a missão!'); return; }
+    if (!n || !e || !t || !c || !ci) { alert('Preencha todos os campos para começar!'); return; }
     estado.nome = n; estado.escola = e; estado.turma = t; estado.componente = c; estado.ciclo = ci;
-    salvarParaLocalStorage(); // salva identificação
-    mostrarScreen('s1');
-    atualizarDots();
-    renderNav('s1', 0);
+    salvarParaLocalStorage();
+    mostrarScreen('s1'); atualizarDots(); renderNav('s1', 0);
   }
 
   function mostrarScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('screen-' + id).classList.add('active');
+    window.scrollTo(0, 0);
   }
 
   function atualizarDots() {
@@ -751,14 +792,14 @@
     }
     let pct = Math.round((estado.passos / TOTAL) * 100);
     document.getElementById('xp-bar').style.width = pct + '%';
-    document.getElementById('xp-label').textContent = estado.passos + ' / ' + TOTAL + ' itens na mochila';
+    document.getElementById('xp-label').textContent = estado.passos + ' / ' + TOTAL + ' paradas desenhadas';
   }
 
   function renderNav(screenId, stepIdx) {
     let nav = document.getElementById('nav-' + screenId);
     if (!nav) return;
     nav.innerHTML = '';
-    NOMES_ETAPAS.forEach((nome, i) => {
+    ETAPAS.forEach((nome, i) => {
       let btn = document.createElement('div');
       btn.className = 'nav-step' + (i < stepIdx ? ' done-nav' : i === stepIdx ? ' current-nav' : '');
       btn.textContent = (i + 1) + '. ' + nome;
@@ -768,57 +809,39 @@
 
   function avancar(de, para, passoAtual) {
     if (passoAtual >= estado.passos) estado.passos = passoAtual + 1;
-    salvarParaLocalStorage(); // salva antes de avançar
+    salvarParaLocalStorage();
     atualizarDots();
-    if (para === 'relatorio') gerarRelatorio();
     mostrarScreen(para);
     let idx = passoAtual + 1;
-    if (idx < TOTAL) renderNav(para, idx);
-    window.scrollTo(0, 0);
-  }
-
-  function voltar(para) {
-    mostrarScreen(para);
-  }
-
-  function setStars(n) {
-    estado.estrelas = n;
-    let btns = document.querySelectorAll('#stars-s5 .star-btn');
-    btns.forEach((b, i) => b.classList.toggle('lit', i < n));
-    let labels = ['', 'Precisando de apoio', 'Com algumas dúvidas', 'Preparado(a)', 'Motivado(a)', 'Muito animado(a) e pronto(a)!'];
-    document.getElementById('star-label').textContent = labels[n] || '';
-    salvarParaLocalStorage(); // salva estrelas
+    if (idx <= TOTAL) renderNav(para, idx);
   }
 
   function getChecked(name) {
     let vals = [];
     document.querySelectorAll('input[name="' + name + '"]:checked').forEach(cb => vals.push(cb.value));
-    return vals.join(', ') || 'Nenhum item marcado';
+    return vals.length ? vals.join('; ') : 'Nenhum item marcado';
   }
   function getRadio(name) {
     let el = document.querySelector('input[name="' + name + '"]:checked');
     return el ? el.value : 'Não respondido';
   }
-  function getVal(id) { return document.getElementById(id) ? document.getElementById(id).value.trim() || 'Não preenchido' : 'Não preenchido'; }
+  function getVal(id) { let el = document.getElementById(id); return el ? el.value.trim() || 'Não preenchido' : 'Não preenchido'; }
 
   function gerarRelatorio() {
     let data = new Date();
     let dataStr = data.toLocaleDateString('pt-BR') + ' às ' + data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-    let starLabels = ['', 'Precisando de apoio', 'Com algumas dúvidas', 'Preparado(a)', 'Motivado(a)', 'Muito animado(a)'];
     let html = '';
-    html += '<div class="report-section"><h3><i class="fas fa-user"></i> Identificação</h3>';
-    html += '<div class="report-item"><span class="report-label">Professor(a): </span>' + estado.nome + '</div>';
-    html += '<div class="report-item"><span class="report-label">Escola: </span>' + estado.escola + '</div>';
-    html += '<div class="report-item"><span class="report-label">Turma: </span>' + estado.turma + '</div>';
-    html += '<div class="report-item"><span class="report-label">Componente: </span>' + estado.componente + '</div>';
-    html += '<div class="report-item"><span class="report-label">Ciclo: </span>' + estado.ciclo + '</div><div class="report-item"><span class="report-label">Data: </span>' + dataStr + '</div></div>';
-
-    html += '<div class="report-section"><h3><i class="fas fa-video"></i> Etapa 1 — Vídeo SEDUC</h3><div class="report-item"><span class="report-label">Aprendizagens não consolidadas: </span>' + getVal('s1q1') + '</div><div class="report-item"><span class="report-label">Destaques do vídeo: </span>' + getVal('s1q2') + '</div><div class="report-item"><span class="report-label">Relação vídeo × turma: </span>' + getRadio('s1q3') + '</div></div>';
-    html += '<div class="report-section"><h3><i class="fas fa-map"></i> Etapa 2 — Guia Currículo</h3><div class="report-item"><span class="report-label">Itens explorados: </span>' + getChecked('s2q1') + '</div><div class="report-item"><span class="report-label">Destaques nas AEs: </span>' + getVal('s2q2') + '</div><div class="report-item"><span class="report-label">Descritores / surpresas: </span>' + getVal('s2q3') + '</div></div>';
-    html += '<div class="report-section"><h3><i class="fas fa-laptop"></i> Etapa 3 — Materiais</h3><div class="report-item"><span class="report-label">Plataformas utilizadas: </span>' + getChecked('s3q1') + '</div><div class="report-item"><span class="report-label">Recursos que chamaram atenção: </span>' + getVal('s3q2') + '</div><div class="report-item"><span class="report-label">Temas desafiadores: </span>' + getVal('s3q3') + '</div></div>';
-    html += '<div class="report-section"><h3><i class="fas fa-chart-line"></i> Etapa 4 — Dados</h3><div class="report-item"><span class="report-label">Fontes consultadas: </span>' + getChecked('s4q1') + '</div><div class="report-item"><span class="report-label">Dados × vídeo: </span>' + getRadio('s4q2') + '</div><div class="report-item"><span class="report-label">Lacunas principais: </span>' + getVal('s4q3') + '</div><div class="report-item"><span class="report-label">Grupos com atenção especial: </span>' + getVal('s4q4') + '</div></div>';
-    html += '<div class="report-section"><h3><i class="fas fa-lightbulb"></i> Etapa 5 — Reflexão</h3><div class="report-item"><span class="report-label">Prioridade para o 3º bimestre: </span>' + getVal('s5q1') + '</div><div class="report-item"><span class="report-label">Inclusão/acessibilidade: </span>' + getRadio('s5q2') + '</div><div class="report-item"><span class="report-label">Apoio necessário: </span>' + getVal('s5q3') + '</div><div class="report-item"><span class="report-label">Disposição: </span>' + (estado.estrelas ? '★'.repeat(estado.estrelas) + ' — ' + starLabels[estado.estrelas] : 'Não avaliado') + '</div></div>';
+    html += `<div class="report-section"><h3><i class="fas fa-user"></i> Identificação</h3><div class="report-item"><span class="report-label">Professor(a): </span>${estado.nome}</div><div class="report-item"><span class="report-label">Escola: </span>${estado.escola}</div><div class="report-item"><span class="report-label">Turma: </span>${estado.turma}</div><div class="report-item"><span class="report-label">Componente: </span>${estado.componente}</div><div class="report-item"><span class="report-label">Ciclo: </span>${estado.ciclo}</div><div class="report-item"><span class="report-label">Data: </span>${dataStr}</div></div>`;
+    html += `<div class="report-section"><h3><i class="fas fa-comment-dots"></i> Parada 1 — Reflexão inicial</h3><div class="report-item"><span class="report-label">Como percebe aprendizagem: </span>${getVal('s1q1')}</div><div class="report-item"><span class="report-label">O que faz quando não acompanham: </span>${getRadio('s1q2')}</div><div class="report-item"><span class="report-label">O que diferencia boa aula: </span>${getVal('s1q3')}</div></div>`;
+    html += `<div class="report-section"><h3><i class="fas fa-chalkboard-teacher"></i> Parada 2 — Autoavaliação</h3><div class="report-item"><span class="report-label">Maior ponto forte: </span>${getRadio('s2q1')}</div><div class="report-item"><span class="report-label">Aspecto a desenvolver: </span>${getRadio('s2q2')}</div><div class="report-item"><span class="report-label">Situação de ajuste recente: </span>${getVal('s2q3')}</div></div>`;
+    html += `<div class="report-section"><h3><i class="fas fa-search"></i> Parada 3 — Estratégias</h3><div class="report-item"><span class="report-label">Verificações usadas: </span>${getChecked('s3q1')}</div><div class="report-item"><span class="report-label">Ajustes usados: </span>${getChecked('s3q2')}</div><div class="report-item"><span class="report-label">Estratégia nova: </span>${getVal('s3q3')}</div></div>`;
+    html += `<div class="report-section"><h3><i class="fas fa-clipboard-list"></i> Parada 4 — 3 primeiras aulas</h3>`;
+    for (let i = 1; i <= 3; i++) {
+      html += `<div style="background:#f8fafc;border-radius:20px;padding:0.75rem;margin-bottom:0.75rem;"><h4 style="font-weight:700;">Aula ${i}: ${getVal(`a${i}-tema`)}</h4><div class="report-item"><span class="report-label">Verificação: </span>${getVal(`a${i}-verif`)}</div><div class="report-item"><span class="report-label">Dificuldades: </span>${getVal(`a${i}-dific`)}</div><div class="report-item"><span class="report-label">Avanços: </span>${getVal(`a${i}-avanc`)}</div></div>`;
+    }
+    html += `</div><div class="report-section"><h3><i class="fas fa-heart"></i> Parada 5 — Compromisso</h3><div class="report-item"><span class="report-label">Compromisso: </span>${getVal('s5q1')}</div><div class="report-item"><span class="report-label">Sentimento: </span>${getRadio('s5q2')}</div><div class="report-item"><span class="report-label">Apoio necessário: </span>${getVal('s5q3')}</div><div class="report-item"><span class="report-label">Palavra-resumo: </span><strong>${getVal('s5q4')}</strong></div></div>`;
     document.getElementById('relatorio-conteudo').innerHTML = html;
+    mostrarScreen('relatorio');
   }
 
   function imprimirSomenteRelatorio() {
@@ -840,7 +863,7 @@
       <html>
       <head>
         <meta charset="UTF-8">
-        <title>Relatório Missão 1 - Arrumando a Mochila</title>
+        <title>Relatório Missão 3 - Pontos de Parada</title>
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body {
@@ -889,7 +912,7 @@
       </head>
       <body>
         <div class="print-header">
-          <h1>🎒 Relatório da Missão 1 – Arrumando a Mochila</h1>
+          <h1>🚶 Relatório da Missão 3 – Pontos de Parada</h1>
           <p>Jornada da Aprendizagem · URE Caieiras - Seduc SP</p>
         </div>
         ${conteudo.outerHTML}
@@ -907,38 +930,32 @@
   // Carregar dados salvos ao iniciar
   const dadosCarregados = carregarDoLocalStorage();
   if (dadosCarregados && (estado.nome || estado.passos > 0)) {
-    // Se há dados, pular tela de cadastro e ir para o último passo salvo
-    if (estado.passos > 0) {
-      let telaAtual = '';
-      if (estado.passos === 1) telaAtual = 's1';
-      else if (estado.passos === 2) telaAtual = 's2';
-      else if (estado.passos === 3) telaAtual = 's3';
-      else if (estado.passos === 4) telaAtual = 's4';
-      else if (estado.passos === 5) telaAtual = 's5';
-      else if (estado.passos >= 6) telaAtual = 's6';
-      if (telaAtual) {
-        mostrarScreen(telaAtual);
-        atualizarDots();
-        renderNav(telaAtual, estado.passos === 1 ? 0 : estado.passos === 2 ? 1 : estado.passos === 3 ? 2 : estado.passos === 4 ? 3 : estado.passos === 5 ? 4 : 5);
-      } else {
-        mostrarScreen('cadastro');
-      }
+    let telaAtual = '';
+    if (estado.passos === 1) telaAtual = 's1';
+    else if (estado.passos === 2) telaAtual = 's2';
+    else if (estado.passos === 3) telaAtual = 's3';
+    else if (estado.passos === 4) telaAtual = 's4';
+    else if (estado.passos === 5) telaAtual = 's5';
+    else if (estado.passos >= 6) telaAtual = 'fim';
+    if (telaAtual) {
+      mostrarScreen(telaAtual);
+      atualizarDots();
+      let stepIdx = estado.passos === 1 ? 0 : estado.passos === 2 ? 1 : estado.passos === 3 ? 2 : estado.passos === 4 ? 3 : estado.passos === 5 ? 4 : 5;
+      renderNav(telaAtual, stepIdx);
     } else {
       mostrarScreen('cadastro');
     }
   } else {
-    // se não há dados, fica na tela de cadastro
     mostrarScreen('cadastro');
   }
-  
-  // adicionar eventos para salvar automaticamente em mudanças de inputs (opcional, mas seguro)
+
+  // Auto-save em todas as mudanças de inputs
   function addAutoSaveEvents() {
-    const allInputs = document.querySelectorAll('input, textarea, select');
+    const allInputs = document.querySelectorAll('input, select, textarea');
     allInputs.forEach(el => {
       el.addEventListener('change', () => salvarParaLocalStorage());
       el.addEventListener('blur', () => salvarParaLocalStorage());
     });
-    // para checkboxes e radios
     document.querySelectorAll('.checkbox-item input, .radio-item input').forEach(cb => {
       cb.addEventListener('change', () => salvarParaLocalStorage());
     });
